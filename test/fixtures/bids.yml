@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  price: 
+  precision: MyString
+  8,: MyString
+  scale: MyString
+  2: MyString
+  user_id: 
+  item_id: 
+
+two:
+  price: 
+  precision: MyString
+  8,: MyString
+  scale: MyString
+  2: MyString
+  user_id: 
+  item_id: 

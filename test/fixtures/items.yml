@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  belongs_to: 
+  belongs_to: 
+  min_accept_bid: 1.5
+  starting_price: 1.5
+
+two:
+  name: MyString
+  description: MyText
+  belongs_to: 
+  belongs_to: 
+  min_accept_bid: 1.5
+  starting_price: 1.5
