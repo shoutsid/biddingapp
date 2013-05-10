@@ -24,7 +24,7 @@ class BidsController < ApplicationController
     @bid = Bid.new(bid_params)
 
     if @bid.save
-      redirect_to @bid, notice: 'Bid was successfully created.'
+      redirect_to item_bids_url(@bid), notice: 'Bid was successfully created.'
     else
       render action: 'new'
     end
@@ -33,7 +33,7 @@ class BidsController < ApplicationController
   # PATCH/PUT /bids/1
   def update
     if @bid.update(bid_params)
-      redirect_to @bid, notice: 'Bid was successfully updated.'
+      redirect_to item_bids_url(@bid), notice: 'Bid was successfully updated.'
     else
       render action: 'edit'
     end
@@ -42,7 +42,7 @@ class BidsController < ApplicationController
   # DELETE /bids/1
   def destroy
     @bid.destroy
-    redirect_to bids_url, notice: 'Bid was successfully destroyed.'
+    redirect_to item_bids_url, notice: 'Bid was successfully destroyed.'
   end
 
   private
@@ -54,5 +54,7 @@ class BidsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def bid_params
       params[:bid]
+      params[:item]
+      params[:user]
     end
 end
