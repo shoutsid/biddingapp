@@ -10,6 +10,7 @@ describe CategoriesController do
       get :index 
       expect(response).to be_success
       expect(response.status).to eql(200)
+      assigns(:categories).should == Category.all
     end
   end
 
@@ -19,6 +20,13 @@ describe CategoriesController do
       expect(response).to be_success
       expect(response.status).to eql(200)
     end
+
+    it 'sets the correct variables' do
+      Item.create!(name: 'foo', description: 'bar', category_id: @category)
+      get :show, id: @category
+      assigns(:items).should == Item.where(category_id: assigns(:category))
+    end
+
   end
 
   describe 'GET #edit' do

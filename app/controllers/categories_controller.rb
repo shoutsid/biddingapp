@@ -6,6 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @items = Item.where(category_id: @category)
   end
 
   def new
