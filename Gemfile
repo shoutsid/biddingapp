@@ -21,6 +21,8 @@ gem 'puma'
 
 gem 'bootstrap-sass', '~> 2.3.1.0'
 
+gem 'stringex', git: 'git://github.com/rsl/stringex.git'
+
 group :test, :development do
   gem 'guard'
   gem 'rb-inotify', '~> 0.9'
