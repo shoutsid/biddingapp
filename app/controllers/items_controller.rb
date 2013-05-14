@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_category  
 
   def index
     @items = Item.all
@@ -19,7 +20,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     if @item.save
-      redirect_to @item, notice: 'Item was successfully created.'
+      redirect_to category_item_path(@category, @item), notice: 'Item was successfully created.'
     else
       render action: 'new'
     end
@@ -27,7 +28,7 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to @item, notice: 'Item was successfully updated.'
+      redirect_to category_item_path(@category, @item), notice: 'Item was successfully updated.'
     else
       render action: 'edit'
     end
@@ -35,7 +36,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to items_url, notice: 'Item was successfully destroyed.'
+    redirect_to category_items_path, notice: 'Item was successfully destroyed.'
   end
 
   private
@@ -43,7 +44,11 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def set_category
+    @category = Category.find_by_url(params[:category_id])
+  end
+
   def item_params
-    params.require(:item).permit(:name, :description, :category_id)
+    params.require(:item).permit(:name, :description, :category_id, :starting_price, :min_accept_bid)
   end
 end

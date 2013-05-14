@@ -1,9 +1,13 @@
 require 'spec_helper'
 
 describe ItemsController do
+
+  let(:category) { Category.create(name: 'foo') }
+  let(:item) { Item.create(name: 'foo', description: 'bar') }
+
   describe 'GET #index' do
     it 'responds successfully with HTTP 200 status' do
-      get :index
+      get :index, category_id: category
       expect(response).to be_success
       expect(response.status).to eql(200)
     end
@@ -11,8 +15,7 @@ describe ItemsController do
 
   describe 'GET #show' do
     it 'responds successfully with HTTP 200 status' do
-      item = Item.create(name: 'foo', description: 'bar')
-      get :show, id: item 
+      get :show, id: item, category_id: category 
       expect(response).to be_success
       expect(response.status).to eql(200)
     end
@@ -21,7 +24,7 @@ describe ItemsController do
   describe 'GET #edit' do
     it 'responds successfully with HTTP 200 status' do
       item = Item.create(name: 'foo', description: 'bar')
-      get :edit, id: item 
+      get :edit, id: item, category_id: category 
       expect(response).to be_success
       expect(response.status).to eql(200)
     end
@@ -29,8 +32,8 @@ describe ItemsController do
 
   describe 'POST #create' do
     it 'responds successfull 302 redirect' do
-      post :create, item: {name: 'foo', description: 'bar'}
-      expect(response).to redirect_to(assigns(:item))
+      post :create, item: { name: 'foo', description: 'bar', category_id: :category }, category_id: category
+      expect(response).to redirect_to(category_item_url(assigns(:category), assigns(:item)))
       expect(response.status).to eql(302)
       expect(flash[:notice]).to eql('Item was successfully created.') 
     end
@@ -38,17 +41,15 @@ describe ItemsController do
 
   describe 'PATCH/PUT #update' do
     it 'should update the record and redirect successfully for PATCH' do
-      item = Item.create(name: 'foo', description: 'bar')
-      patch :update,  id: item, item: { name: 'changed foo', description: 'changed bar' }
-      expect(response).to redirect_to(assigns(:item))
+      patch :update,  id: item, category_id: category, item: { name: 'changed foo', description: 'changed bar' }
+      expect(response).to redirect_to(category_item_url(assigns(:category), assigns(:item)))
       expect(response.status).to eql(302)
       expect(flash[:notice]).to eql('Item was successfully updated.') 
     end
 
     it 'should update the record and redirect successfully for PATCH' do
-      item = Item.create(name: 'foo', description: 'bar')
-      put :update,  id: item, item: { name: 'changed foo', description: 'changed bar' }
-      expect(response).to redirect_to(assigns(:item))
+      put :update,  id: item, category_id: category, item: { name: 'changed foo', description: 'changed bar' }
+      expect(response).to redirect_to(category_item_url(assigns(:category), assigns(:item)))
       expect(response.status).to eql(302)
       expect(flash[:notice]).to eql('Item was successfully updated.') 
     end
@@ -56,9 +57,8 @@ describe ItemsController do
 
   describe 'DELETE #destroy' do
     it 'should delete the record and redirect successfully' do
-      item = Item.create(name: 'foo', description: 'bar')
-      delete :destroy, id: item
-      expect(response).to redirect_to(items_path)
+      delete :destroy, id: item, category_id: category
+      expect(response).to redirect_to(category_items_url)
       expect(response.status).to eql(302)
       expect(flash[:notice]).to eql('Item was successfully destroyed.') 
     end
