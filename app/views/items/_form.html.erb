@@ -1,4 +1,4 @@
-<%= form_for(@item) do |f| %>
+<%= form_for([@category, @item]) do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -12,10 +12,14 @@
     </div>
   <% end %>
   <%= :name %></br>
-  <%= f.text_field :name %></br>
-  <%= :description %></br>
-  <%= f.text_area :description %></br>
-  <%= f.collection_select :category_id, Category.all, :id, :name %>
+  <%= f.text_field :name %><br/>
+  <%= :description %><br/>
+  <%= f.text_area :description %><br/>
+  <%= f.collection_select :category_id, Category.all, :id, :name %><br/>
+  Starting Price<br/>
+  <%= f.number_field :starting_price %><br/>
+  Minimum you will accept<br/>
+  <%= f.number_field :min_accept_bid %>
   <div class="actions">
     <%= f.submit %>
   </div>

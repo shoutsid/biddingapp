@@ -1,6 +1,10 @@
 <h1><%= @item.name %></h1>
 <p id="notice"><%= notice %></p>
-Name: <%= @item.name %></br>
-Description: <%= @item.description %></br>
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+Name: <%= @item.name %><br/>
+Description: <%= @item.description %><br/>
+Starting Price: <%= @item.starting_price %><br/>
+Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
+
+<br/>
+<%= link_to 'Edit', edit_category_item_path(@category, @item) %> |
+<%= link_to 'Back', category_items_path %>
