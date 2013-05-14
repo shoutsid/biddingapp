@@ -5,10 +5,7 @@ Bidding::Application.routes.draw do
 
   devise_for :users
 
-  root to: 'items#index'
-
-  resources :items, concerns: :biddable
-
+  root to: 'categories#index'
   resources :categories
 
   resources :categories, path: '', only: :show do
