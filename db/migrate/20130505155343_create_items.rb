@@ -5,8 +5,9 @@ class CreateItems < ActiveRecord::Migration
       t.text :description
       t.belongs_to :user
       t.belongs_to :category
-      t.float :min_accept_bid
-      t.float :starting_price
+      t.decimal :min_accept_bid
+      t.decimal :starting_price
+      t.string :highest_bid_id
 
       t.timestamps
     end
