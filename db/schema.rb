@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20130505164744) do
 
   create_table "bids", force: true do |t|
-    t.decimal  "price",      precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "price",      precision: 8, scale: 2
     t.integer  "user_id"
     t.integer  "item_id"
     t.datetime "created_at"
@@ -36,9 +36,8 @@ ActiveRecord::Schema.define(version: 20130505164744) do
     t.text     "description"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.decimal  "min_accept_bid"
-    t.decimal  "starting_price"
-    t.string   "highest_bid_id"
+    t.decimal  "min_accept_bid", precision: 8, scale: 2
+    t.decimal  "starting_price", precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
