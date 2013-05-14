@@ -30,12 +30,16 @@ end
 
 group :development do
   gem 'guard-rspec'
+  gem 'guard-livereload'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'parallel_tests'
+  gem 'zeus-parallel_tests'
 end
 
 group :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'ruby-prof'
   gem 'shoulda-matchers'
+  gem 'zeus'
 end
