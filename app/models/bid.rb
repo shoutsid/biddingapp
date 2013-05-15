@@ -1,12 +1,14 @@
 class Bid < ActiveRecord::Base
-  validates_numericality_of :price, on: :create,
-    greater_than: Proc.new { |bid| highest_bid(bid) }
-  after_create :update_item
   belongs_to :user
   belongs_to :item
+  validates_presence_of :item, :amount
+  validates_numericality_of :amount, on: :create,
+                                    greater_than: Proc.new { |bid| highest_bid(bid) }
+  after_create :update_highest_bidder
+  
 
   private
-  def update_item
+  def update_highest_bidder
     Proc.new { |bid| bid.item.highest_bid = bid
       bid.item.save
     }
@@ -16,6 +18,6 @@ class Bid < ActiveRecord::Base
     item = bid.item
     highest_bid = item.highest_bid
 
-    highest_bid ? highest_bid.price.to_f : item.starting_price
+    highest_bid ? highest_bid.amount.to_f : item.starting_price
   end
 end

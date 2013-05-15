@@ -8,6 +8,7 @@ class CreateItems < ActiveRecord::Migration
       t.decimal :min_accept_bid
       t.decimal :starting_price
       t.string :highest_bid_id
+      t.datetime :closing_time
 
       t.timestamps
     end
