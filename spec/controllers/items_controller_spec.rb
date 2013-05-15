@@ -1,12 +1,10 @@
 require 'spec_helper'
-
 describe ItemsController do
 
-  let(:category) { Category.create!(name: 'foo') }
-  let(:item) { Item.create!(name: 'foo', description: 'bar', category: category) }
+  before(:each) { @item = FactoryGirl.create(:item) }
 
   describe 'GET #index' do
-    let(:send_request) { get :index, category_id: category }
+    let(:send_request) { get :index, category_id: @item.category }
 
     it 'responds successful' do
       send_request
@@ -20,7 +18,6 @@ describe ItemsController do
 
   describe 'GET #show' do
     let(:send_request) do
-      @item = item
       @category = @item.category
       get :show, id: @item, category_id: @category 
     end
@@ -36,7 +33,6 @@ describe ItemsController do
 
   describe 'GET #edit' do
     let(:send_request) do
-      @item = item
       @category = @item.category
       get :edit, id: @item, category_id: @category 
     end
@@ -51,13 +47,13 @@ describe ItemsController do
 
     describe 'POST #create' do
       let(:send_request) {
-        @category = category
-        post :create, item: { name: 'foo', description: 'bar', category_id: @category }, category_id: @category 
+        @category = @item.category
+        post :create, item: { name: 'foo', description: 'bar', category_id: @category, starting_price: 500, closing_time: Time.now + 1.day }, category_id: @category 
       }
 
       it 'creates a record' do
-        @category = category
-        lambda{ post :create, item: { name: 'foo', description: 'bar', category_id: @category }, category_id: @category 
+        @category = @item.category
+        lambda{ post :create, item: { name: 'foo', description: 'bar', category_id: @category, starting_price: 500, closing_time: Time.now + 1.day }, category_id: @category 
         }.should change(Item, :count).by(1)
       end
 
@@ -84,22 +80,19 @@ describe ItemsController do
 
     describe 'PATCH/PUT #update' do
       let(:send_patch_request) do 
-        @item = item
         @category = @item.category
-        patch :update,  id: @item, category_id: @category, item: { name: 'changed foo', description: 'changed bar' } 
+        patch :update,  id: @item, category_id: @category, item: { name: 'changed foo', description: 'changed bar', starting_price: 500, closing_time: Time.now + 1.day } 
       end
 
       let(:send_put_request) do 
-        @item = item
         @category = @item.category
-        put :update,  id: @item, category_id: @category, item: { name: 'changed foo', description: 'changed bar' } 
+        put :update,  id: @item, category_id: @category, item: { name: 'changed foo', description: 'changed bar', starting_price: 500, closing_time: Time.now + 1.day } 
       end
       
       context 'PATCH HTTP method' do
         it 'should update the item' do
-          @item = item
           @category = @item.category
-          patch :update,  id: @item, category_id: @category, item: { name: 'changed foo', description: 'changed bar' }
+          patch :update,  id: @item, category_id: @category, item: { name: 'changed foo', description: 'changed bar', starting_price: 500, closing_time: Time.now + 1.day }
           Item.find(@item).name.should eql('changed foo')
         end
 
@@ -126,9 +119,8 @@ describe ItemsController do
 
       context 'PUT HTTP method' do
         it 'should update the item' do
-          @item = item
           @category = @item.category
-          put :update,  id: @item, category_id: @category, item: { name: 'changed foo', description: 'changed bar' }
+          put :update,  id: @item, category_id: @category, item: { name: 'changed foo', description: 'changed bar', starting_price: 500, closing_time: Time.now + 1.day }
           Item.find(@item).name.should eql('changed foo')
         end
 
@@ -156,13 +148,11 @@ describe ItemsController do
 
     describe 'DELETE #destroy' do
       let(:send_request) do 
-        @item = item
-        @category = category
+        @category = @item.category
         delete :destroy, id: @item, category_id: @category
       end
 
       it 'deletes the record' do
-        @item = item
         @category = @item.category
         lambda{ delete :destroy, id: @item, category_id: @category }.should change(Item, :count).by(-1)
       end

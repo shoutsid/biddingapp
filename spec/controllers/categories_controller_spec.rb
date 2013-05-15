@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CategoriesController do
-  let(:category) { Category.create(name: 'Technology') }
+  before(:each) { @category = FactoryGirl.create(:category) }
 
   describe 'GET #index' do
     let(:send_request) { get :index }
@@ -18,7 +18,7 @@ describe CategoriesController do
   end
 
   describe 'GET #show' do
-    let(:send_request) { get :show, id: category }
+    let(:send_request) { get :show, id: @category }
 
     it 'responds succesfull'do
       send_request
@@ -32,7 +32,7 @@ describe CategoriesController do
   end
 
   describe 'GET #edit' do
-    let(:send_request) { get :edit, id: category }
+    let(:send_request) { get :edit, id: @category }
 
     it 'responds succesfull'do
       send_request
@@ -74,12 +74,11 @@ describe CategoriesController do
   end
 
   describe 'PATCH/PUT #update' do
-    let(:send_patch_request) { patch :update, id: category, category: { name: 'Technology' } }
-    let(:send_put_request) { put :update, id: category, category: { name: 'Technology' } }
+    let(:send_patch_request) { patch :update, id: @category, category: { name: 'Technology' } }
+    let(:send_put_request) { put :update, id: @category, category: { name: 'Technology' } }
 
     context 'HTTP PATCH method' do
-      it 'updates the category' do
-        @category = category 
+      it 'updates the @category' do
         patch :update, id: @category, category: { name: 'changed' } 
         Category.find(@category).name.should eql('changed')
       end
@@ -107,8 +106,7 @@ describe CategoriesController do
 
 
     context 'HTTP PUT method' do
-      it 'updates the category' do
-        @category = category 
+      it 'updates the @category' do
         put :update, id: @category, category: { name: 'changed' } 
         Category.find(@category).name.should eql('changed')
       end
@@ -136,10 +134,9 @@ describe CategoriesController do
   end
 
   describe 'DELETE #destroy' do
-    let(:send_request) { delete :destroy, id: category }
+    let(:send_request) { delete :destroy, id: @category }
 
     it 'should delete the record' do
-      @category = category
       lambda{ delete :destroy, id: @category }.should change(Category, :count).by(-1)
     end
 

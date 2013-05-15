@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/bmabey/database_cleaner.git
+  revision: 3ecd0f5f6401e59aec291f8404d32ee9fd565800
+  specs:
+    database_cleaner (1.0.1)
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: e26314ee8dcd1f82cd2d0dc499ded5289c3469ab
   branch: rails4
@@ -72,6 +78,11 @@ GEM
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     ffi (1.6.0)
     formatador (0.2.4)
     guard (1.7.0)
@@ -214,7 +225,9 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (~> 2.3.1.0)
   coffee-rails (~> 4.0.0)
+  database_cleaner!
   devise!
+  factory_girl_rails (~> 4.0)
   guard
   guard-livereload
   guard-rspec

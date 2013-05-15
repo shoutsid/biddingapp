@@ -26,6 +26,7 @@ gem 'stringex', git: 'git://github.com/rsl/stringex.git'
 group :test, :development do
   gem 'guard'
   gem 'rb-inotify', '~> 0.9'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :development do
@@ -42,4 +43,5 @@ group :test do
   gem 'ruby-prof'
   gem 'shoulda-matchers'
   gem 'zeus'
+  gem 'database_cleaner', git: 'git://github.com/bmabey/database_cleaner.git'
 end
