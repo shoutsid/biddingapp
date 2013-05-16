@@ -1,19 +1,34 @@
-<p id="notice"><%= notice %></p>
-<% @items.each do |item| %>
-  <p style="border: 1px solid">
-  Name: <%= item.name %><br/>
-  Description: <%= item.description %> <br/>
-  link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
-  Current Bids:  <%= item.highest_bid.price if item.highest_bid%><br/>
-  <%= link_to 'Make a bid', new_category_item_bid_path(@category, item) %>
+<script type="text/javascript">
+  function timeLeft() {
+    $.getScript("<%= @category %>.js");
+  };
+setInterval(timeLeft, 1000); 
+</script>
 
-  </p>
+<p id="notice"><%= notice %></p>
+
+<% @items.each_with_index do |item, i| %>
+  <div style="border: 1px solid">
+    <% @item = item %>
+    Name: <%= @item.name %><br/>
+    Description: <%= @item.description %> <br/>
+    link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
+    Current Bids:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %><br/>
+
+    <div id="time_<%= i %>">
+      Time left: <b style="color: red">loading...</b>
+    </div>
+
+    <%= link_to 'bid on this item', new_category_item_bid_path(@category, item) %>
+
+  </div>
   <hr/>
 <% end %>
+
 <p/>
+
 <div>
-  <p>
-<%= link_to 'Edit this category', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
-</p>
+  <%= link_to 'Auction Item', new_category_item_path(@category) %> |
+  <%= link_to 'Edit this category', edit_category_path(@category) %> |
+  <%= link_to 'Back', categories_path %>
 </div>

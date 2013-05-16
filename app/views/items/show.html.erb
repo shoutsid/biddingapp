@@ -1,10 +1,21 @@
+<script type="text/javascript">
+  function timeLeft() {
+    $.getScript("<%= @item.id %>.js");
+  };
+   setInterval(timeLeft, 1000); 
+</script>
+Closing Time: <%= @item.closing_time -%><br/>
+Time now: <%= Time.now.getutc() %>
+
 <h1><%= @item.name %></h1>
 <p id="notice"><%= notice %></p>
 Name: <%= @item.name %><br/>
 Description: <%= @item.description %><br/>
 Starting Price: <%= @item.starting_price %><br/>
 Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
+<div id="time">
+</div>
 
 <br/>
 <%= link_to 'Edit', edit_category_item_path(@category, @item) %> |
-<%= link_to 'Back', category_items_path %>
+<%= link_to 'Back', category_path(@category) %>
