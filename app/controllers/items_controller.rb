@@ -7,6 +7,13 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @time_left = TimeDifference.between(@item.closing_time, Time.now).in_seconds
+    
+     respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def new

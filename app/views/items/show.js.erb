@@ -1,0 +1,2 @@
+$('#time').empty();
+$('#time').append("Time left: <%= TimeDifference.between(@item.closing_time, Time.now).in_seconds.round(0) %> Seconds");

@@ -1,0 +1,4 @@
+<% @items.each_with_index do |item, i| %>
+  $("#time_<%= i %>").empty();
+  $("#time_<%= i %>").append("Time left: <%= TimeDifference.between(item.closing_time, Time.now).in_seconds.round(0) %> Seconds");
+<% end %>
