@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th></th>
+      <th>Amount</th>
       <th></th>
       <th></th>
     </tr>
@@ -12,8 +12,9 @@
   <tbody>
     <% @bids.each do |bid| %>
       <tr>
-        <td><%= link_to 'Edit', edit_item_bid_path(@item, bid) %></td>
-        <td><%= link_to 'Destroy', item_bid_path(@item, bid), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= bid.amount %></td>
+        <td><%= link_to 'Edit', edit_category_item_bid_path(@category, @item, bid) %></td>
+        <td><%= link_to 'Destroy', category_item_bid_path(@category, @item, bid), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

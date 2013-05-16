@@ -19,7 +19,9 @@
   Starting Price<br/>
   <%= f.number_field :starting_price %><br/>
   Minimum you will accept<br/>
-  <%= f.number_field :min_accept_bid %>
+  <%= f.number_field :min_accept_bid %><br/>
+  Auction Until:<br/>
+  <%= f.datetime_local_field :closing_time %>
   <div class="actions">
     <%= f.submit %>
   </div>
