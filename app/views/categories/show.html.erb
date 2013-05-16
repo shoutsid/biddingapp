@@ -1,28 +1,38 @@
-<script type="text/javascript">
-  function timeLeft() {
-    $.getScript("<%= @category %>.js");
-  };
-setInterval(timeLeft, 1000); 
-</script>
+<div style="text-align: center">
 
-<p id="notice"><%= notice %></p>
 
-<% @items.each_with_index do |item, i| %>
-  <div style="border: 1px solid">
-    <% @item = item %>
-    Name: <%= @item.name %><br/>
-    Description: <%= @item.description %> <br/>
-    link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
-    Current Bids:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %><br/>
+  <p id="notice"><%= notice %></p>
 
-    <div id="time_<%= i %>">
-      Time left: <b style="color: red">loading...</b>
+  <% @items.each_with_index do |item, i| %>
+    <div style="border: 1px solid">
+      <% @item = item %>
+      Name: <%= @item.name %><br/>
+      Description: <%= @item.description %> <br/>
+      link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
+      Current Bids:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %><br/>
+
+      <b style="color: red">
+        <div id="time_<%= i %>">
+        </div>
+      </b>
+
+      <%= link_to 'bid on this item', new_category_item_bid_path(@category, item) %>
+
     </div>
+    <hr/>
 
-    <%= link_to 'bid on this item', new_category_item_bid_path(@category, item) %>
 
-  </div>
-  <hr/>
+    <script type="text/javascript">
+      function timeLeft() {
+        if($('#time_<%= i %>').html() != "This Item Has Expired") {
+          $.getScript("<%= @category %>.js");
+        }
+      };
+var foo = function() { setInterval(timeLeft, 1000); 
+}
+$('a').click(clearInterval(foo));
+foo()
+</script>
 <% end %>
 
 <p/>
@@ -31,4 +41,5 @@ setInterval(timeLeft, 1000);
   <%= link_to 'Auction Item', new_category_item_path(@category) %> |
   <%= link_to 'Edit this category', edit_category_path(@category) %> |
   <%= link_to 'Back', categories_path %>
+</div>
 </div>

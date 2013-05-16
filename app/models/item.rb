@@ -6,4 +6,16 @@ class Item < ActiveRecord::Base
   has_many :bids
 
   has_one :highest_bid, class_name: 'Bid', foreign_key: :item_id
+
+  def time_left
+    if expired?
+      "This Item Has Expired"
+    else
+      "Time left: " + TimeDifference.between(closing_time, Time.now).in_seconds.round(0).to_s + " Seconds"
+    end
+  end
+
+  def expired?
+    closing_time <= Time.now
+  end
 end

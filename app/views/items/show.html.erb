@@ -1,8 +1,14 @@
-<script type="text/javascript">
-  function timeLeft() {
-    $.getScript("<%= @item.id %>.js");
-  };
-   setInterval(timeLeft, 1000); 
+<div style="text-align: center">
+  <script type="text/javascript">
+    function timeLeft() {
+      if($('#time').html() != "This Item Has Expired") {
+        $.getScript("<%= @item.id %>.js");
+      }
+    };
+var foo = function() { setInterval(timeLeft, 1000); 
+}
+$('a').click(clearInterval(foo));
+foo()
 </script>
 Closing Time: <%= @item.closing_time -%><br/>
 Time now: <%= Time.now.getutc() %>
@@ -13,9 +19,12 @@ Name: <%= @item.name %><br/>
 Description: <%= @item.description %><br/>
 Starting Price: <%= @item.starting_price %><br/>
 Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
-<div id="time">
-</div>
+<b style="color: red">
+  <div id="time">
+  </div>
+</b>
 
 <br/>
 <%= link_to 'Edit', edit_category_item_path(@category, @item) %> |
 <%= link_to 'Back', category_path(@category) %>
+</div>
