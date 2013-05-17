@@ -5,14 +5,16 @@ class Item < ActiveRecord::Base
   validates_presence_of :name, :description, :starting_price, :closing_time
   has_many :bids
 
-  has_one :highest_bid, class_name: 'Bid', foreign_key: :item_id
-
   def time_left
     if expired?
       "This Item Has Expired"
     else
       "Time left: " + check_time_left.to_s  + " Seconds"
     end
+  end
+
+  def highest_bid 
+    bids.max
   end
 
   def increase_time_left

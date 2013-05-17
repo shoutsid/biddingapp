@@ -8,7 +8,15 @@ describe Item do
   it { should validate_presence_of(:starting_price) }
   it { should validate_presence_of(:closing_time) }
   it { should have_many(:bids) }
-  it { should have_one(:highest_bid) }
+
+  describe '#highest_bid' do
+    it 'returns highest bid' do
+        item = FactoryGirl.create(:item)
+        bid = FactoryGirl.create(:bid, item: item)
+
+        Item.find(item).highest_bid.should eql(bid)
+    end
+  end
 
   describe '#time_left' do
     context 'there is time left' do
