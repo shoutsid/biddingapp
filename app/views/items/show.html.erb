@@ -1,30 +1,25 @@
-<div style="text-align: center">
-  <script type="text/javascript">
-    function timeLeft() {
-      if($('#time').html() != "This Item Has Expired") {
-        $.getScript("<%= @item.id %>.js");
-      }
-    };
-var foo = function() { setInterval(timeLeft, 1000); 
-}
-$('a').click(clearInterval(foo));
-foo()
+<script type="text/javascript">
+  setInterval(function() { if($('#time').html() != "This Item Has Expired") {
+      $.getScript("<%= @item %>.js"); }
+      },1000);
 </script>
-Closing Time: <%= @item.closing_time -%><br/>
-Time now: <%= Time.now.getutc() %>
+<div style="text-align: center">
 
-<h1><%= @item.name %></h1>
-<p id="notice"><%= notice %></p>
-Name: <%= @item.name %><br/>
-Description: <%= @item.description %><br/>
-Starting Price: <%= @item.starting_price %><br/>
-Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
-<b style="color: red">
-  <div id="time">
-  </div>
-</b>
+  Closing Time: <%= @item.closing_time %><br/>
+  Time now: <%= Time.now.getutc() %>
 
-<br/>
-<%= link_to 'Edit', edit_category_item_path(@category, @item) %> |
-<%= link_to 'Back', category_path(@category) %>
+  <h1><%= @item.name %></h1>
+  <p id="notice"><%= notice %></p>
+  Name: <%= @item.name %><br/>
+  Description: <%= @item.description %><br/>
+  Starting Price: <%= @item.starting_price %><br/>
+  Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
+  <b style="color: red">
+    <div id="time">
+    </div>
+  </b>
+
+  <br/>
+  <%= link_to 'Edit', edit_category_item_path(@category, @item) %> |
+  <%= link_to 'Back', category_path(@category) %>
 </div>
