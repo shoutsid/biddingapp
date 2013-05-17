@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
 
   def show
     @items = Item.where(category_id: @category)
+    @bid = Bid.new
     respond_to do |format|
       format.html
       format.js

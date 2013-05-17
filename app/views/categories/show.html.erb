@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div class="span4">
 
 
   <p id="notice"><%= notice %></p>
@@ -9,13 +9,15 @@
       Name: <%= @item.name %><br/>
       Description: <%= @item.description %> <br/>
       link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
-      Current Bids:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %><br/>
+      Current Bid:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %> <br/>
       <b style="color: red">
         <div id="time_<%= i %>">
         </div>
       </b>
 
-      <%= link_to 'bid on this item', new_category_item_bid_path(@category, item), id: "item_bid_#{i}" %>
+      <div id="item_bid_<%= i %>">
+      <%= render '/bids/form' %>
+    </div>
 
     </div>
     <hr/>

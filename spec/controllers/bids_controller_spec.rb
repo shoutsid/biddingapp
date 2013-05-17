@@ -79,7 +79,7 @@ describe BidsController do
 
       it 'redirects to correct url' do
         send_request
-        expect(response).to redirect_to(category_item_bids_url(assigns(:category), assigns(:item)))
+        expect(response).to redirect_to(category_item_url(assigns(:category), assigns(:item)))
       end
 
       it 'responds with HTTP 302 status' do
