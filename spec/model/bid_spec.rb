@@ -7,13 +7,15 @@ describe Bid do
   it { should validate_presence_of(:amount) }
   it { should validate_numericality_of(:amount) }
 
-  describe '#item_expired validation' do
-    context 'not valid' do
-      it "adds an error" do
-        item = FactoryGirl.create(:item, closing_time: Time.now - 2.hours)
-        bid = FactoryGirl.build(:bid, item: item)
-        bid.valid?
-        bid.errors[:item].should include "Can't bid on an expired item."
+  describe 'Custom Validation' do
+    describe '#item_expired' do
+      context 'not valid' do
+        it "adds an error" do
+          item = FactoryGirl.create(:item, closing_time: Time.now - 2.hours)
+          bid = FactoryGirl.build(:bid, item: item)
+          bid.valid?
+          bid.errors[:item].should include "Can't bid on an expired item."
+        end
       end
     end
   end

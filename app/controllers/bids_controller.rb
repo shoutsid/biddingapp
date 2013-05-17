@@ -22,7 +22,7 @@ class BidsController < ApplicationController
     @bid.item_id = @item.id
 
     if @bid.save
-      redirect_to category_item_bids_path(@category, @item), notice: 'Bid was successfully created.'
+      redirect_to category_item_path(@category, @item), notice: 'Bid was successfully created.'
     else
       render action: 'new'
     end
