@@ -11,8 +11,16 @@ class Item < ActiveRecord::Base
     if expired?
       "This Item Has Expired"
     else
-      "Time left: " + TimeDifference.between(closing_time, Time.now).in_seconds.round(0).to_s + " Seconds"
+      "Time left: " + check_time_left.to_s  + " Seconds"
     end
+  end
+
+  def increase_time_left
+    update(closing_time: closing_time + 10.seconds)
+  end
+
+  def check_time_left 
+    TimeDifference.between(closing_time, Time.now).in_seconds.round(0)
   end
 
   def expired?
