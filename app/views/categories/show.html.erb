@@ -11,33 +11,23 @@
       link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
       Current Bid:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %> <br/>
       <b style="color: red">
-        <div id="time_<%= i %>">
+        <div id="time_left_<%= i %>">
         </div>
       </b>
 
       <div id="item_bid_<%= i %>">
-      <%= render '/bids/form' %>
-    </div>
+        <%= render '/bids/form' %>
+      </div>
 
     </div>
     <hr/>
+  <% end %>
 
+  <p/>
 
-    <script type="text/javascript">
-      setInterval(function() { if($('#time_<%= i %>').html() != "This Item Has Expired") {
-          $.getScript("<%= @category %>.js"); } 
-          else {
-          $('#item_<%= i %>').fadeTo("slow", 0.33);
-          $('#item_bid_<%= i %>').remove(); }
-          },1000);
-        </script>
-      <% end %>
-
-      <p/>
-
-      <div>
-        <%= link_to 'Auction Item', new_category_item_path(@category) %> |
-        <%= link_to 'Edit this category', edit_category_path(@category) %> |
-        <%= link_to 'Back', categories_path %>
-      </div>
-    </div>
+  <div>
+    <%= link_to 'Auction Item', new_category_item_path(@category) %> |
+    <%= link_to 'Edit this category', edit_category_path(@category) %> |
+    <%= link_to 'Back', categories_path %>
+  </div>
+</div>

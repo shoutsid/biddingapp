@@ -1,15 +1,18 @@
+require 'sse'
+
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_category  
+
+  include ActionController::Live
 
   def index
     @items = Item.all
   end
 
   def show
-    @time_left = TimeDifference.between(@item.closing_time, Time.now).in_seconds
-    
-     respond_to do |format|
+
+    respond_to do |format|
       format.html
       format.js
     end
@@ -44,6 +47,23 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     redirect_to category_items_path, notice: 'Item was successfully destroyed.'
+  end
+
+  def time_left 
+    response.headers["Content-Type"] = "text/event-stream"
+    sse = SSE::Client.new(response.stream)
+
+    @item = Item.find(params[:item_id])
+    begin
+      loop do
+        sse.write({ time: @item.time_left }, event: 'time_left')
+        sleep 1
+      end
+    rescue IOError
+      logger.info "Stream closed"
+    ensure 
+      sse.close
+    end
   end
 
   private

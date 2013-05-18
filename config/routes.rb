@@ -6,9 +6,11 @@ Bidding::Application.routes.draw do
   devise_for :users
 
   root to: 'categories#index'
-  resources :categories
 
-  resources :categories, path: '', only: :show do
-    resources :items, concerns: :biddable
+  resources :categories, path: '' do
+    get :time_left
+    resources :items, concerns: :biddable do
+      get :time_left
+    end
   end
 end
