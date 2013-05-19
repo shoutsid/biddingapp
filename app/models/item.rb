@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
-  validates_presence_of :name, :description, :starting_price, :closing_time
+  validates_presence_of :name, :description, :starting_price, :closing_time, :min_accept_bid
   has_many :bids
 
   def time_left
@@ -27,5 +27,9 @@ class Item < ActiveRecord::Base
 
   def expired?
     closing_time <= Time.now
+  end
+
+  def accept_highest_bid?
+    highest_bid.amount > min_accept_bid
   end
 end

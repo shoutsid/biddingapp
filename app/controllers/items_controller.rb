@@ -3,6 +3,7 @@ require 'sse'
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_category  
+  before_action :set_user
 
   include ActionController::Live
 
@@ -11,12 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-
+    @bid = Bid.new
   end
 
   def new
@@ -28,6 +24,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    @item.user = @user
 
     if @item.save
       redirect_to category_item_path(@category, @item), notice: 'Item was successfully created.'
@@ -67,6 +64,10 @@ class ItemsController < ApplicationController
   end
 
   private
+  def set_user 
+    @user = current_user
+  end
+
   def set_item
     @item = Item.find(params[:id])
   end

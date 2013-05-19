@@ -20,6 +20,7 @@ class BidsController < ApplicationController
   def create
     @bid = Bid.new(bid_params)
     @bid.item_id = @item.id
+    @bid.user = current_user
 
     if @bid.save
       redirect_to category_item_path(@category, @item), notice: 'Bid was successfully created.'
@@ -29,7 +30,6 @@ class BidsController < ApplicationController
   end
 
   def update
-
     if @bid.update(bid_params)
       redirect_to category_item_bids_path(@category, @item), notice: 'Bid was successfully updated.'
     else
@@ -43,6 +43,10 @@ class BidsController < ApplicationController
   end
 
   private
+  def set_user 
+    @user = current_user
+  end
+
   def set_bid
     @bid = Bid.find(params[:id])
   end
@@ -56,6 +60,6 @@ class BidsController < ApplicationController
   end
 
   def bid_params
-    params.require(:bid).permit(:item_id, :amount)
+    params.require(:bid).permit(:item_id, :user, :amount)
   end
 end

@@ -7,15 +7,26 @@
   <p id="notice"><%= notice %></p>
   Name: <%= @item.name %><br/>
   Description: <%= @item.description %><br/>
-  Starting Price: <%= @item.starting_price %><br/>
   Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
-  <b style="color: red">
-    <div id="time">
-      foo
-    </div>
-  </b>
-
+  Starting Price: <%= @item.starting_price %><br/>
+  Current Bid:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %> <br/>
   <br/>
   <%= link_to 'Edit', edit_category_item_path(@category, @item) %> |
   <%= link_to 'Back', category_path(@category) %>
+
+  <b style="color: red">
+    <div id="time">
+    </div>
+  </b>
+
+  <hr/>
+  <% if user_signed_in? %>
+    <div id="item_bid">
+      <%= render '/bids/form' %>
+    </div>
+  <% else %>
+    You must be a user to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
+  <% end %>
+
+
 </div>

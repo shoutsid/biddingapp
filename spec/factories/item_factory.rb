@@ -5,7 +5,9 @@ FactoryGirl.define do
     name :item_name
     description 'foo'
     category
+    user
     starting_price 100
+    min_accept_bid 101
     closing_time Time.now + 1.day
   end
 end

@@ -9,8 +9,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render 'layouts/navigation' %>
+<%= render 'layouts/messages' %>
 
 <%= yield %>
+
+<div class="row-fluid">
+  <div class="span12 pagination-centered">
+    <hr/>
+    <footer>
+     | James Summerill &copy; |
+    </footer>
+  </div>
+</div>
+
 
 </body>
 </html>

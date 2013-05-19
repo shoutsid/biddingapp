@@ -60,7 +60,7 @@ describe BidsController do
       let(:send_request) {
         @item = @bid.item 
         @category = @item.category
-        post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item } 
+        post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } 
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
       }
 
@@ -98,13 +98,13 @@ describe BidsController do
         @item = @bid.item
         @category = @item.category
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
-        post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item } 
+        post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } 
       }
 
       it 'should not create a new record' do
         @item = @bid.item
         @category = @item.category
-        post :create, item_id: @item, category_id: @category, bid: { amount: 5000 } 
+        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
         lambda { 
           post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item } 
         }.should_not change(Bid, :count).by(1) 

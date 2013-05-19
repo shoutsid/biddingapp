@@ -46,7 +46,7 @@ describe CategoriesController do
   end
 
   describe 'POST #create' do
-    let(:send_request) { post :create, category: { name: 'Technology' } }
+    let(:send_request) { post :create, category: { name: 'foobar' } }
 
     it 'creates a new record' do
       lambda { post :create, category: { name: 'Techbology' } }.should change(Category, :count).by(1)

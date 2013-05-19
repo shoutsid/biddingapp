@@ -2,6 +2,7 @@ require 'sse'
 
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   include ActionController::Live
 
@@ -51,7 +52,7 @@ class CategoriesController < ApplicationController
   def time_left 
     response.headers["Content-Type"] = "text/event-stream"
     sse = SSE::Client.new(response.stream)
-    
+
     @items = Item.where(category_id: Category.find_by_url(params[:category_id]))
     begin
       loop do
@@ -68,6 +69,9 @@ class CategoriesController < ApplicationController
   end
 
   private
+  def set_user 
+    @user = current_user
+  end  
   def set_category
     @category = Category.find_by_url(params[:id])
   end

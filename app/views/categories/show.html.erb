@@ -9,15 +9,22 @@
       Name: <%= @item.name %><br/>
       Description: <%= @item.description %> <br/>
       link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
+      Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
+      Starting Price: <%= @item.starting_price %><br/>
       Current Bid:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %> <br/>
       <b style="color: red">
         <div id="time_left_<%= i %>">
         </div>
       </b>
+      <hr/>
 
-      <div id="item_bid_<%= i %>">
-        <%= render '/bids/form' %>
-      </div>
+      <% if user_signed_in? %>
+        <div id="item_bid_<%= i %>">
+          <%= render '/bids/form' %>
+        </div>
+      <% else %>
+        You must be a signed in to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
+      <% end %>
 
     </div>
     <hr/>

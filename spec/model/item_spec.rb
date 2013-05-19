@@ -64,7 +64,7 @@ describe Item do
     end
   end
 
-  describe 'check_time_left' do
+  describe '#check_time_left' do
     it 'returns as an integer' do
       item = FactoryGirl.create(:item)
       item.check_time_left.should be_kind_of(Integer)
@@ -73,6 +73,24 @@ describe Item do
     it 'returns correct time left in seconds' do
       item = FactoryGirl.create(:item, closing_time: Time.now + 1.hour)
       item.check_time_left.should eql(1.hour.to_i)
+    end
+  end
+
+  describe '#accept_highest_bid?' do
+    context 'bid is above minimum accept price' do
+      it 'should return true' do
+        item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
+        bid = FactoryGirl.create(:bid, item: item, amount: 1000)
+        Item.find(item).accept_highest_bid?.should eql(true)
+      end
+    end
+
+    context 'bid is below minimum accept price' do
+      it 'should return false' do
+        item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
+        bid = FactoryGirl.create(:bid, item: item, amount: 20)
+        Item.find(item).accept_highest_bid?.should eql(false)
+      end
     end
   end
 end

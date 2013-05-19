@@ -4,3 +4,5 @@ $ ->
     time = $.parseJSON(event.data).time
     $('#time').empty()
     $('#time').append(time)
+    if $('#time').is ":contains('This Item Has Expired')"
+      $('#item_bid').remove()
