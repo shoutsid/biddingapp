@@ -1,38 +1,54 @@
-<div class="span4">
+<div class="container-fluid">
+  <div class="row-fluid">
 
+    <p id="notice"><%= notice %></p>
 
-  <p id="notice"><%= notice %></p>
+    <div class="container-fluid">
+      <div class="span8">
+        <h3><%= @category.name.titleize %> Related Items</h3>
 
-  <% @items.each_with_index do |item, i| %>
-    <div style="border: 1px solid" id="item_<%= i %>">
-      <% @item = item %>
-      Name: <%= @item.name %><br/>
-      Description: <%= @item.description %> <br/>
-      link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
-      Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
-      Starting Price: <%= @item.starting_price %><br/>
-      Current Bid:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %> <br/>
-      <b style="color: red">
-        <div id="time_left_<%= i %>">
-        </div>
-      </b>
-      <hr/>
+        <% @items.each_with_index do |item, i| %>
+          <div class="container-fluid" style="border: 1px solid;" id="item_<%= i %>">
 
-      <% if user_signed_in? %>
-        <div id="item_bid_<%= i %>">
-          <%= render '/bids/form' %>
-        </div>
-      <% else %>
-        You must be a signed in to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
-      <% end %>
+            <div class="span4" id="item_sold_<%= i %>">
+              <h4><u><%= item.name.titleize %></u></h4>
+              <!-- TODO:- Add image of item here. --> 
+            </div>
 
+            <div class="span8" style="padding: 10px; text-align: right;">
+              Description: <%= item.description %> <br/>
+              link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
+              Minimum Acceptance Price: <%= item.min_accept_bid %><br/>
+              Starting Price: <%= item.starting_price %><br/>
+              Current Bid:  <%= item.highest_bid ? item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %> <br/>
+
+              <b style="color: red">
+                <div id="time_left_<%= i %>">
+                </div>
+              </b>
+              <hr/>
+
+              <% if user_signed_in? %>
+                <div id="item_bid_<%= i %>">
+                  <% @item = item %>
+                  <%= render '/bids/form' %>
+                </div>
+              <% else %>
+                You must be a signed in to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
+              <% end %>
+            </div>
+          </div>
+          <hr/>
+        <% end %>
+      </div>
+
+      <div class="span4">
+        <%= render '/items/recently_sold' %>
+      </div>
     </div>
-    <hr/>
-  <% end %>
+  </div>
 
-  <p/>
-
-  <div>
+  <div class="row-fluid">
     <%= link_to 'Auction Item', new_category_item_path(@category) %> |
     <%= link_to 'Edit this category', edit_category_path(@category) %> |
     <%= link_to 'Back', categories_path %>
