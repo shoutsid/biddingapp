@@ -13,7 +13,7 @@ class CompleteAuction
           #         Create some live feed data of all auctions
         end
         break if item.closed?
-        sleep 2
+        sleep 20
       end
     end
   end
