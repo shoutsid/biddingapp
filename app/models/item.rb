@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
   validates_presence_of :name, :description, :starting_price, :closing_time, :min_accept_bid
   has_many :bids
   after_create :bg_worker_complete_auction
+  after_create :not_closed
 
   def time_left
     if expired?
@@ -20,6 +21,10 @@ class Item < ActiveRecord::Base
 
   def highest_bid_amount
     highest_bid == nil ? 0 : highest_bid.amount 
+  end
+
+  def min_bid_amount
+    highest_bid == nil ? starting_price + 1 : highest_bid.amount + 1 
   end
 
   def increase_time_left
@@ -53,5 +58,9 @@ class Item < ActiveRecord::Base
   private 
   def bg_worker_complete_auction
     Resque.enqueue(CompleteAuction, id)
+  end
+   
+  def not_closed
+    update(closed: false)
   end
 end

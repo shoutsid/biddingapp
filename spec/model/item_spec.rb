@@ -9,11 +9,19 @@ describe Item do
   it { should validate_presence_of(:closing_time) }
   it { should have_many(:bids) }
 
+  describe '#not_closed' do
+    context 'after create' do
+      it 'sets closed to false' do
+        item = FactoryGirl.create(:item)
+        Item.find(item).closed.should eql(false)
+      end
+    end
+  end
+
   describe '#highest_bid' do
     it 'returns highest bid' do
       item = FactoryGirl.create(:item)
       bid = FactoryGirl.create(:bid, item: item)
-
       Item.find(item).highest_bid.should eql(bid)
     end
   end
@@ -94,6 +102,71 @@ describe Item do
     end
   end
 
-  describe '#bg_worker_complete_auction' do
+  describe '#min_bid_amount' do
+    context 'no current bid' do
+      it 'returns as big decimal' do
+        item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
+        Item.find(item).min_bid_amount.should be_kind_of(BigDecimal)
+      end
+
+      it 'returns item starting price + 1' do
+        item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
+        Item.find(item).min_bid_amount.should eql(11.to_d)
+      end
+    end
+
+    context 'has highest bid' do
+      it ' returns as a big decimal' do
+        item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
+        bid = FactoryGirl.create(:bid, item: item)
+        Item.find(item).min_bid_amount.should be_kind_of(BigDecimal)
+      end
+
+      it 'returns highest bid + 1' do
+        item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
+        bid = FactoryGirl.create(:bid, item: item, amount: 200)
+        Item.find(item).min_bid_amount.should eql(201.to_d)
+      end
+    end
+  end
+
+  describe '#close_auction' do
+    context 'has expired expired' do
+      context 'accepts the highest bid' do
+        it 'sets item as closed, (true) value' do
+          item = FactoryGirl.create(:item, closing_time: Time.now + 2.minutes)
+          bid = FactoryGirl.create(:bid, item: item)
+          item.update(closing_time: Time.now - 10.minutes)
+
+          Item.find(item).close_auction
+          Item.find(item).closed.should eql(true)
+        end
+      end
+
+      context 'wont accept the highest bid' do
+        it 'sets item as closed, (true) value' do
+          item = FactoryGirl.create(:item, closing_time: Time.now - 2.minutes)
+          Item.find(item).close_auction
+          Item.find(item).closed.should eql(true)
+        end
+      end
+    end
+  end
+
+  describe '#highest_bid_amount' do
+    context 'no highest bid' do
+      it 'should return 0' do
+        item = FactoryGirl.create(:item, closing_time: Time.now - 2.minutes)
+        Item.find(item).highest_bid_amount.should eql(0)
+      end
+    end
+
+    context 'has highest bid' do
+      it 'returns highest bid amount' do
+        item = FactoryGirl.create(:item, closing_time: Time.now + 2.minutes)
+        bid = FactoryGirl.create(:bid, item: item, amount: 500)
+        Item.find(item).highest_bid_amount.should eql(500.to_d)
+      end
+    end
   end
 end
