@@ -1,10 +1,6 @@
-require 'sse'
-
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :set_user
-
-  include ActionController::Live
 
   def index
     @categories = Category.all
@@ -47,25 +43,6 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     redirect_to categories_url, notice: 'Category was successfully destroyed.'
-  end
-
-  def time_left 
-    response.headers["Content-Type"] = "text/event-stream"
-    sse = SSE::Client.new(response.stream)
-
-    @items = Item.where(category_id: Category.find_by_url(params[:category_id]), closed: false).to_a
-    begin
-      loop do
-        @items.each_with_index do |item, i|
-          sse.write({ time: item.time_left }, event: "time_left_#{i}")
-        end
-        sleep 1
-      end
-    rescue IOError
-      logger.info "Stream closed"
-    ensure 
-      sse.close
-    end
   end
 
   private

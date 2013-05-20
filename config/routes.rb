@@ -5,14 +5,15 @@ Bidding::Application.routes.draw do
     resources :bids
   end
 
+  namespace :events do
+    get :not_closed_items
+  end
+
   devise_for :users
 
   root to: 'categories#index'
 
   resources :categories, path: '' do
-    get :time_left
-    resources :items, concerns: :biddable do
-      get :time_left
-    end
+    resources :items, concerns: :biddable
   end
 end

@@ -46,23 +46,6 @@ class ItemsController < ApplicationController
     redirect_to category_items_path, notice: 'Item was successfully destroyed.'
   end
 
-  def time_left 
-    response.headers["Content-Type"] = "text/event-stream"
-    sse = SSE::Client.new(response.stream)
-
-    @item = Item.find(params[:item_id])
-    begin
-      loop do
-        sse.write({ time: @item.time_left }, event: 'time_left')
-        sleep 1
-      end
-    rescue IOError
-      logger.info "Stream closed"
-    ensure 
-      sse.close
-    end
-  end
-
   private
   def set_user 
     @user = current_user
