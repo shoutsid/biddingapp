@@ -30,16 +30,4 @@ describe Bid do
       end
     end
   end
-
-  describe '#highest_bid' do
-    context 'item has no highest bid' do
-      it 'returns parent item starting price' do
-        item = FactoryGirl.create(:item)
-        bid = FactoryGirl.create(:bid, item: item)
-
-        bid.highest_bid.should eql(item.starting_price)
-      end
-    end
-  end
-
 end

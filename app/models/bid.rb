@@ -3,17 +3,12 @@ class Bid < ActiveRecord::Base
   belongs_to :item
   validates_presence_of :item, :amount
   validates_numericality_of :amount, on: :create,
-                                    greater_than: Proc.new { |bid| bid.highest_bid }
+                                    greater_than_or_equal_to: Proc.new { |bid| bid.item.min_bid_amount.to_f }
   after_create :bump_item_time_left
   validate :item_expired, if: :item
   
   def item_expired
     errors.add(:item, "Can't bid on an expired item.") if item.expired?
-  end
-
-  def highest_bid
-    highest_bid = item.highest_bid
-    highest_bid ? highest_bid.amount.to_f : item.starting_price
   end
 
   private
