@@ -1,0 +1,12 @@
+<h3>Recently Sold</h3>
+<% Item.where(closed: true).limit(5).each_with_index do |item, i| %>
+  <div style="border: 1px solid">
+    Name: <%= item.name %><br/>
+    Description: <%= item.description %> <br/>
+    link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
+    Minimum Acceptance Price: <%= item.min_accept_bid %><br/>
+    Starting Price: <%= item.starting_price %><br/>
+    Winning Bid:  <%= item.highest_bid ? "#{item.highest_bid.amount}  by: #{item.highest_bid.user.email}" : '<b style="color: red">No bids on this item.</b>'.html_safe %> <br/>
+  </div>
+    <hr/>
+<% end %>
