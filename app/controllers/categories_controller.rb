@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @items = Item.where(category_id: @category)
+    @items = Item.where(category_id: @category, closed: false).to_a
     @bid = Bid.new
     respond_to do |format|
       format.html
@@ -53,7 +53,7 @@ class CategoriesController < ApplicationController
     response.headers["Content-Type"] = "text/event-stream"
     sse = SSE::Client.new(response.stream)
 
-    @items = Item.where(category_id: Category.find_by_url(params[:category_id]))
+    @items = Item.where(category_id: Category.find_by_url(params[:category_id]), closed: false).to_a
     begin
       loop do
         @items.each_with_index do |item, i|
