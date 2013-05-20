@@ -11,10 +11,10 @@ describe Item do
 
   describe '#highest_bid' do
     it 'returns highest bid' do
-        item = FactoryGirl.create(:item)
-        bid = FactoryGirl.create(:bid, item: item)
+      item = FactoryGirl.create(:item)
+      bid = FactoryGirl.create(:bid, item: item)
 
-        Item.find(item).highest_bid.should eql(bid)
+      Item.find(item).highest_bid.should eql(bid)
     end
   end
 
@@ -24,7 +24,7 @@ describe Item do
         item = FactoryGirl.create(:item)
         item.time_left.should eql("Time left: " + item.check_time_left.to_s + " Seconds")
       end
-      
+
       it 'returns type of string' do
         item = FactoryGirl.create(:item)
         item.time_left.should be_kind_of(String)
@@ -57,10 +57,10 @@ describe Item do
 
   describe '#increase_time_left' do
     it 'increased time left by 10 seconds' do
-        item = FactoryGirl.create(:item)
-        before_change = item.check_time_left
-        item.increase_time_left
-        Item.find(item).check_time_left.should eql(before_change + 10.seconds)
+      item = FactoryGirl.create(:item)
+      before_change = item.check_time_left
+      item.increase_time_left
+      Item.find(item).check_time_left.should eql(before_change + 10.seconds)
     end
   end
 
@@ -92,5 +92,8 @@ describe Item do
         Item.find(item).accept_highest_bid?.should eql(false)
       end
     end
+  end
+
+  describe '#bg_worker_complete_auction' do
   end
 end

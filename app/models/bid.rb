@@ -20,5 +20,4 @@ class Bid < ActiveRecord::Base
   def bump_item_time_left
     item.increase_time_left
   end
-
 end

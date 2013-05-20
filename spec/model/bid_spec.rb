@@ -41,4 +41,5 @@ describe Bid do
       end
     end
   end
+
 end
