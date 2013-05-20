@@ -8,9 +8,9 @@
         <h3><%= @category.name.titleize %> Related Items</h3>
 
         <% @items.each_with_index do |item, i| %>
-          <div class="container-fluid" style="border: 1px solid;" id="item_<%= i %>">
+          <div class="container-fluid" style="border: 1px solid;" id="item_<%= item.id%>">
 
-            <div class="span4" id="item_sold_<%= i %>">
+            <div class="span4" id="item_sold_<%= item.id %>">
               <h4><u><%= item.name.titleize %></u></h4>
               <!-- TODO:- Add image of item here. --> 
             </div>
@@ -20,16 +20,16 @@
               link: <%= link_to 'show item', category_item_path(@category, item) %> <br/>
               Minimum Acceptance Price: <%= item.min_accept_bid %><br/>
               Starting Price: <%= item.starting_price %><br/>
-              Current Bid:  <%= item.highest_bid ? item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %> <br/>
+              Current Bid Amount: <span id="current_bid_amount_<%= item.id %>"></span><br/>
 
               <b style="color: red">
-                <div id="time_left_<%= i %>">
+                <div id="time_left_<%= item.id %>">
                 </div>
               </b>
               <hr/>
 
               <% if user_signed_in? %>
-                <div id="item_bid_<%= i %>">
+                <div id="item_bid_<%= item.id %>">
                   <% @item = item %>
                   <%= render '/bids/form' %>
                 </div>

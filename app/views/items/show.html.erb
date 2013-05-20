@@ -9,7 +9,7 @@
   Description: <%= @item.description %><br/>
   Minimum Acceptance Price: <%= @item.min_accept_bid %><br/>
   Starting Price: <%= @item.starting_price %><br/>
-  Current Bid:  <%= @item.highest_bid ? @item.highest_bid.amount : '<b style="color: red">no bids</b>'.html_safe %> <br/>
+  Current Bid:  <span id="current_bid_amount"></span>
   <br/>
   <%= link_to 'Edit', edit_category_item_path(@category, @item) %> |
   <%= link_to 'Back', category_path(@category) %>
