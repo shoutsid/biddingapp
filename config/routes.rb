@@ -7,6 +7,7 @@ Bidding::Application.routes.draw do
 
   namespace :events do
     get :not_closed_items
+    get :all_bids
   end
 
   devise_for :users
