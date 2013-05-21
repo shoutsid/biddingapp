@@ -39,7 +39,7 @@ $ ->
         $('#current_bid_amount_' + item).empty()
         $('#current_bid_amount_' + item).append(highest_bid)
         
-        if highest_bid > $('#item_bid_' + item + ' #place_bid_amount').val()
-          $('#item_bid_' + item + ' #place_bid_amount').attr( 'placeholder', (parseFloat(highest_bid) + 1))
-          $('#item_bid_' + item + ' #place_bid_amount').attr( 'min', (parseFloat(highest_bid) + 1))
-          $('#item_bid_' + item + ' #place_bid_amount').val(parseFloat(highest_bid) + 1)
+        if highest_bid > $('#item_bid_' + item + ' #input_bid_amount').val()
+          $('#item_bid_' + item + ' #input_bid_amount').attr( 'placeholder', (parseFloat(highest_bid) + 1))
+          $('#item_bid_' + item + ' #input_bid_amount').attr( 'min', (parseFloat(highest_bid) + 1))
+          $('#item_bid_' + item + ' #input_bid_amount').val(parseFloat(highest_bid) + 1)
