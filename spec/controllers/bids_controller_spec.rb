@@ -60,6 +60,8 @@ describe BidsController do
       let(:send_request) {
         @item = @bid.item 
         @category = @item.category
+        @user = @item.user
+        sign_in @user
         post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } 
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
       }
@@ -67,6 +69,8 @@ describe BidsController do
       it 'should create a new record' do
         @item = @bid.item
         @category = @item.category
+        @user = @item.user
+        sign_in @user
         lambda {
           post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
         }.should change(Bid, :count).by(1) 

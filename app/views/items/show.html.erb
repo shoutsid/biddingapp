@@ -1,3 +1,5 @@
+<%= link_to 'Back', category_path(@category) %>
+
 <div style="text-align: center">
 
   Closing Time: <%= @item.closing_time %><br/>
@@ -11,8 +13,6 @@
   Starting Price: <%= @item.starting_price %><br/>
   Current Bid:  <span id="current_bid_amount"></span>
   <br/>
-  <%= link_to 'Edit', edit_category_item_path(@category, @item) %> |
-  <%= link_to 'Back', category_path(@category) %>
 
   <b style="color: red">
     <div id="time">
@@ -25,8 +25,8 @@
       <%= render '/bids/form' %>
     </div>
   <% else %>
-    You must be a user to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
+    You must be signed in to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
   <% end %>
-
-
 </div>
+
+<%= link_to 'Back', category_path(@category) %>

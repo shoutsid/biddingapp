@@ -1,7 +1,11 @@
 <div class="container-fluid">
-  <div class="row-fluid">
 
-    <p id="notice"><%= notice %></p>
+  <div class="row-fluid">
+    <%= link_to '| Auction an Item | ', new_category_item_path(@category) if user_signed_in? %>
+    <%= link_to '| Back |', categories_path %>
+  </div>
+
+  <div class="row-fluid">
 
     <div class="container-fluid">
       <div class="span8">
@@ -49,8 +53,7 @@
   </div>
 
   <div class="row-fluid">
-    <%= link_to 'Auction Item', new_category_item_path(@category) %> |
-    <%= link_to 'Edit this category', edit_category_path(@category) %> |
-    <%= link_to 'Back', categories_path %>
+    <%= link_to '| Auction an Item | ', new_category_item_path(@category) if user_signed_in? %>
+    <%= link_to '| Back |', categories_path %>
   </div>
 </div>
