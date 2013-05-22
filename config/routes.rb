@@ -1,16 +1,24 @@
 Bidding::Application.routes.draw do
-  mount Resque::Server, :at => "/resque"
 
   concern :biddable do
     resources :bids
   end
 
+  devise_for :users
+
   namespace :events do
     get :not_closed_items
     get :all_bids
   end
-
-  devise_for :users
+  
+  devise_for :admins, path: '/admin'
+  authenticate :admin do
+    namespace :admin do
+      get '/', to: 'dashboard#index'
+      mount Resque::Server, at: 'resque'
+      resources :categories, except: :show
+    end
+  end
 
   root to: 'categories#index'
 
