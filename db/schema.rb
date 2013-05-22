@@ -14,15 +14,15 @@
 ActiveRecord::Schema.define(version: 20130520001648) do
 
   create_table "bids", force: true do |t|
-    t.decimal  "amount",     precision: 8, scale: 2
+    t.decimal  "amount",     precision: 8, scale: 2, default: 0.0, null: false
     t.integer  "user_id"
     t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "bids", ["item_id"], name: "index_bids_on_item_id"
-  add_index "bids", ["user_id"], name: "index_bids_on_user_id"
+  add_index "bids", ["item_id"], name: "index_bids_on_item_id", using: :btree
+  add_index "bids", ["user_id"], name: "index_bids_on_user_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(version: 20130520001648) do
     t.text     "description"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.decimal  "min_accept_bid", precision: 8, scale: 2
-    t.decimal  "starting_price", precision: 8, scale: 2
+    t.decimal  "min_accept_bid"
+    t.decimal  "starting_price"
+    t.string   "highest_bid_id"
     t.datetime "closing_time"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(version: 20130520001648) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
