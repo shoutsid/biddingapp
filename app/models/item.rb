@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
-  validates_presence_of :name, :description, :starting_price, :closing_time, :min_accept_bid
+  validates_presence_of :name, :description, :starting_price, :closing_time, :min_accept_bid, :user
   has_many :bids
   after_create :bg_worker_complete_auction
   after_create :not_closed

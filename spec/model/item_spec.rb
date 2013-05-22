@@ -7,6 +7,7 @@ describe Item do
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:starting_price) }
   it { should validate_presence_of(:closing_time) }
+  it { should validate_presence_of(:user) }
   it { should have_many(:bids) }
 
   describe '#not_closed' do

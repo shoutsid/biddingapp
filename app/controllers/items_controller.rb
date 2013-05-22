@@ -1,11 +1,8 @@
-require 'sse'
-
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_category  
   before_action :set_user
-
-  include ActionController::Live
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @items = Item.all
@@ -60,6 +57,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :category_id, :starting_price, :min_accept_bid, :closing_time)
+    params.require(:item).permit(:name, :description, :category_id, :starting_price, :min_accept_bid, :closing_time, :user)
   end
 end
