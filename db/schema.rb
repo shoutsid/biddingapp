@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130535152813) do
+ActiveRecord::Schema.define(version: 20130535152814) do
 
   create_table "admins", force: true do |t|
     t.string   "email",               default: "", null: false
@@ -65,18 +65,29 @@ ActiveRecord::Schema.define(version: 20130535152813) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                                               default: "",  null: false
+    t.string   "encrypted_password",                                  default: "",  null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",                                       default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
+    t.decimal  "balance",                     precision: 8, scale: 2, default: 0.0, null: false
+    t.string   "lat"
+    t.string   "lng"
+    t.string   "address"
+    t.string   "street_number"
+    t.string   "locality"
+    t.string   "administrative_area_level_1"
+    t.string   "administrative_area_level_2"
+    t.string   "country"
+    t.string   "postal_code"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
