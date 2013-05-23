@@ -44,8 +44,6 @@ class Item < ActiveRecord::Base
     closing_time <= Time.now
   end
 
-
-
   def accept_highest_bid?
     highest_bid_amount > min_accept_bid
   end
@@ -55,10 +53,13 @@ class Item < ActiveRecord::Base
     #         Notify the auction owner that they sold the item
     if expired? && accept_highest_bid?
       update(closed: true)
+      user.update_user_balance_by(highest_bid.amount)
+
       ## TODO:- Notify the auction owner that their asking price
       #         was not met.
     elsif expired? == true && accept_highest_bid? == false
       update(closed: true)          
+      highest_bid.user.update_user_balance_by(highest_bid.amount) if highest_bid
     end
   end
 

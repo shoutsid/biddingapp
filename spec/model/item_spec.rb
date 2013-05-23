@@ -10,6 +10,7 @@ describe Item do
   it { should validate_presence_of(:user) }
   it { should have_many(:bids) }
 
+
   describe '#second_highest_bid' do
     it 'returns the second highest bid' do
       item = FactoryGirl.create(:item)
@@ -153,13 +154,53 @@ describe Item do
           Item.find(item).close_auction
           Item.find(item).closed.should eql(true)
         end
+
+        it 'updates users balance with winning bid amount' do
+          bid_user = FactoryGirl.create(:user, balance: 2000)
+          item_user = FactoryGirl.create(:user, balance: 100)
+          item = FactoryGirl.create(:item, min_accept_bid: 100, closing_time: Time.now + 2.minutes, user: item_user)
+          bid = FactoryGirl.create(:bid, item: item, amount: 200, user: bid_user)
+          item.update(closing_time: Time.now - 10.minutes)
+
+          Item.find(item).close_auction
+          User.find(item_user).balance.should eql(300.to_d)
+        end
       end
 
       context 'wont accept the highest bid' do
-        it 'sets item as closed, (true) value' do
-          item = FactoryGirl.create(:item, closing_time: Time.now - 2.minutes)
-          Item.find(item).close_auction
-          Item.find(item).closed.should eql(true)
+        context 'because no highest bidder' do
+          it 'sets item as closed, (true) value' do
+            item_user = FactoryGirl.create(:user, balance: 100)
+            item = FactoryGirl.create(:item, min_accept_bid: 100000, closing_time: Time.now + 2.minutes, user: item_user)
+            item.update(closing_time: Time.now - 10.minutes)
+
+            Item.find(item).close_auction
+            Item.find(item).closed.should eql(true)
+          end
+        end
+
+        context 'because bid didnt meat min accept amount' do
+          it 'sets the item as closed, (true) value' do
+            bid_user = FactoryGirl.create(:user, balance: 2000)
+            item_user = FactoryGirl.create(:user, balance: 100)
+            item = FactoryGirl.create(:item, min_accept_bid: 100000, closing_time: Time.now + 2.minutes, user: item_user)
+            bid = FactoryGirl.create(:bid, item: item, amount: 200, user: bid_user)
+            item.update(closing_time: Time.now - 10.minutes)
+
+            Item.find(item).close_auction
+            Item.find(item).closed.should eql(true)
+          end
+
+          it 'reimberses highest bidder with bid amount' do
+            bid_user = FactoryGirl.create(:user, balance: 1000)
+            item_user = FactoryGirl.create(:user, balance: 100)
+            item = FactoryGirl.create(:item, min_accept_bid: 100000, closing_time: Time.now + 2.minutes, user: item_user)
+            bid = FactoryGirl.create(:bid, item: item, amount: 200, user: bid_user)
+            item.update(closing_time: Time.now - 10.minutes)
+
+            Item.find(item).close_auction
+            User.find(bid_user).balance.should eql(1000.to_d)
+          end
         end
       end
     end
