@@ -9,6 +9,7 @@ Bidding::Application.routes.draw do
   namespace :events do
     get :not_closed_items
     get :all_bids
+    get :users_balance
   end
   
   devise_for :admins, path: '/admin'

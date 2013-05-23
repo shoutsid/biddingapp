@@ -45,4 +45,25 @@ class EventsController < ApplicationController
   ensure 
     sse.close
   end
+
+  def users_balance
+    response.headers["Content-Type"] = "text/event-stream"
+    sse = SSE::Client.new(response.stream)
+
+    User.uncached do
+      begin
+        loop do
+          @users = User.all.to_a
+          @users.each do |user|
+            sse.write({ id: "#{user.id}", balance: user.balance }, event: "balance")
+          end
+          sleep 5
+        end
+      end
+    end
+  rescue IOError
+    logger.info "Stream closed"
+  ensure 
+    sse.close
+  end
 end
