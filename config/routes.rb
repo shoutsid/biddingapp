@@ -15,6 +15,7 @@ Bidding::Application.routes.draw do
   authenticate :admin do
     namespace :admin do
       get '/', to: 'dashboard#index'
+      get 'resque-dashboard', to: 'dashboard#resque', as: 'dashboard_resque'
       mount Resque::Server, at: 'resque'
       resources :categories, except: :show
     end
