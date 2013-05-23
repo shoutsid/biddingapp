@@ -12,6 +12,9 @@ This application requires the following:
 
 
 == Maybe...
-  Might be switching over to JRuby to increase performance and for true threads, get rid of the pesty Global Interpreter Lock(GIL) and have a true asynchronous enviroment. (link) http://jruby.org
 
-  Also with this change I am thinking about making the server TorqueBox(TB), this will give many features that I think will be suited for a live immersive auction website. It will also remove the need for redis, because torquebox provides their own background processes right out of the box. (link) http://torquebox.org
+Stripe intergration for payments to update the users balance. UK-beta has been released for Stripe. https://stripe.com/
+
+Might be switching over to JRuby to increase performance and for true threads, get rid of the pesty Global Interpreter Lock(GIL) and have a true asynchronous enviroment. (link) http://jruby.org
+
+Also with this change I am thinking about making the server TorqueBox(TB), this will give many features that I think will be suited for a live immersive auction website. It will also remove the need for redis, because torquebox provides their own background processes right out of the box. (link) http://torquebox.org
