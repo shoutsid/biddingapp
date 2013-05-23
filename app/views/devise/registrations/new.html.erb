@@ -1,18 +1,79 @@
-<h2>Sign up</h2>
+<script>
+  $(function() {
+    var addresspicker = $( "#addresspicker" ).addresspicker();
+    var addresspickerMap = $( "#addresspicker_map" ).addresspicker({
+      regionBias: "fr",
+      updateCallback: showCallback,
+      elements: {
+        map:      "#map",
+        lat:      "#lat",
+        lng:      "#lng",
+        street_number: '#street_number',
+        route: '#route',
+        locality: '#locality',
+        administrative_area_level_2: '#administrative_area_level_2',
+        administrative_area_level_1: '#administrative_area_level_1',
+        country:  '#country',
+        postal_code: '#postal_code',
+        type:    '#type' 
+      }
+    });
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+    var gmarker = addresspickerMap.addresspicker( "marker");
+    gmarker.setVisible(true);
+    addresspickerMap.addresspicker( "updatePosition");
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+    $('#reverseGeocode').change(function(){ 
+      $("#addresspicker_map").addresspicker("option", "reverseGeocode", ($(this).val() === 'true'));
+    });
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+    function showCallback(geocodeResult, parsedGeocodeResult){
+      $('#callback_result').text(JSON.stringify(parsedGeocodeResult, null, 4));
+    }
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  });
+</script>
 
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <h2>Sign up</h2>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="span3">
+            <div><%= f.label :email %><br />
+              <%= f.email_field :email, :autofocus => true %></div>
 
-<%= render "devise/shared/links" %>
+            <div><%= f.label :password %><br />
+              <%= f.password_field :password %></div>
+
+            <div><%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation %></div>
+          </div>
+
+          <div class="span3">
+            <%= f.label 'Address' %><br />
+            <%= f.text_field :address, id: 'addresspicker_map' %><br />
+            <%= f.label 'House Number' %><br />
+            <%= f.text_field :street_number, id: 'street_number' %><br />
+            <%= f.label 'Town' %><br />
+            <%= f.text_field :locality, id: 'locality' %><br />
+            <%= f.label 'County' %><br />
+            <%= f.text_field :administrative_area_level_1, id: 'administrative_area_level_1' %><br/>
+            <%= f.label 'State/Province' %><br />
+            <%= f.text_field :administrative_area_level_2, id: 'administrative_area_level_2' %><br/>
+            <%= f.label :country %><br />
+            <%= f.text_field :country, id: 'country' %><br/>
+            <%= f.label :postal_code %><br />
+            <%= f.text_field :postal_code, id: 'postal_code' %><br/>
+          </div>
+
+
+          <div><%= f.submit "Sign up" %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= render "devise/shared/links" %>
+</div>
