@@ -9,6 +9,7 @@ FactoryGirl.define do
   factory :user do
     email 
     password 'password'
+    balance 100000
     address
     street_number
     postal_code

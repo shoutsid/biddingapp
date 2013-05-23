@@ -11,4 +11,57 @@ describe User do
   it { should validate_presence_of(:street_number) }
   it { should validate_presence_of(:postal_code) }
   it { should validate_presence_of(:country) }
+
+  describe '#hard_update_balance' do
+    context 'when given amount to reset balance too' do
+      it 'resets balance to amount supplied' do
+        user = FactoryGirl.create(:user)
+        user.hard_reset_balance(20)
+        User.find(user).balance.should eql(20.to_d)
+      end 
+
+      context 'when no amount supplied' do
+        it 'resets balance to 0' do
+          user = FactoryGirl.create(:user, balance: 20)
+          user.hard_reset_balance
+          User.find(user).balance.should eql(0.to_d)
+        end
+      end
+    end
+  end
+
+
+  describe '#update_user_balance_by' do
+    context 'given positive amount' do
+      it 'increases balance by given amount' do
+        user = FactoryGirl.create(:user, balance: 20)
+        user.update_user_balance_by(10)
+        User.find(user).balance.should eql(30.to_d) 
+      end
+    end
+
+    context 'given negitive amount' do
+      it 'decreases balance by given amount' do
+        user = FactoryGirl.create(:user, balance: 20)
+        user.update_user_balance_by(-10)
+        User.find(user).balance.should eql(10.to_d)
+      end
+    end
+  end
+
+  describe '#has_enough_balance_to_bid?' do
+    context 'user has enough balance' do
+      it 'returns true' do
+        user = FactoryGirl.create(:user, balance: 9000)
+        user.has_enough_balance_to_bid?(200).should eql(true)
+      end
+    end
+
+    context 'user doesnt have enough balance' do
+      it 'returns false' do
+        user = FactoryGirl.create(:user, balance: 20)
+        user.has_enough_balance_to_bid?(200).should eql(false)
+      end
+    end
+  end
 end
