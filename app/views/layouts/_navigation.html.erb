@@ -1,4 +1,6 @@
-<input id="user_id" style="display: none;" type="text" value="<%= current_user.id if current_user %>"/>
+<!-- need to change this, allows people to check others balances. So does visiting /events/users_balance but whatever. -->
+<input id="user_id" style="display: none;" type="text" value="<%= current_user.id if current_user %>" disabled="disabled" />
+
 <div class="navbar navbar-inverse navbar-static-top">
   <nav class="navbar-inner">
   <div class="container">
