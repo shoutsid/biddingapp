@@ -4,4 +4,6 @@ class User < ActiveRecord::Base
 
   has_many :items
   has_many :bids
+
+  validates_presence_of :address, :street_number, :postal_code, :country
 end
