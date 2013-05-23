@@ -20,8 +20,8 @@ $ ->
           ).fadeTo("slow", 1.0)
           i++
 
-       if balance > balance_placeholder_DOM
-         i = 0
+      if balance > balance_placeholder_DOM
+        i = 0
         while i < 3
           balance_DOM.animate( { backgroundColor: '#009966' } ).fadeTo("slow", 0.5, ->
             $(this).removeAttr('style')
