@@ -19,6 +19,11 @@ class Item < ActiveRecord::Base
     bids.max 
   end
 
+  def second_highest_bid
+    last_2_bids = bids.order(amount: :desc).limit(2)
+    last_2_bids[1]
+  end
+
   def highest_bid_amount
     highest_bid == nil ? 0 : highest_bid.amount 
   end
@@ -38,6 +43,8 @@ class Item < ActiveRecord::Base
   def expired?
     closing_time <= Time.now
   end
+
+
 
   def accept_highest_bid?
     highest_bid_amount > min_accept_bid

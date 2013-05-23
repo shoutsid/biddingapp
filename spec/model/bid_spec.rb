@@ -57,4 +57,23 @@ describe Bid do
     end
   end
 
+  describe '#deduct_from_balance' do
+    it 'should deduct bid amount from users balance' do
+      user = FactoryGirl.create(:user, balance: 2000)
+      bid = FactoryGirl.create(:bid, user: user, amount: 900)
+      User.find(user).balance.should eql(1100.to_d) 
+    end
+  end
+
+  describe '#reimberse_previous_bidders_balance' do
+    it 'should reimberse previous balance to correct amount' do
+      item = FactoryGirl.create(:item)
+      user_1 = FactoryGirl.create(:user, balance: 5000)
+      user_2 = FactoryGirl.create(:user, balance: 5000)
+      user_bid_1 = FactoryGirl.create(:bid, user: user_1, amount: 900, item: item)
+      user_bid_2 = FactoryGirl.create(:bid, user: user_2, amount: 1000, item: item)
+      User.find(user_1).balance.should eql(5000.to_d) 
+    end
+  end
+
 end

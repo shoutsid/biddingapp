@@ -10,6 +10,17 @@ describe Item do
   it { should validate_presence_of(:user) }
   it { should have_many(:bids) }
 
+  describe '#second_highest_bid' do
+    it 'returns the second highest bid' do
+      item = FactoryGirl.create(:item)
+      user_1 = FactoryGirl.create(:user, balance: 5000)
+      user_2 = FactoryGirl.create(:user, balance: 5000)
+      user_bid_1 = FactoryGirl.create(:bid, user: user_1, amount: 900, item: item)
+      user_bid_2 = FactoryGirl.create(:bid, user: user_2, amount: 1000, item: item)
+      item.second_highest_bid.should eql(user_bid_1)
+    end
+  end
+
   describe '#not_closed' do
     context 'after create' do
       it 'sets closed to false' do

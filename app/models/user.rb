@@ -18,6 +18,4 @@ class User < ActiveRecord::Base
   def has_enough_balance_to_bid?(amount)
     balance.to_f >= amount.to_f
   end
-
-
 end

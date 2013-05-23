@@ -100,14 +100,18 @@ describe BidsController do
     context 'when bid is lower than previous' do
       let(:send_request) {
         @item = @bid.item
+        @user = @bid.user
         @category = @item.category
+        sign_in @user
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
         post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } 
       }
 
       it 'should not create a new record' do
         @item = @bid.item
+        @user = @bid.user
         @category = @item.category
+        sign_in @user
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
         lambda { 
           post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item } 
