@@ -2,6 +2,35 @@ $ ->
   event_source = new EventSource('/events/not_closed_items')
   url = window.location.href
 
+  $('[id^=current_bid_user]').each (index) ->
+    event_source.addEventListener ('highest_bid_user'), (event) ->
+      category = $.parseJSON(event.data).category
+      item = $.parseJSON(event.data).id
+
+      current_bid_user_DOM = $('#current_bid_user_' + item)
+      current_user_DOM = $('#user_id')
+      input_bid_DOM = $('#item_bid_' + item + ' #input_bid_amount')
+      balance_DOM = $('#user_balance')
+      balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
+
+      $('form').submit ->
+        if input_bid_DOM.val() > balance_placeholder_DOM
+          balance_DOM.animate( { backgroundColor: '#CC3333' } )
+
+      if url.search(category) > 0
+        current_bid_user = $.parseJSON(event.data).username
+        current_bid_user_id = $.parseJSON(event.data).user
+
+        if current_bid_user_DOM.val() != current_bid_user
+          current_bid_user_DOM.empty()
+          current_bid_user_DOM.append('bid by: ' + current_bid_user)
+
+        if current_user_DOM.val() != current_bid_user_id
+          i = 0
+          while i < 3
+            input_bid_DOM.fadeTo("100", 0.5).fadeTo("100", 1.0)
+            i++
+
   $('[id^=time_left]').each (index) ->
 
     event_source.addEventListener ('time_left'), (event) ->
@@ -11,7 +40,7 @@ $ ->
       time_left_DOM = $('#time_left_' + item)
       item_sold_DOM = $('#item_sold_' + item)
 
-      if url.search(category) > 0 
+      if url.search(category) > 0
         time = $.parseJSON(event.data).time
 
         time_left_DOM.empty()
