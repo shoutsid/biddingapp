@@ -2,7 +2,7 @@ FactoryGirl.define do
   sequence(:item_name) { |n| "CPU#{n}" }
 
   factory :item do
-    name :item_name
+    name { generate(:item_name) }
     description 'foo'
     category
     user
