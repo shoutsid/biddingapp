@@ -51,7 +51,7 @@ $ ->
     item = $.parseJSON(event.data).id
     highest_bid = $.parseJSON(event.data).highest_bid
 
-    if url.search(category) > 0  && url.search('items/' + item) > 0 && highest_bid > current_bid_DOM.val()
+    if url.search(category) > 0  && url.search('items/' + item) > 0 && highest_bid >= current_bid_DOM.val()
       current_bid_DOM.empty()
       current_bid_DOM.append(highest_bid)
 
@@ -59,3 +59,9 @@ $ ->
         input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
         input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
         input_bid_DOM.val(parseFloat(highest_bid) + 1)
+
+      starting_price_DOM = parseFloat($('#starting_price').html())
+      if starting_price_DOM >= parseFloat(input_bid_DOM.val())
+        input_bid_DOM.attr( 'placeholder', (starting_price_DOM + 1))
+        input_bid_DOM.attr( 'min', (starting_price_DOM + 1))
+        input_bid_DOM.val(starting_price_DOM + 1)

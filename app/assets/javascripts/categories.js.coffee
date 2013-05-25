@@ -2,8 +2,6 @@ $ ->
   event_source_not_closed_items = new EventSource('/events/not_closed_items')
   url = window.location.href
 
-
-
   event_source_not_closed_items.addEventListener ('highest_bid_user'), (event) ->
     category = $.parseJSON(event.data).category
     item = $.parseJSON(event.data).id
