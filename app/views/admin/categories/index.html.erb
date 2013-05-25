@@ -1,20 +1,30 @@
-<h1>Categories</h1>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <h1>Categories</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-    </tr>
-  </thead>
+    <table style="margin: 20px;">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.name %></td>
-        <td><%= link_to 'Browse', category %></td>
-        <td><%= link_to 'Delete', admin_category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+            <td><%= link_to 'Browse', category %></td>
+            <td><%= link_to 'Edit', edit_admin_category_path(category) %></td>
+            <td><%= link_to 'Delete', admin_category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row-fluid">
+    <p><%= link_to 'Create Category', new_admin_category_path %></p>
+  </div>
+</div>

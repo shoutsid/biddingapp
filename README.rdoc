@@ -10,6 +10,9 @@ This application requires the following:
     spawn some resque workers
     $ rake resque:workers COUNT=#number QUEUE=#queue here.
 
+== TODO
+
+Fancy jQuery and design work
 
 == Maybe...
 
