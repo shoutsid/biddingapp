@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
-    render template: "controller/#{@controller.url}"
   end
 
   def show

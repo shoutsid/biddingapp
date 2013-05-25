@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe BidsController do
- before(:each) { @bid = FactoryGirl.create(:bid) }
+ before(:each) { @bid = FactoryGirl.create(:bid)
+ sign_in @bid.user
+ }
 
   describe 'GET #index' do
     let(:send_request) do 
@@ -60,8 +62,6 @@ describe BidsController do
       let(:send_request) {
         @item = @bid.item 
         @category = @item.category
-        @user = @item.user
-        sign_in @user
         post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } 
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
       }
@@ -69,8 +69,6 @@ describe BidsController do
       it 'should create a new record' do
         @item = @bid.item
         @category = @item.category
-        @user = @item.user
-        sign_in @user
         lambda {
           post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
         }.should change(Bid, :count).by(1) 
@@ -100,18 +98,14 @@ describe BidsController do
     context 'when bid is lower than previous' do
       let(:send_request) {
         @item = @bid.item
-        @user = @bid.user
         @category = @item.category
-        sign_in @user
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
         post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } 
       }
 
       it 'should not create a new record' do
         @item = @bid.item
-        @user = @bid.user
         @category = @item.category
-        sign_in @user
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
         lambda { 
           post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item } 

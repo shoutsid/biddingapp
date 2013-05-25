@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe Admin::CategoriesController do
-  before(:each) { @category = FactoryGirl.create(:category) }
+  before(:each) { @category = FactoryGirl.create(:category)
+  @admin = FactoryGirl.create(:admin)
+  sign_in :admin, @admin
+  }
 
   describe 'GET #edit' do
     let(:send_request) { get :edit, id: @category }

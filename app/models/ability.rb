@@ -25,6 +25,6 @@ class AdminAbility
   include CanCan::Ability
 
   def intialize(admin)
-    can :manage, :all
+    can :manage, :all 
   end
 end
