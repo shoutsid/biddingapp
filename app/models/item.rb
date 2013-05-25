@@ -54,6 +54,7 @@ class Item < ActiveRecord::Base
     if expired? && accept_highest_bid?
       update(closed: true)
       user.update_user_balance_by(highest_bid.amount)
+      ItemMailer.item_sold(self, highest_bid).deliver
 
       ## TODO:- Notify the auction owner that their asking price
       #         was not met.
