@@ -1,79 +1,79 @@
 $ ->
-  event_source = new EventSource('/events/not_closed_items')
+  event_source_not_closed_items = new EventSource('/events/not_closed_items')
   url = window.location.href
 
-  $('[id^=current_bid_user]').each (index) ->
-    event_source.addEventListener ('highest_bid_user'), (event) ->
-      category = $.parseJSON(event.data).category
-      item = $.parseJSON(event.data).id
 
-      current_bid_user_DOM = $('#current_bid_user_' + item)
-      current_user_DOM = $('#user_id')
-      input_bid_DOM = $('#item_bid_' + item + ' #input_bid_amount')
-      balance_DOM = $('#user_balance')
-      balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
 
-      $('form').submit ->
-        if input_bid_DOM.val() > balance_placeholder_DOM
+  event_source_not_closed_items.addEventListener ('highest_bid_user'), (event) ->
+    category = $.parseJSON(event.data).category
+    item = $.parseJSON(event.data).id
+
+    current_bid_user_DOM = $('#current_bid_user_' + item)
+    current_user_DOM = $('#user_id')
+    input_bid_DOM = $('#item_bid_' + item + ' #input_bid_amount')
+    balance_DOM = $('#user_balance')
+    balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
+    new_bid_form = $('#new_bid_' + item)
+
+    $('[id^=new_bid_]').each (index) ->
+      form = this
+      $(form).submit ->
+        if $('#input_bid_amount', form).val() > parseFloat(balance_placeholder_DOM)
           balance_DOM.animate( { backgroundColor: '#CC3333' } )
+          $('#unable_to_bid').modal('show')
+   
+    if url.search(category) > 0
+      current_bid_user = $.parseJSON(event.data).username
+      current_bid_user_id = $.parseJSON(event.data).user
 
-      if url.search(category) > 0
-        current_bid_user = $.parseJSON(event.data).username
-        current_bid_user_id = $.parseJSON(event.data).user
+      if current_bid_user_DOM.val() != current_bid_user
+        current_bid_user_DOM.empty()
+        current_bid_user_DOM.append('bid by: ' + current_bid_user)
 
-        if current_bid_user_DOM.val() != current_bid_user
-          current_bid_user_DOM.empty()
-          current_bid_user_DOM.append('bid by: ' + current_bid_user)
+      if current_user_DOM.val() != current_bid_user_id
+        i = 0
+        while i < 3
+          input_bid_DOM.fadeTo("100", 0.5).fadeTo("100", 1.0)
+          i++
 
-        if current_user_DOM.val() != current_bid_user_id
-          i = 0
-          while i < 3
-            input_bid_DOM.fadeTo("100", 0.5).fadeTo("100", 1.0)
-            i++
+  event_source_not_closed_items.addEventListener ('time_left'), (event) ->
+    category = $.parseJSON(event.data).category
+    item = $.parseJSON(event.data).id
 
-  $('[id^=time_left]').each (index) ->
+    time_left_DOM = $('#time_left_' + item)
+    item_sold_DOM = $('#item_sold_' + item)
 
-    event_source.addEventListener ('time_left'), (event) ->
-      category = $.parseJSON(event.data).category
-      item = $.parseJSON(event.data).id
+    if url.search(category) > 0
+      time = $.parseJSON(event.data).time
 
-      time_left_DOM = $('#time_left_' + item)
-      item_sold_DOM = $('#item_sold_' + item)
+      time_left_DOM.empty()
+      time_left_DOM.append(time)
 
-      if url.search(category) > 0
-        time = $.parseJSON(event.data).time
-
-        time_left_DOM.empty()
-        time_left_DOM.append(time)
-
-        if time_left_DOM.is ":contains('This Item Has Expired')"
-          $('#item_bid_' + item).remove()
-          $('#item_' + item).fadeTo('slow', 0.33)
-          item_sold_DOM.empty()
-          item_sold_DOM.append('SOLD!')
-          item_sold_DOM.css
-            'margin-top': '80px'
-            'text-align': 'center'
-            'color': 'red'
-            'font-size': '56px'
-          item_sold_DOM.fadeIn('slow', 0.33)
+      if time_left_DOM.is ":contains('This Item Has Expired')"
+        $('#item_bid_' + item).remove()
+        $('#item_' + item).fadeTo('slow', 0.33)
+        item_sold_DOM.empty()
+        item_sold_DOM.append('SOLD!')
+        item_sold_DOM.css
+          'margin-top': '80px'
+          'text-align': 'center'
+          'color': 'red'
+          'font-size': '56px'
+        item_sold_DOM.fadeIn('slow', 0.33)
   
+  event_source_not_closed_items.addEventListener ('highest_bid_amount'), (event) ->
+    category = $.parseJSON(event.data).category
+    item = $.parseJSON(event.data).id
+    highest_bid = $.parseJSON(event.data).highest_bid
 
-  $('[id^=current_bid_amount]').each (index) ->
+    bid_amount_DOM = $('#current_bid_amount_' + item)
+    input_bid_DOM = $('#item_bid_' + item + ' #input_bid_amount')
 
-    event_source.addEventListener ('highest_bid_amount'), (event) ->
-      category = $.parseJSON(event.data).category
-      item = $.parseJSON(event.data).id
-      highest_bid = $.parseJSON(event.data).highest_bid
-
-      bid_amount_DOM = $('#current_bid_amount_' + item)
-      input_bid_DOM = $('#item_bid_' + item + ' #input_bid_amount')
-
-      if url.search(category) > 0 && highest_bid > bid_amount_DOM.val()
-        bid_amount_DOM.empty()
-        bid_amount_DOM.append(highest_bid)
-        
-        if highest_bid > input_bid_DOM.val()
-          input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
-          input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
-          input_bid_DOM.val(parseFloat(highest_bid) + 1)
+    if url.search(category) > 0 && highest_bid > bid_amount_DOM.val()
+      bid_amount_DOM.empty()
+      bid_amount_DOM.append(highest_bid)
+      
+      if highest_bid > input_bid_DOM.val()
+        input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
+        input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
+        input_bid_DOM.val(parseFloat(highest_bid) + 1)
