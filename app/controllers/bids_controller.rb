@@ -2,6 +2,7 @@ class BidsController < ApplicationController
   before_action :set_bid, only: [:show, :edit, :update, :destroy]
   before_action :set_item
   before_action :set_category
+  load_and_authorize_resource 
 
   def index
     @bids = Bid.all
