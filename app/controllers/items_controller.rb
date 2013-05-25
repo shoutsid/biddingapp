@@ -60,6 +60,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :category_id, :starting_price, :min_accept_bid, :closing_time, :user)
+    params.fetch(:item, {}).permit(:name, :description, :category_id, :starting_price, :min_accept_bid, :closing_time, :user)
   end
 end
