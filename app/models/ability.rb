@@ -20,3 +20,11 @@ class Ability
     
   end
 end
+
+class AdminAbility
+  include CanCan::Ability
+
+  def intialize(admin)
+    can :manage, :all
+  end
+end
