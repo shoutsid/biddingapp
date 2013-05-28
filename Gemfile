@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.0.rc1'
 gem 'pg'
+gem 'unicorn'
 
 gem 'json', '~> 1.7.7'
 gem 'sass-rails', '~> 4.0.0.rc1'
@@ -42,3 +43,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner', git: 'git://github.com/bmabey/database_cleaner.git'
 end
+
+gem 'capistrano'
+gem 'rvm-capistrano'
