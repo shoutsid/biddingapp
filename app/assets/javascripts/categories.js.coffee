@@ -24,15 +24,23 @@ $ ->
       current_bid_user = $.parseJSON(event.data).username
       current_bid_user_id = $.parseJSON(event.data).user
 
-      if current_bid_user_DOM.val() != current_bid_user
+      if current_bid_user_DOM.html() != 'bid by: ' + current_bid_user
+        current_bid_user_DOM.effect( "explode", { times: 1 }, "slow", ->
+            setTimeout (->
+              current_bid_user_DOM.removeAttr("style").hide().fadeIn()
+            ), 500
+        )
         current_bid_user_DOM.empty()
         current_bid_user_DOM.append('bid by: ' + current_bid_user)
 
       if current_user_DOM.val() != current_bid_user_id
+        input_bid_DOM.removeAttr('disabled')
         i = 0
         while i < 3
           input_bid_DOM.fadeTo("100", 0.5).fadeTo("100", 1.0)
           i++
+      else
+        input_bid_DOM.attr('disabled', 'disabled')
 
   event_source_not_closed_items.addEventListener ('time_left'), (event) ->
     category = $.parseJSON(event.data).category

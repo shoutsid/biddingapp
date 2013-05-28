@@ -11,6 +11,8 @@ $ ->
   current_bid_user_DOM = $('#current_bid_user')
   time_DOM = $('#time')
 
+
+
   $('#new_bid').submit ->
     if input_bid_DOM.val() > parseFloat($('#user_balance').attr( 'placeholder' ))
       $('#unable_to_bid').modal('show')
@@ -24,7 +26,15 @@ $ ->
       current_bid_user = $.parseJSON(event.data).username
       current_bid_user_id = $.parseJSON(event.data).user
 
-      if current_bid_user_DOM.val() != current_bid_user
+      if current_user_DOM.val() == current_bid_user_id
+        item_bid_DOM.fadeTo("100", 0.5)
+        
+      if current_bid_user_DOM.html() != 'bid by: ' + current_bid_user
+        current_bid_user_DOM.effect( "explode", { times: 1 }, "slow", ->
+            setTimeout (->
+              current_bid_user_DOM.removeAttr("style").hide().fadeIn()
+            ), 500
+        )
         current_bid_user_DOM.empty()
         current_bid_user_DOM.append('bid by: ' + current_bid_user)
 
