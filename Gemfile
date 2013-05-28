@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.0.rc1'
 gem 'pg'
-gem 'unicorn'
 
 gem 'json', '~> 1.7.7'
 gem 'sass-rails', '~> 4.0.0.rc1'
@@ -13,6 +12,8 @@ gem 'jquery-rails'
 #gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
 
+gem 'foreman'
+gem 'puma'
 gem 'figaro'
 gem 'resque', :require=> 'resque/server'
 gem 'cancan', :github => 'moriz/cancan' 
