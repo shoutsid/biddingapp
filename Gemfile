@@ -12,6 +12,8 @@ platform :ruby do
   gem 'pg'
 end
 
+gem 'pry-rails'
+gem 'pry-rescue'
 
 gem 'json', '~> 1.7.7'
 gem 'sass-rails', '~> 4.0.0.rc1'
