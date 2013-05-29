@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.0.rc1'
-#gem 'pg'
 
-platform :jruby do
-  gem 'activerecord-jdbcpostgresql-adapter', github: 'jruby/activerecord-jdbc-adapter'
-  gem 'therubyrhino', group: :assets
-end
 
-platform :ruby do
-  gem 'pg'
-end
+#gem 'turbolinks'
+#gem 'puma'
 
+#source 'http://torquebox.org/rubygems'
+#gem 'torquebox-server', '2.3.1'
+gem 'puma'
+gem "activerecord-jdbc-adapter", github: "jruby/activerecord-jdbc-adapter"
+gem 'activerecord-jdbcpostgresql-adapter', github: 'jruby/activerecord-jdbc-adapter'
+gem 'therubyrhino', group: :assets
 gem 'pry-rails'
 gem 'pry-rescue'
 
@@ -20,11 +20,9 @@ gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
-#gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
 
 gem 'foreman'
-gem 'puma'
 gem 'figaro'
 gem 'resque', :require=> 'resque/server'
 gem 'cancan', :github => 'moriz/cancan' 
@@ -52,7 +50,7 @@ group :test do
   gem 'rspec-rails', '~> 2.0'
   #gem 'ruby-prof'
   gem 'shoulda-matchers'
-  gem 'database_cleaner', git: 'git://github.com/bmabey/database_cleaner.git'
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
 end
 
 gem 'capistrano'

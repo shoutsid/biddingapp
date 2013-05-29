@@ -6,8 +6,9 @@ GIT
 
 GIT
   remote: git://github.com/jruby/activerecord-jdbc-adapter.git
-  revision: 71dec3b66ed9afca6daa27ff9ad278dec6959fd8
+  revision: afeee445b93e7f0635801f2dc8be74ccd4ca66db
   specs:
+    activerecord-jdbc-adapter (1.3.0.DEV)
     activerecord-jdbcpostgresql-adapter (1.3.0.DEV)
       activerecord-jdbc-adapter (~> 1.3.0.DEV)
       jdbc-postgres (>= 9.1, < 9.3)
@@ -56,7 +57,6 @@ GEM
       activesupport (= 4.0.0.rc1)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.2)
-    activerecord-jdbc-adapter (1.3.0.beta1)
     activesupport (4.0.0.rc1)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -166,7 +166,6 @@ GEM
     parallel (0.6.5)
     parallel_tests (0.13.2)
       parallel
-    pg (0.15.1)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -291,6 +290,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-jdbc-adapter!
   activerecord-jdbcpostgresql-adapter!
   better_errors
   bootstrap-sass (~> 2.3.1.0)
@@ -309,7 +309,6 @@ DEPENDENCIES
   jquery-rails
   json (~> 1.7.7)
   parallel_tests
-  pg
   pry-rails
   pry-rescue
   puma

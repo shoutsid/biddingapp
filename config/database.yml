@@ -1,19 +1,19 @@
 development:
-  adapter: postgresql
+  adapter: jdbcpostgresql
   database: bidding-development
   username: james
   password: 'password'
   pool: 30
 
 test: &test
-  adapter: postgresql 
+  adapter: jdbcpostgresql
   database: bidding-test<%= ENV['TEST_ENV_NUMBER'] %>
   username: james
   password: 'password'
   pool: 30
 
 production:
-  adapter: postgresql
+  adapter: jdbcpostgresql
   database: bidding-production
   username: james
   password: 'password'
