@@ -8,9 +8,9 @@ class EventsController < ApplicationController
     sse = SSE::Client.new(response.stream)
 
     Item.uncached do
+      @items = Item.where(closed: false).to_a
       begin
         loop do
-          @items = Item.where(closed: false).to_a
           @items.each do |item|
             sse.write({ id: "#{item.id}", highest_bid: item.highest_bid_amount, category: item.category.url, starting_price: item.starting_price }, event: "highest_bid_amount")
             sse.write({ id: "#{item.id}", time: item.time_left, category: item.category.url }, event: "time_left")
@@ -33,9 +33,9 @@ class EventsController < ApplicationController
     sse = SSE::Client.new(response.stream)
 
     Bid.uncached do
+      @bids = Bid.all.to_a
       begin
         loop do
-          @bids = Bid.all.to_a
           @bids.each do |bid|
             sse.write({ id: bid.id, amount: bid.amount, item: bid.item.id }, event: "bid")
           end
@@ -54,9 +54,9 @@ class EventsController < ApplicationController
     sse = SSE::Client.new(response.stream)
 
     User.uncached do
+      @users = User.all.to_a
       begin
         loop do
-          @users = User.all.to_a
           @users.each do |user|
             sse.write({ id: "#{user.id}", balance: user.balance }, event: "balance")
           end
