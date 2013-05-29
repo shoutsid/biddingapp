@@ -8,6 +8,10 @@ platform :jruby do
   gem 'therubyrhino', group: :assets
 end
 
+platform :ruby do
+  gem 'pg'
+end
+
 
 gem 'json', '~> 1.7.7'
 gem 'sass-rails', '~> 4.0.0.rc1'
