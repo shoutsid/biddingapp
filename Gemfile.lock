@@ -302,6 +302,7 @@ DEPENDENCIES
   jquery-rails
   json (~> 1.7.7)
   parallel_tests
+  pg
   puma
   rails (= 4.0.0.rc1)
   resque

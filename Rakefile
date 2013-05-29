@@ -4,3 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 
 Bidding::Application.load_tasks
+ENV['SKIP_AR_JDBC_RAKE_REDEFINES'] = '1'
