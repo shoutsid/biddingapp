@@ -51,5 +51,5 @@ group :test do
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
 end
 
-gem 'capistrano'
+gem 'capistrano', github: 'capistrano/capistrano'
 gem 'rvm-capistrano'

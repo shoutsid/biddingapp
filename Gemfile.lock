@@ -5,6 +5,17 @@ GIT
     database_cleaner (1.0.1)
 
 GIT
+  remote: git://github.com/capistrano/capistrano.git
+  revision: be356dea25dbc698cc2a40a073bed07293db101e
+  specs:
+    capistrano (2.15.4)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+
+GIT
   remote: git://github.com/jruby/activerecord-jdbc-adapter.git
   revision: afeee445b93e7f0635801f2dc8be74ccd4ca66db
   specs:
@@ -74,12 +85,6 @@ GEM
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.1.4)
-    capistrano (2.15.4)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -289,7 +294,7 @@ DEPENDENCIES
   better_errors
   bootstrap-sass (~> 2.3.1.0)
   cancan!
-  capistrano
+  capistrano!
   coffee-rails (~> 4.0.0)
   database_cleaner!
   devise!

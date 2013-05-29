@@ -3,7 +3,8 @@ development:
   database: bidding-development
   username: james
   password: 'password'
-  pool: 30
+  pool: 60
+  reaping_frequency: 5
 
 test: &test
   adapter: jdbcpostgresql
