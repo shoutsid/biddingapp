@@ -13,7 +13,7 @@ class CompleteAuction
           break
         else
           Resque.enqueue(CompleteAuction, item_id)
-          sleep(2.seconds)
+          sleep(2)
           break
         end
       end
