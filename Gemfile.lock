@@ -5,6 +5,14 @@ GIT
     database_cleaner (1.0.1)
 
 GIT
+  remote: git://github.com/jruby/activerecord-jdbc-adapter.git
+  revision: 71dec3b66ed9afca6daa27ff9ad278dec6959fd8
+  specs:
+    activerecord-jdbcpostgresql-adapter (1.3.0.DEV)
+      activerecord-jdbc-adapter (~> 1.3.0.DEV)
+      jdbc-postgres (>= 9.1, < 9.3)
+
+GIT
   remote: git://github.com/moriz/cancan.git
   revision: c1e86b9404be768a99f16128e68d944a5d365ce8
   specs:
@@ -48,6 +56,7 @@ GEM
       activesupport (= 4.0.0.rc1)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.2)
+    activerecord-jdbc-adapter (1.3.0.beta1)
     activesupport (4.0.0.rc1)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -56,12 +65,12 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.9)
+    atomic (1.1.9-java)
     bcrypt-ruby (3.0.1)
+    bcrypt-ruby (3.0.1-java)
     better_errors (0.8.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
-    binding_of_caller (0.7.1)
-      debug_inspector (>= 0.0.1)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.1.4)
@@ -79,7 +88,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
-    debug_inspector (0.0.2)
     diff-lcs (1.2.4)
     dotenv (0.7.0)
     em-websocket (0.5.0)
@@ -87,6 +95,7 @@ GEM
       http_parser.rb (~> 0.5.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    eventmachine (1.0.3-java)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.2.0)
@@ -95,10 +104,14 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     ffi (1.8.1)
+    ffi (1.8.1-java)
     figaro (0.6.4)
       bundler (~> 1.0)
       rails (>= 3, < 5)
     foreman (0.63.0)
+      dotenv (>= 0.7)
+      thor (>= 0.13.6)
+    foreman (0.63.0-java)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
     formatador (0.2.4)
@@ -118,14 +131,16 @@ GEM
     highline (1.6.19)
     hike (1.2.2)
     http_parser.rb (0.5.3)
+    http_parser.rb (0.5.3-java)
     i18n (0.6.4)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
+    jdbc-postgres (9.2.1002)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.7)
-    libv8 (3.11.8.17)
+    json (1.7.7-java)
     listen (1.1.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -150,13 +165,19 @@ GEM
     parallel (0.6.5)
     parallel_tests (0.13.2)
       parallel
-    pg (0.15.1)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry (0.9.12.2-java)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+      spoon (~> 0.0)
     puma (2.0.1)
+      rack (>= 1.1, < 2.0)
+    puma (2.0.1-java)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-protection (1.5.0)
@@ -185,7 +206,6 @@ GEM
     redis (3.0.4)
     redis-namespace (1.3.0)
       redis (~> 3.0.0)
-    ref (1.0.5)
     resque (1.24.1)
       mono_logger (~> 1.0)
       multi_json (~> 1.0)
@@ -207,7 +227,6 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
-    ruby-prof (0.13.0)
     rvm-capistrano (1.3.0)
       capistrano (>= 2.0.0)
     sass (3.2.9)
@@ -223,6 +242,8 @@ GEM
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
     slop (3.4.5)
+    spoon (0.0.4)
+      ffi
     sprockets (2.9.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -232,9 +253,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    therubyracer (0.11.4)
-      libv8 (~> 3.11.8.12)
-      ref
+    therubyrhino (2.0.2)
+      therubyrhino_jar (>= 1.7.3)
+    therubyrhino_jar (1.7.4)
     thor (0.18.1)
     thread_safe (0.1.0)
       atomic
@@ -259,11 +280,12 @@ GEM
       zeus (~> 0.13.3)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
+  activerecord-jdbcpostgresql-adapter!
   better_errors
-  binding_of_caller
   bootstrap-sass (~> 2.3.1.0)
   cancan!
   capistrano
@@ -280,18 +302,15 @@ DEPENDENCIES
   jquery-rails
   json (~> 1.7.7)
   parallel_tests
-  pg
   puma
   rails (= 4.0.0.rc1)
-  rb-inotify (~> 0.9)
   resque
   rspec-rails (~> 2.0)
-  ruby-prof
   rvm-capistrano
   sass-rails (~> 4.0.0.rc1)
   shoulda-matchers
   stringex!
-  therubyracer
+  therubyrhino
   time_difference
   uglifier (>= 1.3.0)
   zeus-parallel_tests
