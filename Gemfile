@@ -12,8 +12,6 @@ gem 'puma'
 gem "activerecord-jdbc-adapter", github: "jruby/activerecord-jdbc-adapter"
 gem 'activerecord-jdbcpostgresql-adapter', github: 'jruby/activerecord-jdbc-adapter'
 gem 'therubyrhino', group: :assets
-gem 'pry-rails'
-gem 'pry-rescue'
 
 gem 'json', '~> 1.7.7'
 gem 'sass-rails', '~> 4.0.0.rc1'
