@@ -1,3 +1,14 @@
+### Event Listeners
+## balance
+# id:       typeOf(String)
+#           kindOf(User)
+#           { id => '1' }
+#
+# balance:  typeOf(Float) 
+#           kindOf(User.balance)
+#           { balance => 2000.0 }
+#
+#################################
 $ ->
   event_source = new EventSource('/events/users_balance')
   
@@ -9,9 +20,11 @@ $ ->
     balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
     user_DOM = $('#user_id')
 
+    # check for the user and that balance is not currently displayed
     if user == user_DOM.val() && balance != balance_placeholder_DOM
       balance_DOM.attr( 'placeholder', balance )
 
+      # When money has gone, flash red
       if balance < balance_placeholder_DOM
         i = 0
         while i < 2
@@ -20,6 +33,7 @@ $ ->
           ).fadeTo("slow", 1.0)
           i++
 
+      # When receiving money, flash green
       if balance > balance_placeholder_DOM
         i = 0
         while i < 2
