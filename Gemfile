@@ -11,6 +11,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 #gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
+gem 'turbo-sprockets-rails3', group: :assets
 
 gem 'foreman'
 gem 'puma'
