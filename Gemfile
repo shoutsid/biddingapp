@@ -21,7 +21,7 @@ gem 'cancan', :github => 'moriz/cancan'
 gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'stringex', git: 'git://github.com/rsl/stringex.git'
-gem 'time_difference'
+gem 'time_diff'
 
 group :test, :development do
   gem 'guard'

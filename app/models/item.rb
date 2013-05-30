@@ -1,3 +1,4 @@
+require 'time_diff'
 class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
@@ -8,10 +9,11 @@ class Item < ActiveRecord::Base
   after_create :not_closed
 
   def time_left
+    time = check_time_left
     if expired?
       "This Item Has Expired"
     else
-      "Time left: " + check_time_left.to_s  + " Seconds"
+      "#{time[:day]}:#{time[:hour]}:#{time[:minute]}:#{time[:second]}"
     end
   end
 
@@ -37,7 +39,7 @@ class Item < ActiveRecord::Base
   end
 
   def check_time_left 
-    TimeDifference.between(closing_time, Time.now).in_seconds.round(0)
+    Time.diff(Time.now, closing_time)
   end
 
   def expired?
