@@ -74,14 +74,14 @@ $ ->
       current_bid_user_id = $.parseJSON(event.data).user
 
       # When current bid user is different than present, do some affects and append new
-      if current_bid_user_DOM.html() != 'bid by: ' + current_bid_user
+      if current_bid_user_DOM.html() != current_bid_user
         current_bid_user_DOM.effect( "explode", { times: 1 }, "slow", ->
             setTimeout (->
               current_bid_user_DOM.removeAttr("style").hide().fadeIn()
             ), 500
         )
         current_bid_user_DOM.empty()
-        current_bid_user_DOM.append('bid by: ' + current_bid_user)
+        current_bid_user_DOM.append(current_bid_user)
 
         #if not current bidder, remove any disabled attributes
       if current_user_DOM.val() != current_bid_user_id

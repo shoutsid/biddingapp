@@ -1,7 +1,7 @@
 <%= form_for([@category, @item, @bid], remote: true, html: {id: "new_bid_#{@item.id}"}) do |f| %>
   <% if @bid.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:</h2>
+      <h2><%= pluralize(@bid.errors.count, "error") %> prohibited this bid</h2>
 
       <ul>
         <% @bid.errors.full_messages.each do |msg| %>
@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  Amount: <%= f.number_field :amount, placeholder: @item.min_bid_amount, min: @item.min_bid_amount, id: 'input_bid_amount' %>
+ <%= f.number_field :amount, placeholder: @item.min_bid_amount, min: @item.min_bid_amount, id: 'input_bid_amount', style: "width: 50px;"  %>
   <div class="actions">
     <%= f.submit 'Bid', data: { disable_with: 'Bidding...' } %>
   </div>
