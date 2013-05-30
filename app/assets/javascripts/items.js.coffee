@@ -11,8 +11,6 @@ $ ->
   current_bid_user_DOM = $('#current_bid_user')
   time_DOM = $('#time')
 
-
-
   $('#new_bid').submit ->
     if input_bid_DOM.val() > parseFloat($('#user_balance').attr( 'placeholder' ))
       $('#unable_to_bid').modal('show')
@@ -38,11 +36,16 @@ $ ->
         current_bid_user_DOM.empty()
         current_bid_user_DOM.append('bid by: ' + current_bid_user)
 
+        # if not current bidder, remove any disabled attributes start flashing
       if current_user_DOM.val() != current_bid_user_id
+        input_bid_DOM.removeAttr('disabled')
         i = 0
-        while i < 3
+        while i < 2
           input_bid_DOM.fadeTo("100", 0.5).fadeTo("100", 1.0)
           i++
+      else
+        # if current bidder disable the form
+        input_bid_DOM.attr('disabled', 'disabled')
 
   event_source.addEventListener 'time_left', (event) ->
     category = $.parseJSON(event.data).category

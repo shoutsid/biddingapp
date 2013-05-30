@@ -14,7 +14,7 @@ $ ->
 
       if balance < balance_placeholder_DOM
         i = 0
-        while i < 3
+        while i < 2
           balance_DOM.animate( { backgroundColor: '#CC3333' } ).fadeTo("slow", 0.5, ->
             $(this).removeAttr('style')
           ).fadeTo("slow", 1.0)
@@ -22,7 +22,7 @@ $ ->
 
       if balance > balance_placeholder_DOM
         i = 0
-        while i < 3
+        while i < 2
           balance_DOM.animate( { backgroundColor: '#009966' } ).fadeTo("slow", 0.5, ->
             $(this).removeAttr('style')
           ).fadeTo("slow", 1.0)
