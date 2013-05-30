@@ -1,6 +1,6 @@
 $ ->
   url = window.location.href
-  event_source = new EventSource('/events/not_closed_items')
+  event_source_not_closed_items = new EventSource('/events/not_closed_items')
 
   current_user_DOM = $('#user_id')
   balance_DOM = $('#user_balance')
@@ -18,7 +18,7 @@ $ ->
       $('#unable_to_bid').modal('show')
       balance_DOM.animate( { backgroundColor: '#CC3333' } )
 
-  event_source.addEventListener ('highest_bid_user'), (event) ->
+  event_source_not_closed_items.addEventListener ('highest_bid_user'), (event) ->
     category = $.parseJSON(event.data).category
     item = $.parseJSON(event.data).id
 
@@ -44,7 +44,7 @@ $ ->
           input_bid_DOM.fadeTo("100", 0.5).fadeTo("100", 1.0)
           i++
 
-  event_source.addEventListener 'time_left', (event) ->
+  event_source_not_closed_items.addEventListener 'time_left', (event) ->
     category = $.parseJSON(event.data).category
     item = $.parseJSON(event.data).id
 
@@ -56,7 +56,7 @@ $ ->
       if time_DOM.is ":contains('This Item Has Expired')"
         item_bid_DOM.remove()
 
-  event_source.addEventListener ('highest_bid_amount'), (event) ->
+  event_source_not_closed_items.addEventListener ('highest_bid_amount'), (event) ->
     category = $.parseJSON(event.data).category
     item = $.parseJSON(event.data).id
     highest_bid = $.parseJSON(event.data).highest_bid

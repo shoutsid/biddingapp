@@ -1,7 +1,7 @@
 $ ->
-  event_source = new EventSource('/events/users_balance')
+  event_source_user_balance = new EventSource('/events/users_balance')
   
-  event_source.addEventListener 'balance', (event) ->
+  event_source_user_balance.addEventListener 'balance', (event) ->
     user = $.parseJSON(event.data).id
     balance = $.parseJSON(event.data).balance
 
