@@ -9,37 +9,43 @@
           <% @items.in_groups_of(3, false) do |items| %>
             <div class="row-fluid" style="margin-top: 25px;">
               <% items.each do |item| %>
-                <div class="span4" id="item_<%= item.id%>" style="border: 1px solid;">
-                  <div class="span5" id="item_sold_<%= item.id %>" style="margin-left: 20px;" >
-                    <%= link_to category_item_path(@category, item) do %> <br/>
-                      <%= image_tag(item.image) if item.image? %>
-                    <% end %>
-                    <p> 
-                    <h5><u><%= item.name.titleize %></u></h5>
-                    <%= truncate(item.description, length: 50) { link_to '...', category_item_path(@category, item) }%>
-                    </p>
-                  </div>
+                <div class="span4 well"  id="item_<%= item.id%>" style="border: 1px solid;">
 
-                  <div class="span6" style="padding: 10px; text-align: right;">
-                    <p>Starting at: <%= item.starting_price %></p>
-                    <p>
-                    Current Bid: <span id="current_bid_amount_<%= item.id %>">0</span><br/>
-                    by: <span id="current_bid_user_<%= item.id %>"></span><br/>
-                    </p>
-
-                    <div style="margin-top: 20px;">
-                      Time Left:<br/>
-                      <div id="time_left_<%= item.id %>">
+                  <div class="container-fluid">
+                    <div class="row-fluid">
+                      <div class="span6" id="item_sold_<%= item.id %>" style="margin-left: -10px; margin-top: -20px;" >
+                        <%= link_to category_item_path(@category, item) do %> <br/>
+                          <%= image_tag(item.image, class: 'thumbnail') if item.image? %>
+                        <% end %>
+                        <p> 
+                        <h5><u><%= item.name.titleize %></u></h5>
+                        <%= truncate(item.description, length: 50) { link_to '...', category_item_path(@category, item) }%>
+                        </p>
                       </div>
 
-                      <% if user_signed_in? %>
-                        <div id="item_bid_<%= item.id %>">
-                          <% @item = item %>
-                          <%= render '/bids/form' %>
+                      <div class="span5" style="text-align: center; margin-left: 45px;">
+                        <p>Posted By: <%= item.user.username %></p>
+                        <p style="margin-bottom: 60px;">Starting at: <%= item.starting_price %></p>
+                        <p style="font-size: 120%;">
+                        Current Bid: <span id="current_bid_amount_<%= item.id %>">0</span><br/>
+                        by: <span id="current_bid_user_<%= item.id %>"></span><br/>
+                        </p>
+
+                        <div style="margin-top: 20px;">
+                          Time Left:<br/>
+                          <div id="time_left_<%= item.id %>" style="font-size: 150%; margin: 5px;">
+                          </div>
+
+                          <% if user_signed_in? %>
+                            <div id="item_bid_<%= item.id %>">
+                              <% @item = item %>
+                              <%= render '/bids/form' %>
+                            </div>
+                          <% else %>
+                            You must be a signed in to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
+                          <% end %>
                         </div>
-                      <% else %>
-                        You must be a signed in to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
-                      <% end %>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
- <%= f.number_field :amount, placeholder: @item.min_bid_amount, min: @item.min_bid_amount, id: 'input_bid_amount', style: "width: 50px;"  %>
+ <%= f.number_field :amount, placeholder: @item.min_bid_amount, min: @item.min_bid_amount, id: 'input_bid_amount', style: "width: 100px;"  %>
   <div class="actions">
     <%= f.submit 'Bid', data: { disable_with: 'Bidding...' } %>
   </div>
