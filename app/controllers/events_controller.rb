@@ -78,7 +78,7 @@ class EventsController < ApplicationController
     Bid.uncached do
       begin
         loop do
-          @bid = Bid.where(created_at: (Time.now - 2.seconds)..Time.now).last
+          @bid = Bid.last
             sse.write({ id: "#{@bid.id}", amount: @bid.amount, item: @bid.item.name, user: @bid.user.username }, event: "bids") if @bid
           sleep 2
          end

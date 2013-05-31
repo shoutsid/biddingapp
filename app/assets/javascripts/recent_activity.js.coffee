@@ -25,10 +25,14 @@ $ ->
     user = $.parseJSON(event.data).user
     amount = $.parseJSON(event.data).amount
     
+    placeholder_string = 'Bid:' + amount + ', by ' + user + ', on ' + item
     recent_activity_DOM = $('#recent_activity')
-    recent_activity_DOM.effect( "explode", { times: 1 }, "slow", ->
-            setTimeout (->
-              recent_activity_DOM.removeAttr("style").hide().fadeIn()
-            ), 500
-        )
-    recent_activity_DOM.attr( 'placeholder', 'Bid:' + amount + ', by ' + user + ', on ' + item)
+
+    if recent_activity_DOM.attr('placeholder') != placeholder_string
+      recent_activity_DOM.effect( "explode", { times: 1 }, "slow", ->
+              setTimeout (->
+                recent_activity_DOM.removeAttr("style").hide().fadeIn()
+              ), 500
+          )
+      recent_activity_DOM.attr( 'placeholder', placeholder_string)
+
