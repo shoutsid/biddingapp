@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   load_and_authorize_resource 
 
   def index
-    @items = Item.all
+    redirect_to category_url(@category)
   end
 
   def show
