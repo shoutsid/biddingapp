@@ -25,7 +25,7 @@ $ ->
     user = $.parseJSON(event.data).user
     amount = $.parseJSON(event.data).amount
     
-    placeholder_string = 'Bid:' + amount + ', by ' + user + ', on ' + item
+    placeholder_string = 'Bid: ' + amount + ', by ' + user + ', on ' + item
     recent_activity_DOM = $('#recent_activity')
 
     if recent_activity_DOM.attr('placeholder') != placeholder_string
