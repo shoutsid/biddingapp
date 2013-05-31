@@ -12,7 +12,7 @@
                 <div class="span4" id="item_<%= item.id%>" style="border: 1px solid;">
                   <div class="span5" id="item_sold_<%= item.id %>" style="margin-left: 20px;" >
                     <%= link_to category_item_path(@category, item) do %> <br/>
-                      <img src="http://cdn.mos.totalfilm.com/images/f/first-official-images-of-bilbo-baggins-in-the-hobbit-59835.jpg"/> 
+                      <%= image_tag(item.image) if item.image? %>
                     <% end %>
                     <p> 
                     <h5><u><%= item.name.titleize %></u></h5>
@@ -28,19 +28,19 @@
                     </p>
 
                     <div style="margin-top: 20px;">
-                    Time Left:<br/>
-                    <div id="time_left_<%= item.id %>">
-                    </div>
-
-                    <% if user_signed_in? %>
-                      <div id="item_bid_<%= item.id %>">
-                        <% @item = item %>
-                        <%= render '/bids/form' %>
+                      Time Left:<br/>
+                      <div id="time_left_<%= item.id %>">
                       </div>
-                    <% else %>
-                      You must be a signed in to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
-                    <% end %>
-                  </div>
+
+                      <% if user_signed_in? %>
+                        <div id="item_bid_<%= item.id %>">
+                          <% @item = item %>
+                          <%= render '/bids/form' %>
+                        </div>
+                      <% else %>
+                        You must be a signed in to bid, <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               <% end %>

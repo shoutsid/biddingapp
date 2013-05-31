@@ -5,6 +5,15 @@ GIT
     database_cleaner (1.0.1)
 
 GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: 1e87bb54d545dafe0d26644d4c3c558938cc593a
+  specs:
+    carrierwave (0.8.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+
+GIT
   remote: git://github.com/moriz/cancan.git
   revision: c1e86b9404be768a99f16128e68d944a5d365ce8
   specs:
@@ -20,6 +29,12 @@ GIT
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.1)
+
+GIT
+  remote: git://github.com/rmagick/rmagick.git
+  revision: 962d56cba3a132d590be1dd062f2a3a2efa48545
+  specs:
+    rmagick (2.13.2)
 
 GIT
   remote: git://github.com/rsl/stringex.git
@@ -271,6 +286,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.1.0)
   cancan!
   capistrano
+  carrierwave!
   coffee-rails (~> 4.0.0)
   database_cleaner!
   devise!
@@ -289,6 +305,7 @@ DEPENDENCIES
   rails (= 4.0.0.rc1)
   rb-inotify (~> 0.9)
   resque
+  rmagick (= 2.13.2)!
   rspec-rails (~> 2.0)
   ruby-prof
   rvm-capistrano

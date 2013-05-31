@@ -8,6 +8,8 @@ class Item < ActiveRecord::Base
   after_create :bg_worker_complete_auction
   after_create :not_closed
 
+  mount_uploader :image, ItemImageUploader
+
   def time_left
     time = check_time_left
     if expired?

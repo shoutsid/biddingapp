@@ -18,10 +18,12 @@ gem 'puma'
 gem 'figaro'
 gem 'resque', :require=> 'resque/server'
 gem 'cancan', :github => 'moriz/cancan' 
-gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
+gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'bootstrap-sass', '~> 2.3.1.0'
-gem 'stringex', git: 'git://github.com/rsl/stringex.git'
+gem 'stringex', github: 'rsl/stringex'
 gem 'time_diff'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'rmagick', '2.13.2', github: 'rmagick/rmagick'
 
 group :test, :development do
   gem 'guard'
@@ -42,7 +44,7 @@ group :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'ruby-prof'
   gem 'shoulda-matchers'
-  gem 'database_cleaner', git: 'git://github.com/bmabey/database_cleaner.git'
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
 end
 
 gem 'capistrano'

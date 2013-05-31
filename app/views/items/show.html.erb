@@ -5,6 +5,7 @@
   Closing Time: <%= @item.closing_time %><br/>
   Time now: <%= Time.now.getutc() %>
 
+  <%= image_tag(@item.image) if @item.image? %><br/>
   <h1><%= @item.name %></h1>
   <p id="notice"><%= notice %></p>
   Name: <%= @item.name %><br/>
