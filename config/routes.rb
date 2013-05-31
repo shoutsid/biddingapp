@@ -10,6 +10,7 @@ Bidding::Application.routes.draw do
     get :not_closed_items
     get :all_bids
     get :users_balance
+    get :recent_activity
   end
   
   devise_for :admins, path: '/admin'
