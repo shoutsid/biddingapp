@@ -23,7 +23,7 @@ gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'stringex', github: 'rsl/stringex'
 gem 'time_diff'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-#gem 'rmagick', '2.13.2', github: 'rmagick/rmagick'
+gem 'rmagick', github: 'rmagick/rmagick'
 
 group :test, :development do
   gem 'guard'

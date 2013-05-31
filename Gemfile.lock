@@ -31,6 +31,12 @@ GIT
       warden (~> 1.2.1)
 
 GIT
+  remote: git://github.com/rmagick/rmagick.git
+  revision: 962d56cba3a132d590be1dd062f2a3a2efa48545
+  specs:
+    rmagick (2.13.2)
+
+GIT
   remote: git://github.com/rsl/stringex.git
   revision: 26883df41d1f44470fc9dd7461b353e9964c7900
   specs:
@@ -299,6 +305,7 @@ DEPENDENCIES
   rails (= 4.0.0.rc1)
   rb-inotify (~> 0.9)
   resque
+  rmagick!
   rspec-rails (~> 2.0)
   ruby-prof
   rvm-capistrano
