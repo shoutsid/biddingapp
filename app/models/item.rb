@@ -2,9 +2,9 @@ require 'time_diff'
 class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
+  has_many :bids, dependant: :destroy
 
   validates_presence_of :name, :description, :starting_price, :closing_time, :min_accept_bid, :user
-  has_many :bids
   after_create :bg_worker_complete_auction
   after_create :not_closed
 
