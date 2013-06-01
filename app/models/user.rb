@@ -18,4 +18,20 @@ class User < ActiveRecord::Base
   def has_enough_balance_to_bid?(amount)
     balance.to_f >= amount.to_f
   end
+
+  def item_count
+    items.count
+  end
+
+  def closed_item_count
+    items.where(closed: true).count
+  end
+  
+  def not_closed_item_count
+    items.where(closed: false).count
+  end
+
+  #def sold_item_count
+  #  items.where(sold: true)
+  #end
 end

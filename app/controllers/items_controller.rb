@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
 
   def show
     @bid = Bid.new
+    @bids = Bid.where(item_id: @item).order(created_at: :desc).limit(6)
   end
 
   def new

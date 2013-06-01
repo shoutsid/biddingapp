@@ -47,6 +47,11 @@
 #               { category => 'technology' }
 ##############################################
 $ ->
+  $('#user_stats').hover (->
+    $(this).popover "show"
+    ), ->
+      $(this).popover "hide"
+  
   url = window.location.href
   event_source = new EventSource('/events/not_closed_items')
 
