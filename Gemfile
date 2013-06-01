@@ -13,11 +13,12 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.0.1'
 gem 'turbo-sprockets-rails3', group: :assets
 
+gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'foreman'
 gem 'puma'
 gem 'figaro'
 gem 'resque', :require=> 'resque/server'
-gem 'cancan', :github => 'moriz/cancan' 
+gem 'cancan', github: 'moriz/cancan' 
 gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'stringex', github: 'rsl/stringex'

@@ -1,32 +1,46 @@
-<%= form_for([@category, @item], html: { multipart: true }) do |f| %>
-  <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+<%= simple_form_for([@category, @item], defaults: { hint_html: { style: 'font-size: 85%;' } }, html: { multipart: true, class: 'form-horizontal' }) do |f| %>
+  <div class="container-fluid">
+    <div class="span8 well well-small" style="border: 1px solid;">
+      <h4>Main:</h4>
 
-      <ul>
-        <% @item.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
 
-      </ul>
+      <%= f.input :name %>
+      <%= f.input :description, hint: 'Give a full breakdown of what it is, be as discriptive as possible.'%>
+      <%= f.input :category_id, collection: Category.all, value_method: :id, display_name: :name, label: 'Genre', prompt: 'Select a Category' %>
+      <%= f.input :starting_price, hint: 'Starts the bidding off at specified amount.', label: 'Starting Amount', input_html: { min: 1, value: 1 } %>
+      <%= f.input :min_accept_bid, hint: 'This will determain what you will accept for the winning bid, when the auction is over and the current highest bidder does not axceed this amount, your item will not be sold.', label: 'Minimum Accept Amount', input_html: { min: 1, value: 1 } %>
+      <%= f.input :closing_time, hint: 'Try not to set the time too long, be realistic.', label: 'Auction Until', input_html: { class: 'input-small' } %>
     </div>
-  <% end %>
-  <%= f.hidden_field :image_cache %>
-  <%= image_tag(@item.image_url) if @item.image? %>
-  Image: <br/>
-  <%= f.file_field :image %><br/>
-  <%= :name %><br/>
-  <%= f.text_field :name %><br/>
-  <%= :description %><br/>
-  <%= f.text_area :description %><br/>
-  <%= f.collection_select :category_id, Category.all, :id, :name %><br/>
-  Starting Price<br/>
-  <%= f.number_field :starting_price %><br/>
-  Minimum you will accept<br/>
-  <%= f.number_field :min_accept_bid %><br/>
-  Auction Until:<br/>
-  <%= f.datetime_local_field :closing_time %>
-  <div class="actions">
-    <%= f.submit %>
+
+    <div class="span4">
+      <div class="row-fluid">
+        <div class="span12 well well-small" style="border: 1px solid;">
+          <h4>Image:</h4>
+
+          <div class="row-fluid">
+            <% if @item.image? %>
+              <div class="span12 offset3" style="margin-bottom: 10px;">
+                <%= image_tag(@item.image_url, class: 'thumbnail' ) %>
+              </div>
+            <% end %>
+          </div>
+          <div class="row-fluid">
+            <%= f.hidden_field :image_cache %>
+            <%= f.input :image, label: 'From Computer' %>
+            <%= f.input :remote_image_url, as: :url, input_html: { class: 'input-large' }, label: 'Or Web', hint: "good: 'https://www.google.com' </br>bad: 'google.com".html_safe %>
+            <small>Extentions Permitted: jpg, jpeg, gif, png</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span12 well well-small text-center" style="border: 1px solid;">
+          <div>All done?</div>
+          <div class="actions">
+            <%= f.submit class: 'btn btn-info' %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>

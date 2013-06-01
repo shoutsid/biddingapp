@@ -1,6 +1,14 @@
-<h1>Editing item</h1>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <h2 style="text-align: center;">Editing <%= @item.name.titleize %></h2>
+  </div>
 
-<%= render 'form' %>
+  <div class="row-fluid">
+    <%= render 'form' %>
+  </div>
 
-<%= link_to 'Show', category_item_path(@category, @item) %> |
-<%= link_to 'Back', category_items_path(@category) %>
+  <div class="row-fluid">
+    <%= link_to 'Show', category_item_path(@category, @item) %> |
+    <%= link_to 'Back', category_items_path(@category) %>
+  </div>
+</div>

@@ -31,6 +31,14 @@ GIT
       warden (~> 1.2.1)
 
 GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: d75963307f3a9aa7884cff8d5ad228f65e94d343
+  specs:
+    simple_form (3.0.0.rc)
+      actionpack (>= 4.0.0.rc1, < 4.1)
+      activemodel (>= 4.0.0.rc1, < 4.1)
+
+GIT
   remote: git://github.com/rmagick/rmagick.git
   revision: 962d56cba3a132d590be1dd062f2a3a2efa48545
   specs:
@@ -311,6 +319,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails (~> 4.0.0.rc1)
   shoulda-matchers
+  simple_form!
   stringex!
   therubyracer
   time_diff
