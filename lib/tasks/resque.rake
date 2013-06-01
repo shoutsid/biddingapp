@@ -45,4 +45,9 @@ namespace :resque do
   task :start_workers => :environment do
     run_worker("*", 1)
   end
+
+  desc "Kill all"
+  task :kill_all => :environment do
+    Resque.workers.each {|w| w.unregister_worker}
+  end
 end
