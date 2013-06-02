@@ -9,7 +9,7 @@
           <% @items.in_groups_of(3, false) do |items| %>
             <div class="row-fluid" style="margin-top: 25px;">
               <% items.each do |item| %>
-                <span id="starting_price_<%= item.id %>"><%= item.starting_price %></span>
+                <span id="starting_price_<%= item.id %>" style="display: none"><%= item.starting_price %></span>
                 <div class="span4 well"  id="item_<%= item.id%>" style="border: 1px solid;">
 
                   <div class="container-fluid">
