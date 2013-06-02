@@ -53,18 +53,16 @@ class Item < ActiveRecord::Base
   end
 
   def close_auction
-    ## TODO:- Notify the winning bidder they won the auction
-    #         Notify the auction owner that they sold the item
     if expired? && accept_highest_bid?
       update(closed: true, sold: true)
       user.update_user_balance_by(highest_bid.amount)
-      ItemMailer.item_sold(self, highest_bid).deliver
+      ItemMailer.item_sold_owner(self, highest_bid).deliver
+      ItemMailer.item_sold_bidder(self, highest_bid).deliver
 
-      ## TODO:- Notify the auction owner that their asking price
-      #         was not met.
     elsif expired? == true && accept_highest_bid? == false
       update(closed: true, sold: false)          
       highest_bid.user.update_user_balance_by(highest_bid.amount) if highest_bid
+      ItemMailer.item_not_sold_owner(self).deliver
     end
   end
 
