@@ -54,6 +54,11 @@ $ ->
     balance_DOM = $('#user_balance')
     balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
 
+    $('#user_stats_' + item).popover
+      html: true
+      placement: 'bottom'
+      trigger: 'hover'
+
     # On form submittion, check if user has enough balance 
     $('[id^=new_bid_]').each (index) ->
       form = this
