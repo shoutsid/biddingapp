@@ -12,10 +12,9 @@ class EventsController < ApplicationController
         loop do
           @items = Item.where(closed: false).to_a
           @items.each do |item|
-            sse.write({ id: "#{item.id}", highest_bid: item.highest_bid_amount, category: item.category.url, starting_price: item.starting_price }, event: "highest_bid_amount")
             sse.write({ id: "#{item.id}", time: item.time_left, category: item.category.url }, event: "time_left")
             if item.highest_bid
-              sse.write({ id: "#{item.id}", user: "#{item.highest_bid.user.id}", username: item.highest_bid.user.username , category: item.category.url }, event: "highest_bid_user")
+              sse.write({ id: "#{item.id}", user: "#{item.highest_bid.user.id}", highest_bid: item.highest_bid_amount, username: item.highest_bid.user.username, starting_price: item.starting_price, category: item.category.url }, event: "highest_bid")
             end
           end
           sleep 1

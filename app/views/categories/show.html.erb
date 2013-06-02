@@ -18,7 +18,7 @@
                           <%= image_tag(item.image, class: 'thumbnail') if item.image? %>
                         <% end %>
                         <p> 
-                        <h5><u><%= item.name.titleize %></u></h5>
+                        <h5><u><%= link_to item.name.titleize, category_item_path(@category, item) %></u></h5>
                         <%= truncate(item.description, length: 50) { link_to '...', category_item_path(@category, item) }%>
                         </p>
                       </div>
@@ -28,7 +28,7 @@
                         <p style="margin-bottom: 60px;">Starting at: <%= item.starting_price %></p>
                         <p style="font-size: 120%;">
                         Current Bid: <span id="current_bid_amount_<%= item.id %>">0</span><br/>
-                        by: <span id="current_bid_user_<%= item.id %>"></span><br/>
+                        by: <span id="current_bid_user_<%= item.id %>"><%= item.highest_bid.user.username %></span><br/>
                         </p>
 
                         <div style="margin-top: 20px;">

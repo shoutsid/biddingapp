@@ -1,21 +1,3 @@
-### Event Listeners
-## highest_bid_user 
-# id:       typeOf(String)
-#           kindOf(Item)
-#           { id => '1' }
-#
-# user:     typeOf(String)
-#           user => '20'
-#           kindOf(User.id)
-#
-# username: typeOf(String) 
-#           kindOf(User.username)
-#           { username => 'Micheal109' }
-#
-# category: typeOf(String)
-#           kindOf(Category.url)
-#           { category => 'technology' }
-#
 ## time_left
 # id:       typeOf(String)
 #           kindOf(Item)
@@ -29,7 +11,7 @@
 #           kindOf(Category.url)
 #           { category => 'technology' }
 #
-## highest_bid_amount 
+## highest_bid
 # id:           typeOf(String)
 #               kindOf(Item)
 #               { id => '1' }
@@ -45,15 +27,26 @@
 # category:     typeOf(String)
 #               kindOf(Category.url)
 #               { category => 'technology' }
-##############################################
+#
+# user:     typeOf(String)
+#           user => '20'
+#           kindOf(User.id)
+#
+# username: typeOf(String) 
+#           kindOf(User.username)
+#           { username => 'Micheal109' }
+###############################################
 $ ->
   event_source_not_closed_items = new EventSource('/events/not_closed_items')
   url = window.location.href
 
-  event_source_not_closed_items.addEventListener ('highest_bid_user'), (event) ->
-    
+  event_source_not_closed_items.addEventListener ('highest_bid'), (event) ->
+ 
+    highest_bid = $.parseJSON(event.data).highest_bid
     category = $.parseJSON(event.data).category
     item = $.parseJSON(event.data).id
+    current_bid_user = $.parseJSON(event.data).username
+    current_bid_user_id = $.parseJSON(event.data).user
 
     current_bid_user_DOM = $('#current_bid_user_' + item)
     current_user_DOM = $('#user_id')
@@ -70,9 +63,6 @@ $ ->
           $('#unable_to_bid').modal('show')
    
     if url.search(category) > 0
-      current_bid_user = $.parseJSON(event.data).username
-      current_bid_user_id = $.parseJSON(event.data).user
-
       # When current bid user is different than present, do some affects and append new
       if current_bid_user_DOM.html() != current_bid_user
         current_bid_user_DOM.effect( "explode", { times: 1 }, "slow", ->
@@ -89,6 +79,27 @@ $ ->
       else
         # if current bidder disable the form
         input_bid_DOM.attr('disabled', 'disabled')
+
+    bid_amount_DOM = $('#current_bid_amount_' + item)
+    input_bid_DOM = $('#item_bid_' + item + ' #input_bid_amount')
+
+    # Check category is is present, and that highest bd amount is above displayed
+    if url.search(category) > 0 && highest_bid > bid_amount_DOM.val()
+      bid_amount_DOM.empty()
+      bid_amount_DOM.append(highest_bid)
+      
+      # Replace bid form input and placeholders to correct values
+      if highest_bid > parseFloat(input_bid_DOM.val())
+        input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
+        input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
+        input_bid_DOM.val(parseFloat(highest_bid) + 1)
+
+      # Replace bid form input and placeholders to correct values
+      starting_price_DOM = parseFloat($('#starting_price' + item ).html())
+      if starting_price_DOM >= parseFloat(input_bid_DOM.val())
+        input_bid_DOM.attr( 'placeholder', (starting_price_DOM + 1))
+        input_bid_DOM.attr( 'min', (starting_price_DOM + 1))
+        input_bid_DOM.val(starting_price_DOM + 1)
 
   event_source_not_closed_items.addEventListener ('time_left'), (event) ->
     category = $.parseJSON(event.data).category
@@ -116,29 +127,3 @@ $ ->
           'color': 'red'
           'font-size': '56px'
         item_sold_DOM.fadeIn('slow', 0.33)
-
-  event_source_not_closed_items.addEventListener ('highest_bid_amount'), (event) ->
-    category = $.parseJSON(event.data).category
-    item = $.parseJSON(event.data).id
-    highest_bid = $.parseJSON(event.data).highest_bid
-
-    bid_amount_DOM = $('#current_bid_amount_' + item)
-    input_bid_DOM = $('#item_bid_' + item + ' #input_bid_amount')
-
-    # Check category is is present, and that highest bd amount is above displayed
-    if url.search(category) > 0 && highest_bid > bid_amount_DOM.val()
-      bid_amount_DOM.empty()
-      bid_amount_DOM.append(highest_bid)
-      
-      # Replace bid form input and placeholders to correct values
-      if highest_bid > input_bid_DOM.val()
-        input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
-        input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
-        input_bid_DOM.val(parseFloat(highest_bid) + 1)
-
-      # Replace bid form input and placeholders to correct values
-      starting_price_DOM = parseFloat($('#starting_price' + item ).html())
-      if starting_price_DOM >= parseFloat(input_bid_DOM.val())
-        input_bid_DOM.attr( 'placeholder', (starting_price_DOM + 1))
-        input_bid_DOM.attr( 'min', (starting_price_DOM + 1))
-        input_bid_DOM.val(starting_price_DOM + 1)
