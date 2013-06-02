@@ -41,9 +41,9 @@ describe Item do
 
   describe '#time_left' do
     context 'there is time left' do
-      it 'should give correct time left in seconds' do
-        item = FactoryGirl.create(:item)
-        item.time_left.should eql("Time left: " + item.check_time_left.to_s + " Seconds")
+      it 'should give correct time left' do
+        item = FactoryGirl.create(:item, closing_time: Time.now + 2.hours)
+        item.time_left.should eql('02:00:00')
       end
 
       it 'returns type of string' do
@@ -78,22 +78,21 @@ describe Item do
 
   describe '#increase_time_left' do
     it 'increased time left by 10 seconds' do
-      item = FactoryGirl.create(:item)
-      before_change = item.check_time_left
+      item = FactoryGirl.create(:item, closing_time: Time.now + 1.hour)
       item.increase_time_left
-      Item.find(item).check_time_left.should eql(before_change + 10.seconds)
+      Item.find(item).time_left.should eql('01:00:10')
     end
   end
 
   describe '#check_time_left' do
-    it 'returns as an integer' do
+    it 'returns as an string' do
       item = FactoryGirl.create(:item)
-      item.check_time_left.should be_kind_of(Integer)
+      item.time_left.should be_kind_of(String)
     end
 
-    it 'returns correct time left in seconds' do
+    it 'returns correct time left' do
       item = FactoryGirl.create(:item, closing_time: Time.now + 1.hour)
-      item.check_time_left.should eql(1.hour.to_i)
+      item.time_left.should eql('01:00:00')
     end
   end
 

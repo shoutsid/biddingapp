@@ -49,10 +49,9 @@ describe Bid do
   describe '#bump_item_time_let' do
     context 'after create' do
       it 'bumps time left on parent item' do
-        item = FactoryGirl.create(:item)
-        time_left = item.check_time_left
+        item = FactoryGirl.create(:item, closing_time: Time.now + 2.hours)
         bid = FactoryGirl.create(:bid, item: item)
-        bid.item.check_time_left.should eql(time_left + 10.seconds)
+        bid.item.time_left.should eql('02:00:10')
       end
     end
   end

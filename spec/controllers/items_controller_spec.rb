@@ -12,14 +12,14 @@ describe ItemsController do
     describe 'GET #index' do
       let(:send_request) { get :index, category_id: @item.category }
 
-      it 'responds successful' do
+      it 'responds as redirect' do
         send_request
-        expect(response).to be_success
+        expect(response).to be_redirect
       end
 
-      it 'responds with 200 status' do
+      it 'responds with 302 redirect status' do
         send_request
-        expect(response.status).to eql(200)
+        expect(response.status).to eql(302)
       end
     end
 
@@ -202,14 +202,14 @@ describe ItemsController do
     describe 'GET #index' do
       let(:send_request) { get :index, category_id: @item.category }
 
-      it 'responds successful' do
+      it 'responds as redirect' do
         send_request
-        expect(response).to be_success
+        expect(response).to be_redirect
       end
 
-      it 'responds with 200 status' do
+      it 'responds with 302 status' do
         send_request
-        expect(response.status).to eql(200)
+        expect(response.status).to eql(302)
       end
     end
 

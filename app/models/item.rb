@@ -15,7 +15,7 @@ class Item < ActiveRecord::Base
     if expired?
       "This Item Has Expired"
     else
-      "#{time[:day]}:#{time[:hour]}:#{time[:minute]}:#{time[:second]}"
+      time[:diff]
     end
   end
 
@@ -56,14 +56,14 @@ class Item < ActiveRecord::Base
     ## TODO:- Notify the winning bidder they won the auction
     #         Notify the auction owner that they sold the item
     if expired? && accept_highest_bid?
-      update(closed: true)
+      update(closed: true, sold: true)
       user.update_user_balance_by(highest_bid.amount)
       ItemMailer.item_sold(self, highest_bid).deliver
 
       ## TODO:- Notify the auction owner that their asking price
       #         was not met.
     elsif expired? == true && accept_highest_bid? == false
-      update(closed: true)          
+      update(closed: true, sold: false)          
       highest_bid.user.update_user_balance_by(highest_bid.amount) if highest_bid
     end
   end
