@@ -3,7 +3,14 @@ class ItemImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   storage :file
-  process resize_to_fill: [200, 200]
+
+  version :largethumbnail do
+    process resize_to_fit: [200, 200]
+  end
+
+  version :smallthumbnail do
+    process resize_to_fit: [100, 100]
+  end
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -14,7 +21,7 @@ class ItemImageUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-     "#{secure_token}.#{file.extension}" if original_filename.present?
+    "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
   protected

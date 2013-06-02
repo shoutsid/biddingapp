@@ -23,7 +23,7 @@
                           Active: <%= item.user.not_closed_item_count %><br/>
                           Previous: <%= item.user.closed_item_count %><br/>">
                           <%= link_to category_item_path(@category, item) do %> <br/>
-                            <%= image_tag(item.image, class: 'thumbnail') if item.image? %>
+                            <%= image_tag(item.image.largethumbnail, class: 'thumbnail') if item.image? %>
                           <% end %>
                         </div>
                         <p> 
