@@ -2,15 +2,19 @@
   <div class="row-fluid">
     <div class="span9 well well-small" style="border: 1px solid;">
       <div class="span2 text-center">
+        <span id="starting_price" style="display: none;"><%= @item.starting_price %></span>
         <div id="user_stats"
-          data-title="<h4><%= @item.user.username.titleize %>'s Stats</h4>"
-          data-content="<p>Items Posted: <%= @item.user.item_count %></p>
-          <p>Active Items: <%= @item.user.not_closed_item_count %></p>
-          <p>Previous Items: <%= @item.user.closed_item_count %></p>">
+          data-title="<%= @item.user.username.titleize %>'s Stats"
+          data-content="Items Posted: <%= @item.user.item_count %><br/>
+          Sold: <%= @item.user.sold_item_count %><br/>
+          Not Sold: <%= @item.user.not_sold_item_count %><br/>
+          Active: <%= @item.user.not_closed_item_count %><br/>
+          Previous: <%= @item.user.closed_item_count %><br/>
+          ">
           <%= image_tag(@item.image, class: 'thumbnail', style: 'margin-bottom: 10px;') if @item.image? %>
         </div>
-        Current Bid: <span id="current_bid_amount" style="font-size: 130%"><%= @item.highest_bid.amount %></span><br/>
-        <span id="current_bid_user" style="font-size: 130%;">bid by: <%= @item.highest_bid.user.username %></span><br/>
+        Current Bid: <span id="current_bid_amount" style="font-size: 130%"><%= @item.highest_bid.amount if @item.highest_bid %></span><br/>
+        <span id="current_bid_user" style="font-size: 130%;">bid by: <%= @item.highest_bid.user.username if @item.highest_bid %></span><br/>
 
         <div id="time" style="margin: 10px; font-size: 150%;"></div>
         <% if user_signed_in? %>
@@ -32,9 +36,9 @@
       <h4><u>Top Bids</u></h4>
       <% @bids.each do |bid| %>
         <div id="topbids">
-        <%= bid.user.username %> bidded <%= bid.amount %>, <%= time_ago_in_words(bid.created_at) %> ago.
-        <hr/>
-      </div>
+          <%= bid.user.username %> bidded <%= bid.amount %>, <%= time_ago_in_words(bid.created_at) %> ago.
+          <hr/>
+        </div>
       <% end %>
     </div>
   </div>

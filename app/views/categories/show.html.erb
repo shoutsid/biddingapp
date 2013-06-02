@@ -9,20 +9,23 @@
           <% @items.in_groups_of(3, false) do |items| %>
             <div class="row-fluid" style="margin-top: 25px;">
               <% items.each do |item| %>
+                <span id="starting_price_<%= item.id %>"><%= item.starting_price %></span>
                 <div class="span4 well"  id="item_<%= item.id%>" style="border: 1px solid;">
 
                   <div class="container-fluid">
                     <div class="row-fluid">
                       <div class="span6" id="item_sold_<%= item.id %>" style="margin-left: -10px; margin-top: -20px;" >
                         <div id="user_stats_<%= item.id %>"
-                          data-title="<h4><%= item.user.username.titleize %>'s Stats</h4>"
-                          data-content="<p>Items Posted: <%= item.user.item_count %></p>
-                          <p>Active Items: <%= item.user.not_closed_item_count %></p>
-                          <p>Previous Items: <%= item.user.closed_item_count %></p>">
-                        <%= link_to category_item_path(@category, item) do %> <br/>
-                          <%= image_tag(item.image, class: 'thumbnail') if item.image? %>
-                        <% end %>
-                      </div>
+                          data-title="<%= item.user.username.titleize %>'s Stats"
+                          data-content="Items Posted: <%= item.user.item_count %><br/>
+                          Sold: <%= item.user.sold_item_count %><br/>
+                          Not Sold: <%= item.user.not_sold_item_count %><br/>
+                          Active: <%= item.user.not_closed_item_count %><br/>
+                          Previous: <%= item.user.closed_item_count %><br/>">
+                          <%= link_to category_item_path(@category, item) do %> <br/>
+                            <%= image_tag(item.image, class: 'thumbnail') if item.image? %>
+                          <% end %>
+                        </div>
                         <p> 
                         <h5><u><%= link_to item.name.titleize, category_item_path(@category, item) %></u></h5>
                         <%= truncate(item.description, length: 50) { link_to '...', category_item_path(@category, item) }%>
@@ -33,8 +36,8 @@
                         <p>Posted By: <%= item.user.username %></p>
                         <p style="margin-bottom: 60px;">Starting at: <%= item.starting_price %></p>
                         <p style="font-size: 120%;">
-                        Current Bid: <span id="current_bid_amount_<%= item.id %>">0</span><br/>
-                        by: <span id="current_bid_user_<%= item.id %>"><%= item.highest_bid.user.username %></span><br/>
+                        Current Bid: <span id="current_bid_amount_<%= item.id %>"><%= item.highest_bid.amount if item.highest_bid %></span><br/>
+                        by: <span id="current_bid_user_<%= item.id %>"><%= item.highest_bid.user.username if item.highest_bid %></span><br/>
                         </p>
 
                         <div style="margin-top: 20px;">

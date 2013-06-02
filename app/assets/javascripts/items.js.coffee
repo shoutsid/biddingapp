@@ -50,6 +50,13 @@ $ ->
   current_bid_DOM = $('#current_bid_amount')
   current_bid_user_DOM = $('#current_bid_user')
   time_DOM = $('#time')
+  starting_price_DOM = parseFloat($('#starting_price').html())
+
+  # Replace bid form input and placeholders to correct values
+  if starting_price_DOM >= parseFloat(input_bid_DOM.val())
+    input_bid_DOM.attr( 'placeholder', (starting_price_DOM + 1))
+    input_bid_DOM.attr( 'min', (starting_price_DOM + 1))
+    input_bid_DOM.val(starting_price_DOM + 1)
 
   # On form submittion, check if user has enough balance 
   $('#new_bid').submit ->
@@ -96,13 +103,6 @@ $ ->
         input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
         input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
         input_bid_DOM.val(parseFloat(highest_bid) + 1)
-
-      # Replace bid form input and placeholders to correct values
-      starting_price_DOM = parseFloat($('#starting_price').html())
-      if starting_price_DOM >= parseFloat(input_bid_DOM.val())
-        input_bid_DOM.attr( 'placeholder', (starting_price_DOM + 1))
-        input_bid_DOM.attr( 'min', (starting_price_DOM + 1))
-        input_bid_DOM.val(starting_price_DOM + 1)
 
   event_source.addEventListener 'time_left', (event) ->
     category = $.parseJSON(event.data).category

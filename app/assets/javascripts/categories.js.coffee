@@ -94,13 +94,6 @@ $ ->
         input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
         input_bid_DOM.val(parseFloat(highest_bid) + 1)
 
-      # Replace bid form input and placeholders to correct values
-      starting_price_DOM = parseFloat($('#starting_price' + item ).html())
-      if starting_price_DOM >= parseFloat(input_bid_DOM.val())
-        input_bid_DOM.attr( 'placeholder', (starting_price_DOM + 1))
-        input_bid_DOM.attr( 'min', (starting_price_DOM + 1))
-        input_bid_DOM.val(starting_price_DOM + 1)
-
   event_source_not_closed_items.addEventListener ('time_left'), (event) ->
     category = $.parseJSON(event.data).category
     item = $.parseJSON(event.data).id
@@ -127,3 +120,11 @@ $ ->
           'color': 'red'
           'font-size': '56px'
         item_sold_DOM.fadeIn('slow', 0.33)
+        
+      # Replace bid form input and placeholders to correct values
+      input_bid_DOM = $('#item_bid_' + item + ' #input_bid_amount')
+      starting_price_DOM = parseFloat($('#starting_price_' + item ).html())
+      if starting_price_DOM >= parseFloat(input_bid_DOM.val())
+        input_bid_DOM.attr( 'placeholder', (starting_price_DOM + 1))
+        input_bid_DOM.attr( 'min', (starting_price_DOM + 1))
+        input_bid_DOM.val(starting_price_DOM + 1)
