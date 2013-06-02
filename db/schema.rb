@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 201305323132815) do
     t.datetime "updated_at"
     t.boolean  "closed"
     t.string   "image"
+    t.boolean  "sold"
   end
 
   create_table "users", force: true do |t|

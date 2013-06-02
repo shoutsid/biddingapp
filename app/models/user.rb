@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_presence_of :address, :street_number, :postal_code, :country
+  validates_presence_of :address, :street_number, :postal_code, :country, :username
+  validates_uniqueness_of(:username)
   has_many :items
   has_many :bids
 
@@ -31,7 +32,11 @@ class User < ActiveRecord::Base
     items.where(closed: false).count
   end
 
-  #def sold_item_count
-  #  items.where(sold: true)
-  #end
+  def sold_item_count
+    items.where(closed: true, sold: true).count
+  end
+
+  def not_sold_item_count
+    items.where(closed: true, sold: false).count
+  end
 end
