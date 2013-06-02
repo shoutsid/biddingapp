@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You won <%= @item.name %>!</h1>
+    <p>
+    <h3><u>Item Information</u></h3>
+
+    Name: <%= @item.name %><br/>
+    Description: <%= @item.description %><br/>
+    Auctioned Until: <%= @item.closing_time %><br/>
+    Sold for: <%= @bid.amount %><br/>
+    </p>
+
+    <p>
+      Your account balance should have been deducted bid amount. To check, login , If your account has not been updated, please reply to this email and we will get in contact with you ASAP.<br/>
+    </p>
+
+    <p>
+    We have given all the vital information to the owner of the auction, that should be enough for you to receive the item. If you would like to speak with them, please email <%= @item_user.email %>, if you have anymore question, don't hesitate to reply to this email and we will answer any questions. 
+    </p>
+
+    <p>Thanks for being awesome and keep being awesome!</p>
+    <p>Hope to see you soon!</p>
+  </body>
+</html>

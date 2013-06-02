@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1> <%= @item.name %> Sucked!</h1>
+    <p>
+    <h3><u>Item Information</u></h3>
+
+    Name: <%= @item.name %><br/>
+    Description: <%= @item.description %><br/>
+    Minimum you would accept: <%= @item.min_accept_bid %><br/>
+    Auction Until: <%= @item.closing_time %><br/>
+    </p>
+
+    <p>
+      Better luck next time, we advise you provide a better description and lower your minimum acceptance price if you really want to sell this item.<br/>
+      It might just not be the right time to sell it! Keep posting your item if you like, it wont hurt!
+    </p>
+
+    <p>Thanks for being half awesome and keep being half awesome!</p>
+    <p>Hope to see you soon!</p>
+  </body>
+</html>
