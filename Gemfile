@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.0.1'
 gem 'turbo-sprockets-rails3', group: :assets
 
+gem 'bb-ruby'
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'foreman'
 gem 'puma'
@@ -33,6 +34,7 @@ end
 
 group :development do
   gem 'guard-livereload'
+  gem 'guard-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'guard-rspec'

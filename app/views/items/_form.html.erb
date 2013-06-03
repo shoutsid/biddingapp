@@ -4,7 +4,7 @@
       <h4>Main:</h4>
 
       <%= f.input :name %>
-      <%= f.input :description, hint: 'Give a full breakdown of what it is, be as discriptive as possible.'%>
+      <%= f.input :description, hint: 'We support bbcode tags, please visit http://www.bbcode.org/reference.php for an extensive list.'%>
       <%= f.input :category_id, collection: Category.all, value_method: :id, display_name: :name, label: 'Genre', prompt: 'Select a Category' %>
       <%= f.input :starting_price, hint: 'Starts the bidding off at specified amount.', label: 'Starting Amount', input_html: { min: 1, value: 1 } %>
       <%= f.input :min_accept_bid, hint: 'This will determain what you will accept for the winning bid, when the auction is over and the current highest bidder does not axceed this amount, your item will not be sold.', label: 'Minimum Accept Amount', input_html: { min: 1, value: 1 } %>
