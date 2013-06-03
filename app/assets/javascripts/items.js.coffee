@@ -38,6 +38,9 @@
 #
 ##############################################
 $ ->
+
+  $('.fancybox').fancybox()
+
   url = window.location.href
   event_source = new EventSource('/events/not_closed_items')
   new_top_bid = ''

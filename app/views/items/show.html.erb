@@ -11,7 +11,9 @@
           Active: <%= @item.user.not_closed_item_count %><br/>
           Previous: <%= @item.user.closed_item_count %><br/>
           ">
-          <%= image_tag(@item.image, class: 'thumbnail', style: 'margin-bottom: 10px;') if @item.image? %>
+          <%= link_to @item.image.url, class: 'fancybox', rel: 'group' do %>
+            <%= image_tag(@item.image.largethumbnail, class: 'thumbnail', style: 'margin-bottom: 10px;') if @item.image? %>
+          <% end %>
         </div>
         Current Bid: <span id="current_bid_amount" style="font-size: 130%"><%= @item.highest_bid.amount if @item.highest_bid %></span><br/>
         <span id="current_bid_user" style="font-size: 130%;">bid by: <%= @item.highest_bid.user.username if @item.highest_bid %></span><br/>
