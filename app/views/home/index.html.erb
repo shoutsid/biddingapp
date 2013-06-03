@@ -1,0 +1,44 @@
+<div class="container-fluid" style="margin-top: 20px;">
+  <div class="row-fluid">
+    <div class="span8">
+
+      <div class="row-fluid">
+
+      </div>
+      <% @categories.each do |category| %>
+        <div class="row-fluid">
+          <p><h4 class="muted"><%= category.name %></h4></p>
+          <div class="span12 well well-small text-center" style="border: 1px solid;">
+            <% category.items.where(closed: false).limit(4).each do |item| %>
+              <div class="span3">
+                <div class="container-fluid">
+                  <div class="row-fluid">
+                    <%= link_to category_item_path(item.category, item) do %> <br/>
+                      <b><%= truncate(item.name.titleize, length: 40) %></b><br/>
+                      <%= image_tag(item.image.smallthumbnail, class: 'thumbnail offset2', style: 'margin-top: 5px;') if item.image? %><br/>
+                    <% end %>
+                    Currently at: <%= item.highest_bid ? item.highest_bid.amount : item.starting_price %>
+                  </div>
+                </div>
+                <div class="row-fluid" id="time_left_<%= item.id %>" style="font-size: 120%;">
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="span4">
+      <p><h4 class="muted">Hot Auctions</h4></p>
+      <div class="span12 well well-small" style="border: 1px solid;">
+        <% @items.each do |item| %>
+          <% if item.bids.count > 15 %>
+            <%= image_tag(item.image.smallthumbnail, class: 'thumbnail', style: 'margin-top: 5px;') if item.image? %>
+            <%= item.name%>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
