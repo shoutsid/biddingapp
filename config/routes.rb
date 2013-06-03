@@ -23,7 +23,7 @@ Bidding::Application.routes.draw do
     end
   end
 
-  root to: 'categories#index'
+  root to: 'home#index'
 
   resources :categories, path: '' do
     resources :items, concerns: :biddable
