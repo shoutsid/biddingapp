@@ -1,16 +1,38 @@
 == README
   
-== Required
+== Installation
+
 This application requires the following:
-    A working installation of Redis, http://redis.io/topics/quickstart
+* A working installation of Redis, http://redis.io/topics/quickstart
     
 Start your redis server with 
     $ redis-server
 
-spawn some resque workers
-    $ rake resque:workers COUNT=#number QUEUE=#queue here.
-or 
+Depending on your ruby enviroment this maybe different. I do the following to install my dependencies
+    $ rvm use default@bidding
+    $ bundle
+
+If your database is not Postgresql, please modify the /config/database.yml and correct the file to your needs
+Create & Migrate the database schema
+    $ bundle exec rake db:create
+    $ bundle exec rake db:migrate
+
+Now to spawn some resque workers
+    $ rake resque:workers COUNT=2 QUEUE=#queue
+Or just one worker with a queue of any
     $ rake resque:work QUEUE=*
+
+Start our webserver, i advise using puma
+    $ rails server puma -p 3000
+Or if you use Zeus like I do
+    $ zeus start
+Open a new console
+    $ zeus s puma -p 3000
+
+== Notes
+Currently running tests requires you to have a redis-server active and all tests which create database records will be still added to the queue, this needs fixing and not really a problem when working with development enviroments. This should not affect a production server though.
+
+When running in development, due to the behaviour of async, concurrency with Eventlisteners & ActionController:Live in rails4. It requires the config.cache_classes set to true in your development file. This means you will have to restart the server after every change. I have struggled to find a solution to this, due to a large amount of core changes in Rails4-rc1, older gems which helped with this can not be applied and used.
 
 == TODO
 
@@ -20,6 +42,7 @@ or
 * Mark an item to be reminded, setting if time is below a set time or above set price.
 * Full featured admin panel, without using external gem.
 * Some jQuery and design work
+
 == Maybe...
 
 Stripe intergration for payments to update the users balance. UK-beta has been released for Stripe. https://stripe.com/
