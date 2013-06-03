@@ -19,7 +19,9 @@
           <div class="row-fluid">
             <% if @item.image? %>
               <div class="span12 offset3" style="margin-bottom: 10px;">
-                <%= image_tag(@item.image_url, class: 'thumbnail' ) %>
+          <%= link_to @item.image.url, class: 'fancybox', rel: 'group' do %>
+                <%= image_tag(@item.image.largethumbnail, class: 'thumbnail' ) %>
+              <% end %>
               </div>
             <% end %>
           </div>
