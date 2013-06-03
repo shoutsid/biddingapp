@@ -4,16 +4,22 @@
 This application requires the following:
     A working installation of Redis, http://redis.io/topics/quickstart
     
-    Start your redis server with 
+Start your redis server with 
     $ redis-server
 
-    spawn some resque workers
+spawn some resque workers
     $ rake resque:workers COUNT=#number QUEUE=#queue here.
+or 
+    $ rake resque:work QUEUE=*
 
 == TODO
 
-Fancy jQuery and design work
-
+* Home Page
+* Hot Items
+* Stripe Payment Integration
+* Mark an item to be reminded, setting if time is below a set time or above set price.
+* Full featured admin panel, without using external gem.
+* Some jQuery and design work
 == Maybe...
 
 Stripe intergration for payments to update the users balance. UK-beta has been released for Stripe. https://stripe.com/
