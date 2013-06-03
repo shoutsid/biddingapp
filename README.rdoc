@@ -4,6 +4,9 @@
 
 This application requires the following:
 * A working installation of Redis, http://redis.io/topics/quickstart
+* Ruby 1.9.3+, 2.0.0 is recommened
+* Bundler
+* Rake
     
 Start your redis server with 
     $ redis-server
