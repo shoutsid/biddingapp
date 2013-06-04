@@ -13,6 +13,13 @@ module SSE
       @io.write "data: #{JSON.dump(object)}\n\n"
     end
 
+    def write_from_redis object, options = {}
+      options.each do |k,v|
+        @io.write "#{k}: #{v}\n"
+      end
+      @io.write "data: #{object}\n\n"
+    end
+
     def close
       @io.close
     end

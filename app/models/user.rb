@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :items
   has_many :bids
 
+  after_update :push_to_redis
+
   def hard_reset_balance(amount = 0)
     update(balance: amount)
   end
@@ -38,5 +40,11 @@ class User < ActiveRecord::Base
 
   def not_sold_item_count
     items.where(closed: true, sold: false).count
+  end
+
+  private
+  def push_to_redis
+    user = self.to_json
+    $redis.publish('updates.balance', user)
   end
 end

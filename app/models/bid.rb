@@ -7,6 +7,8 @@ class Bid < ActiveRecord::Base
   after_create :bump_item_time_left
   after_create :deduct_from_balance
   after_create :reimberse_previous_bidder
+  after_create :push_to_redis
+
   validate :item_expired, if: :item
   validate :check_balance, if: :user
   
@@ -33,5 +35,10 @@ class Bid < ActiveRecord::Base
       amount = item.second_highest_bid.amount
       user.update_user_balance_by(amount)
     end
+  end
+
+  def push_to_redis
+    bid = self.to_json(include: [:user, item: { include: [:category] }])
+    $redis.publish('updates.new_bid', bid)
   end
 end
