@@ -43,6 +43,12 @@ When running in development, due to the behaviour of async, concurrency with Eve
 * Bid on item
 * Using ActionController:Live hooks with Javascript Eventlisteners
 * When you bid, the time left on the auction increases by 10 seconds
+~~ /voiced/ is much like a voting system, the more bids, the higher they go ~~
+
+===== Streamed Events
+Time Left on Item/Auction
+Users Balance
+Highest Bidder & actual Bid
 
 == TODO
 
