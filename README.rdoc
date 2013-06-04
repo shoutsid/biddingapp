@@ -37,6 +37,13 @@ Currently running tests requires you to have a redis-server active and all tests
 
 When running in development, due to the behaviour of async, concurrency with Eventlisteners & ActionController:Live in rails4. It requires the config.cache_classes set to true in your development file. This means you will have to restart the server after every change. I have struggled to find a solution to this, due to a large amount of core changes in Rails4-rc1, older gems which helped with this can not be applied and used.
 
+== Features
+
+* Post Auction/Item
+* Bid on item
+* Using ActionController:Live hooks with Javascript Eventlisteners
+* When you bid, the time left on the auction increases by 10 seconds
+
 == TODO
 
 * Home Page
