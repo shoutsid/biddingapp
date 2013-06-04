@@ -17,9 +17,11 @@ $ ->
       bid_actions:(current_user_DOM, balance_DOM, balance_placeholder_DOM,
         item_bid_DOM,input_bid_DOM, current_bid_DOM, current_bid_user_DOM,
         time_DOM, starting_price_DOM) ->
+
         new_top_bid = current_bid_user + ' bidded ' + highest_bid + ', just now. <hr/>'
         $('#topbids').prepend(new_top_bid)
         new_top_bid = ''
+
         if current_bid_user_DOM.html() != 'bid by: ' + current_bid_user
           current_bid_user_DOM.effect( "explode", { times: 1 }, "slow", ->
             setTimeout (->
@@ -28,17 +30,21 @@ $ ->
           )
         current_bid_user_DOM.empty()
         current_bid_user_DOM.append(current_bid_user)
-        if current_user_DOM.val() != current_bid_user_id
+
+        if parseFloat(current_user_DOM.val()) != current_bid_user_id
           input_bid_DOM.removeAttr('disabled')
         else
           input_bid_DOM.attr('disabled', 'disabled')
-        if highest_bid > current_bid_DOM.val()
+          
+        if parseFloat(highest_bid) >= parseFloat(current_bid_DOM.html())
           current_bid_DOM.empty()
           current_bid_DOM.append(highest_bid)
-        if highest_bid > parseFloat(input_bid_DOM.val())
+
+        if parseFloat(current_bid_DOM.html()) >= parseFloat(input_bid_DOM.val())
           input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
           input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
           input_bid_DOM.val(parseFloat(highest_bid) + 1)
+
 
     # On form submittion, check if user has enough balance 
     $('[id^=new_bid_]').each (index) ->
@@ -75,7 +81,6 @@ $ ->
       all.bid_actions(current_user_DOM, balance_DOM, balance_placeholder_DOM, item_bid_DOM,
         input_bid_DOM, current_bid_DOM, current_bid_user_DOM, starting_price_DOM)
 
-    ## Stopped working, need to fix. 
     if recent_activity_DOM.attr('placeholder') != placeholder_string
       recent_activity_DOM.effect( "explode", { times: 1 }, "slow", ->
       setTimeout (->
@@ -106,4 +111,3 @@ $ ->
             $(this).removeAttr('style')
           ).fadeTo("slow", 1.0)
           i++
-

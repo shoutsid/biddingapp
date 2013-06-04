@@ -1,5 +1,8 @@
 <%= simple_form_for([@category, @item, @bid], remote: true, html: {id: "new_bid_#{@item.id}", class: 'form-vertical text-center'}) do |f| %>
-  <%= f.input :amount, label: '', input_html: { placeholder: @item.min_bid_amount, min: @item.min_bid_amount, id: 'input_bid_amount', style: "width: 100px;" } %>
+  <%= f.input :amount, label: '', input_html: { placeholder: ( @item.highest_bid != nil ? @item.highest_bid_amount + 1 : @item.min_bid_amount),
+                                                min: (@item.highest_bid != nil ? @item.highest_bid_amount  + 1: @item.min_bid_amount),
+                                                value: (@item.highest_bid != nil ? @item.highest_bid_amount + 1 : @item.min_bid_amount),
+                                                id: 'input_bid_amount', style: "width: 100px;" } %>
   <div class="actions">
     <%= f.submit 'Bid', data: { disable_with: 'Bidding...' } %>
   </div>
