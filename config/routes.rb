@@ -7,10 +7,9 @@ Bidding::Application.routes.draw do
   devise_for :users
 
   namespace :events do
-    get :not_closed_items
-    get :all_bids
+    get :time_left
     get :users_balance
-    get :recent_activity
+    get :updates
   end
   
   devise_for :admins, path: '/admin'

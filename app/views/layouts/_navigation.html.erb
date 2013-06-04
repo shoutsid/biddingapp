@@ -78,7 +78,7 @@
         <form class="input-prepend pull-left" style="margin-top: 10px;">
           <span class="add-on">Balance:</span>
           <input type="text" class="span2" placeholder="<%= current_user.balance%>" disabled="disabled" id="user_balance" />
-          <%=  link_to 'Auction Item', new_category_item_path(Category.first.url), class: 'btn btn-info', style: 'margin-left: 10px;' %>
+          <%=  link_to 'Auction Item', new_category_item_path(@category), class: 'btn btn-info', style: 'margin-left: 10px;' %>
           <% if Bid.last %>
             <% bid = Bid.last %>
             <input type="text" class="recent_activity" placeholder="Bid: <%= bid.amount%>, by <%= bid.user.username %>, on <%= bid.item.name %>" disabled="disabled" id="recent_activity" />
