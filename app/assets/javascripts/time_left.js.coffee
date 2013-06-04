@@ -7,7 +7,7 @@ timer =
     countdown = setInterval (->
       timeleft = hours_left + ':' + minutes_left + ':' + seconds_left
       if hours_left <= 0 && minutes_left <= 0 && seconds_left <= 0
-        stopInterval(countdown)
+        clear(countdown)
       if minutes_left <= 0 && seconds_left <= 0
         hours_left = hours_left - 1
       if seconds_left <= 0
@@ -21,7 +21,7 @@ timer =
     clearInterval(countdown)
 
 expired =
-  disable: (time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM) ->
+  disable: (time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM, time) ->
     item_bid_DOM.remove()
     item_DOM.fadeTo('slow', 0.33)
     item_sold_DOM.empty()
@@ -32,6 +32,8 @@ expired =
     'color': 'red'
     'font-size': '56px'
     item_sold_DOM.fadeIn('slow', 0.33)
+    time_left_DOM.empty()
+    time_left_DOM.append(time)
 
 $ ->
   event_source_not_closed_items = new EventSource('/events/time_left')
@@ -48,7 +50,7 @@ $ ->
       item_bid_DOM = $('#item_bid_' + item)
       item_DOM = $('#item' + item)
 
-      if time == 'This Item Has Expired'
+      if time == '00:00:00'
         timer.stop_timer
         expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM)
 
@@ -60,8 +62,8 @@ $ ->
       item_bid_DOM = $('#item_bid')
       item_DOM = $('#item')
 
-      if time == 'This Item Has Expired'
+      if time == '00:00:00'
         timer.stop_timer
-        expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM)
+        expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM, time)
 
       timer.start_timer(time_left_DOM, time)
