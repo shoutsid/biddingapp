@@ -30,13 +30,28 @@
     </div>
 
     <div class="span4">
-      <p><h4 class="muted">Hot Auctions</h4></p>
+      <p><h4 class="muted">Users Voice</h4></p>
       <div class="span12 well well-small" style="border: 1px solid;">
-        <% @items.each do |item| %>
-          <% if item.bids.count > 15 %>
-            <%= image_tag(item.image.smallthumbnail, class: 'thumbnail', style: 'margin-top: 5px;') if item.image? %>
-            <%= item.name%>
-          <% end %>
+        <% @user_voice.each do |item| %>
+          <div class="row-fluid">
+            <div class="span4">
+              <div class="row-fluid">
+                <%= link_to category_item_path(item.category, item) do %> <br/>
+                  <%= image_tag(item.image.smallthumbnail, class: 'thumbnail') if item.image? %>
+                <% end %>
+              </div>
+              <div class="row-fluid">
+                <%= link_to category_item_path(item.category, item) do %> <br/>
+                  <%= truncate(item.name.titleize, length: 40) %>
+                <% end %>
+              </div>
+            </div>
+            <div class="span8">
+              <p style='margin-top: 20px;'>
+              <%= truncate(item.description, length: 100) %>
+              </p>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
