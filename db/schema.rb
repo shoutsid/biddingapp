@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 201305323132815) do
     t.boolean  "closed"
     t.string   "image"
     t.boolean  "sold"
+    t.integer  "bids_count",     default: 0
   end
 
   create_table "users", force: true do |t|

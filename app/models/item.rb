@@ -13,7 +13,7 @@ class Item < ActiveRecord::Base
   def time_left
     time = check_time_left
     if expired?
-      "This Item Has Expired"
+      '00:00:00'
     else
       time[:diff]
     end

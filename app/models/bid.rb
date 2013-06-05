@@ -1,6 +1,6 @@
 class Bid < ActiveRecord::Base
   belongs_to :user
-  belongs_to :item
+  belongs_to :item, counter_cache: true
   validates_presence_of :item, :amount
   validates_numericality_of :amount, on: :create,
                                     greater_than_or_equal_to: Proc.new { |bid| bid.item.min_bid_amount.to_f }
