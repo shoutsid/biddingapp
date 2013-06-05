@@ -13,34 +13,35 @@ $ ->
     current_bid_user_id = bid.user.id
     placeholder_string = 'Bid: ' + bid.amount + ', by ' + bid.user.username + ', on ' + bid.item.name
     recent_activity_DOM = $('#recent_activity')
+    current_user_DOM = $('#user_id')
+    balance_DOM = $('#user_balance')
+    balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
+    item_bid_DOM = $('#item_bid')
 
     all =
-      bid_actions:(current_user_DOM, balance_DOM, balance_placeholder_DOM,
-        item_bid_DOM,input_bid_DOM, current_bid_DOM, current_bid_user_DOM,
-        time_DOM, starting_price_DOM) ->
-
-       if current_bid_user_DOM.html() != 'bid by: ' + current_bid_user
+      bid_actions: (current_user_DOM, balance_DOM, balance_placeholder_DOM, item_bid_DOM,input_bid_DOM, current_bid_DOM, current_bid_user_DOM, time_DOM, starting_price_DOM) ->
+        if current_bid_user_DOM.html() != 'bid by: ' + current_bid_user
           current_bid_user_DOM.effect( "explode", { times: 1 }, "slow", ->
             setTimeout (->
               current_bid_user_DOM.removeAttr("style").hide().fadeIn()
             ), 500
           )
-       current_bid_user_DOM.empty()
-       current_bid_user_DOM.append(current_bid_user)
+        current_bid_user_DOM.empty()
+        current_bid_user_DOM.append(current_bid_user)
 
-       if parseFloat(current_user_DOM.val()) != current_bid_user_id
-         input_bid_DOM.removeAttr('disabled')
-       else
-         input_bid_DOM.attr('disabled', 'disabled')
-         
-       if parseFloat(highest_bid) >= parseFloat(current_bid_DOM.html())
-         current_bid_DOM.empty()
-         current_bid_DOM.append(highest_bid)
+        if parseFloat(current_user_DOM.val()) != parseFloat(current_bid_user_id)
+          input_bid_DOM.removeAttr('disabled')
+        else
+          input_bid_DOM.attr('disabled', 'disabled')
+       
+        if parseFloat(highest_bid) >= parseFloat(current_bid_DOM.html())
+          current_bid_DOM.empty()
+          current_bid_DOM.append(highest_bid)
 
-       if parseFloat(current_bid_DOM.html()) >= parseFloat(input_bid_DOM.val())
-         input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
-         input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
-         input_bid_DOM.val(parseFloat(highest_bid) + 1)
+        if parseFloat(current_bid_DOM.html()) >= parseFloat(input_bid_DOM.val())
+          input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
+          input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
+          input_bid_DOM.val(parseFloat(highest_bid) + 1)
 
     # On form submittion, check if user has enough balance 
     $('[id^=new_bid_]').each (index) ->
@@ -55,11 +56,6 @@ $ ->
     new_top_bid = ''
    
     if url.search(category) > 0 && url.search('items/' + item) < 0
-
-      current_user_DOM = $('#user_id')
-      balance_DOM = $('#user_balance')
-      balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
-      item_bid_DOM = $('#item_bid')
       input_bid_DOM = $('#item_bid_' + item_id + ' #input_bid_amount')
       current_bid_DOM = $('#current_bid_amount_' + item_id)
       current_bid_user_DOM = $('#current_bid_user_' + item_id)
@@ -69,10 +65,6 @@ $ ->
         input_bid_DOM, current_bid_DOM, current_bid_user_DOM, starting_price_DOM)
 
     if url.search('items/' + item_id) > 0
-      current_user_DOM = $('#user_id')
-      balance_DOM = $('#user_balance')
-      balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
-      item_bid_DOM = $('#item_bid')
       input_bid_DOM = $('#input_bid_amount')
       current_bid_DOM = $('#current_bid_amount')
       current_bid_user_DOM = $('#current_bid_user')
