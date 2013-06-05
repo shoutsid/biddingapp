@@ -25,22 +25,22 @@ $ ->
               current_bid_user_DOM.removeAttr("style").hide().fadeIn()
             ), 500
           )
-        current_bid_user_DOM.empty()
-        current_bid_user_DOM.append(current_bid_user)
+       current_bid_user_DOM.empty()
+       current_bid_user_DOM.append(current_bid_user)
 
-        if parseFloat(current_user_DOM.val()) != current_bid_user_id
-          input_bid_DOM.removeAttr('disabled')
-        else
-          input_bid_DOM.attr('disabled', 'disabled')
-          
-        if parseFloat(highest_bid) >= parseFloat(current_bid_DOM.html())
-          current_bid_DOM.empty()
-          current_bid_DOM.append(highest_bid)
+       if parseFloat(current_user_DOM.val()) != current_bid_user_id
+         input_bid_DOM.removeAttr('disabled')
+       else
+         input_bid_DOM.attr('disabled', 'disabled')
+         
+       if parseFloat(highest_bid) >= parseFloat(current_bid_DOM.html())
+         current_bid_DOM.empty()
+         current_bid_DOM.append(highest_bid)
 
-        if parseFloat(current_bid_DOM.html()) >= parseFloat(input_bid_DOM.val())
-          input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
-          input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
-          input_bid_DOM.val(parseFloat(highest_bid) + 1)
+       if parseFloat(current_bid_DOM.html()) >= parseFloat(input_bid_DOM.val())
+         input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
+         input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
+         input_bid_DOM.val(parseFloat(highest_bid) + 1)
 
     # On form submittion, check if user has enough balance 
     $('[id^=new_bid_]').each (index) ->
@@ -99,7 +99,7 @@ $ ->
     balance = user.balance
 
     # check for the user and that balance is not currently displayed
-    if user_id == parseFloat(current_user_DOM.val()) && balance != parseFloat(balance_placeholder_DOM)
+    if user_id == parseFloat(current_user_DOM.val())
       balance_DOM.attr( 'placeholder', balance )
 
       i = 0
