@@ -1,12 +1,6 @@
 require 'spec_helper'
 
 describe 'routing to categories' do
-  it 'routes GET /:id to categories#index ' do
-    expect(get: '/').to route_to(
-      controller: 'categories',
-      action: 'index'
-    )
-  end
 
   it 'routes GET /:id to categories#show' do
     expect(get: '/1').to route_to(

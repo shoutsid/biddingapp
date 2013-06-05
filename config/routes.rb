@@ -8,7 +8,6 @@ Bidding::Application.routes.draw do
 
   namespace :events do
     get :time_left
-    get :users_balance
     get :updates
   end
   

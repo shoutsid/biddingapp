@@ -21,28 +21,3 @@ guard 'rspec', parallel: true, parallel_cli: '-n 2', zeus: true, bundler: false,
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
-
-guard 'rails', zeus: true, force_run: true, server: :puma do
-  watch(%r{app/mailers/(.+)\.rb$}) 
-  watch(%r{app/workers/(.+)\.rb$}) 
-  watch(%r{app/controllers/(.+)\.rb$}) 
-  watch(%r{app/uploaders/(.+)\.rb$}) 
-  watch(%r{app/models/(.+)\.rb$}) 
-  watch(%r{app/views/.+\.(erb|haml|slim)$})
-  watch(%r{app/helpers/.+\.rb})
-  watch(%r{public/.+\.(css|js|html)})
-  watch(%r{config/locales/.+\.yml})
-  # Rails Assets Pipeline
-  watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html))).*}) { |m| "/assets/#{m[3]}" }
-  watch('Gemfile.lock')
-  watch(%r{^(config|lib)/.*})
-end
-
-# guard 'livereload', grace_period: 5 do
-#   watch(%r{app/views/.+\.(erb|haml|slim)$})
-#   watch(%r{app/helpers/.+\.rb})
-#   watch(%r{public/.+\.(css|js|html)})
-#   watch(%r{config/locales/.+\.yml})
-#   # Rails Assets Pipeline
-#   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html))).*}) { |m| "/assets/#{m[3]}" }
-# end

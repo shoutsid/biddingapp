@@ -55,7 +55,7 @@ describe Item do
     context 'theres no time left' do
       it 'should return correct string' do
         item = FactoryGirl.create(:item, closing_time: Time.now - 2.hours)
-        item.time_left.should eql("This Item Has Expired")
+        item.time_left.should eql("00:00:00")
       end
     end
   end
