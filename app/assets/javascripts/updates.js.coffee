@@ -1,9 +1,10 @@
 $ ->
-  event_source_new_bids = new EventSource('/events/updates')
+  event_source_updates = new EventSource('/events/updates')
   url = window.location.href
-  event_source_new_bids.addEventListener ('updates.new_bid'), (event) ->
+  event_source_updates.addEventListener ('updates.new_bid'), (event) ->
 
     bid = $.parseJSON(event.data)
+    balance = bid.user.balance
     highest_bid = bid.amount
     item = bid.item
     item_id = item.id
@@ -18,11 +19,7 @@ $ ->
         item_bid_DOM,input_bid_DOM, current_bid_DOM, current_bid_user_DOM,
         time_DOM, starting_price_DOM) ->
 
-        new_top_bid = current_bid_user + ' bidded ' + highest_bid + ', just now. <hr/>'
-        $('#topbids').prepend(new_top_bid)
-        new_top_bid = ''
-
-        if current_bid_user_DOM.html() != 'bid by: ' + current_bid_user
+       if current_bid_user_DOM.html() != 'bid by: ' + current_bid_user
           current_bid_user_DOM.effect( "explode", { times: 1 }, "slow", ->
             setTimeout (->
               current_bid_user_DOM.removeAttr("style").hide().fadeIn()
@@ -45,7 +42,6 @@ $ ->
           input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
           input_bid_DOM.val(parseFloat(highest_bid) + 1)
 
-
     # On form submittion, check if user has enough balance 
     $('[id^=new_bid_]').each (index) ->
       form = this
@@ -53,6 +49,10 @@ $ ->
         if $('#input_bid_amount', form).val() > parseFloat(balance_placeholder_DOM)
           balance_DOM.animate( { backgroundColor: '#CC3333' } )
           $('#unable_to_bid').modal('show')
+
+    new_top_bid = current_bid_user + ' bidded ' + highest_bid + ', just now. <hr/>'
+    $('#topbids').prepend(new_top_bid)
+    new_top_bid = ''
    
     if url.search(category) > 0 && url.search('items/' + item) < 0
 
@@ -90,24 +90,21 @@ $ ->
       recent_activity_DOM.attr( 'placeholder', placeholder_string)
 
 
+  event_source_updates.addEventListener ('updates.balance'), (event) ->
+    current_user_DOM = $('#user_id')
+    balance_DOM = $('#user_balance')
+    balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
+    user = $.parseJSON(event.data)
+    user_id = user.id
+    balance = user.balance
+
     # check for the user and that balance is not currently displayed
-    if user_id == parseFloat(current_user_DOM.val()) && balance != balance_placeholder_DOM
+    if user_id == parseFloat(current_user_DOM.val()) && balance != parseFloat(balance_placeholder_DOM)
       balance_DOM.attr( 'placeholder', balance )
 
-      # When money has gone, flash red
-      if balance < balance_placeholder_DOM
-        i = 0
-        while i < 2
-          balance_DOM.animate( { backgroundColor: '#CC3333' } ).fadeTo("slow", 0.5, ->
-            $(this).removeAttr('style')
-          ).fadeTo("slow", 1.0)
-          i++
-
-      # When receiving money, flash green
-      if balance > balance_placeholder_DOM
-        i = 0
-        while i < 2
-          balance_DOM.animate( { backgroundColor: '#009966' } ).fadeTo("slow", 0.5, ->
-            $(this).removeAttr('style')
-          ).fadeTo("slow", 1.0)
-          i++
+      i = 0
+      while i < 2
+        balance_DOM.animate( { backgroundColor:	'rgba(102, 153, 153, 0.2)' } ).fadeTo("slow", 0.5, ->
+          $(this).removeAttr('style')
+        ).fadeTo("slow", 1.0)
+        i++
