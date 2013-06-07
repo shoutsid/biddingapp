@@ -9,7 +9,7 @@
             <% items.each do |item| %>
               <div class="span4 well"  id="item_<%= item.id%>" style="border: 1px solid;">
                 <span id="starting_price_<%= item.id %>" style="display: none"><%= item.starting_price %></span>
-                <span id="current_bid_user_id_<%= item.id %>" style="display: none"><%= item.highest_bid.user.id %></span>
+                <span id="current_bid_user_id_<%= item.id %>" style="display: none"><%= item.highest_bid.user.id if item.highest_bid %></span>
                 <div class="container-fluid">
                   <div class="row-fluid">
                     <div class="span6" id="item_sold_<%= item.id %>" style="margin-left: -10px; margin-top: -20px;" >
