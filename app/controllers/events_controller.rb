@@ -9,13 +9,13 @@ class EventsController < ApplicationController
     redis = Redis.new
 
     redis.psubscribe('updates.*') do |on|
-      on.pmessage do |pattern, event, data| 
+      on.pmessage do |pattern, event, data|
         sse.write_from_redis(data, event: event)
       end
     end
   rescue IOError
     logger.info "Stream closed"
-  ensure 
+  ensure
     sse.close
   end
 
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
     sse = SSE::Client.new(response.stream)
 
-   begin 
+   begin
      Item.uncached do
        loop do
          @items = Item.where(closed: false).to_a
@@ -39,7 +39,7 @@ class EventsController < ApplicationController
 
   rescue IOError
     logger.info "Stream closed"
-  ensure 
+  ensure
     sse.close
   end
 end

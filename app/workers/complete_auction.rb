@@ -1,10 +1,9 @@
 class CompleteAuction
   ## TODO:- Add some payment method etc
-  
   @queue = :check_complete_auction_queue
 
   def self.perform(item_id)
-    begin 
+    begin
       loop do
         item = Item.find(item_id)
         if item.expired?

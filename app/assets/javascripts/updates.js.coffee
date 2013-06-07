@@ -10,7 +10,7 @@ $ ->
         )
         current_bid_user_DOM.empty()
         current_bid_user_DOM.append(current_bid_user)
-      
+
     # when highest bid user is current active user, disable the bid form
     disable_form: (current_user_DOM, current_bid_user_id, input_bid_DOM) ->
       if parseFloat(current_user_DOM.val()) != parseFloat(current_bid_user_id)
@@ -48,7 +48,7 @@ $ ->
   balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
   item_bid_DOM = $('#item_bid')
 
-  # On form submittion, check if user has enough balance 
+  # On form submittion, check if user has enough balance
   $('[id^=new_bid_]').each (index) ->
     form = this
     $(form).submit ->
@@ -69,7 +69,7 @@ $ ->
 
     new_top_bid = current_bid_user + ' bidded ' + highest_bid + ', just now. <hr/>'
     $('#topbids').prepend(new_top_bid)
-   
+
     input_bid_DOM = $('#item_bid_' + item_id + ' #input_bid_amount')
     current_bid_DOM = $('#current_bid_amount_' + item_id)
     current_bid_user_DOM = $('#current_bid_user_' + item_id)
@@ -80,7 +80,6 @@ $ ->
     action.update_current_bid(highest_bid, current_bid_DOM)
     action.update_form_attrs(current_bid_DOM, input_bid_DOM, highest_bid)
     action.update_activity_bar(recent_activity_DOM, placeholder_string)
-    
 
   event_source_updates.addEventListener ('updates.balance'), (event) ->
     user = $.parseJSON(event.data)

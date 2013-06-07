@@ -36,7 +36,6 @@ class Admin::CategoriesController < ApplicationController
   end
 
   private
- 
   def set_category
     @category = Category.find_by_url(params[:id])
   end

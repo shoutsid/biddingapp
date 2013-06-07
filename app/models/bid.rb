@@ -11,7 +11,7 @@ class Bid < ActiveRecord::Base
 
   validate :item_expired, if: :item
   validate :check_balance, if: :user
-  
+
   private
   def bump_item_time_left
     item.increase_time_left

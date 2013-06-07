@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe BidsController do
- before(:each) { @bid = FactoryGirl.create(:bid)
- sign_in @bid.user
- }
+  before(:each) { @bid = FactoryGirl.create(:bid)
+    sign_in @bid.user
+  }
 
   describe 'GET #index' do
-    let(:send_request) do 
+    let(:send_request) do
       @item = @bid.item
       @category = @item.category
-      get :index, item_id: @item, category_id: @category 
+      get :index, item_id: @item, category_id: @category
     end
 
     it 'should be successfull' do
@@ -24,7 +24,7 @@ describe BidsController do
   end
 
   describe 'GET #show' do
-    let(:send_request) do 
+    let(:send_request) do
       @item = @bid.item
       @category = @item.category
       get :show, id: @bid, item_id: @item, category_id: @category
@@ -54,24 +54,24 @@ describe BidsController do
     it 'responds with HTTP 200 status' do
       send_request
       expect(response.status).to eql(200)
-    end 
+    end
   end
 
   describe 'POST #create' do
     context 'bid is higher than previous' do
       let(:send_request) {
-        @item = @bid.item 
+        @item = @bid.item
         @category = @item.category
-        post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } 
-        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
+        post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item }
+        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
       }
 
       it 'should create a new record' do
         @item = @bid.item
         @category = @item.category
         lambda {
-          post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
-        }.should change(Bid, :count).by(1) 
+          post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
+        }.should change(Bid, :count).by(1)
       end
 
       it 'responds as a redirect' do
@@ -91,7 +91,7 @@ describe BidsController do
 
       it 'should set flash notice' do
         send_request
-        expect(flash[:notice]).to eql('Bid was successfully created.') 
+        expect(flash[:notice]).to eql('Bid was successfully created.')
       end
     end
 
@@ -99,18 +99,18 @@ describe BidsController do
       let(:send_request) {
         @item = @bid.item
         @category = @item.category
-        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
-        post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } 
+        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
+        post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item }
       }
 
       it 'should not create a new record' do
         @item = @bid.item
         @category = @item.category
-        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } 
-        lambda { 
-          post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item } 
-        }.should_not change(Bid, :count).by(1) 
-      end      
+        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
+        lambda {
+          post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item }
+        }.should_not change(Bid, :count).by(1)
+      end
 
       it 'does not redirect to successful url' do
         send_request
@@ -168,7 +168,7 @@ describe BidsController do
 
         it 'sets correct flash notice' do
           send_patch_request
-          expect(flash[:notice]).to eql('Bid was successfully updated.') 
+          expect(flash[:notice]).to eql('Bid was successfully updated.')
         end
       end
     end
@@ -200,7 +200,7 @@ describe BidsController do
 
         it 'sets correct flash notice' do
           send_put_request
-          expect(flash[:notice]).to eql('Bid was successfully updated.') 
+          expect(flash[:notice]).to eql('Bid was successfully updated.')
         end
       end
     end
@@ -235,7 +235,7 @@ describe BidsController do
     end
     it 'sets the correct flash notice' do
       send_request
-      expect(flash[:notice]).to eql('Bid was successfully destroyed.') 
+      expect(flash[:notice]).to eql('Bid was successfully destroyed.')
     end
   end
 end

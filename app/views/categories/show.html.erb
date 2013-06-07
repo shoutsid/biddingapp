@@ -24,7 +24,7 @@
                           <%= image_tag(item.image.largethumbnail, class: 'thumbnail') if item.image? %>
                         <% end %>
                       </div>
-                      <p> 
+                      <p>
                       <h5><u><%= link_to item.name.titleize, category_item_path(@category, item) %></u></h5>
                       <%= truncate(item.description, length: 50) { link_to '...', category_item_path(@category, item) }%>
                       </p>

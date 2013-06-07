@@ -47,5 +47,4 @@ describe 'routing to categories' do
       action: 'create'
     )
   end
-
 end

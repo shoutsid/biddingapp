@@ -6,6 +6,6 @@ class Category < ActiveRecord::Base
   acts_as_url :name
 
   def to_param
-    url 
+    url
   end
 end

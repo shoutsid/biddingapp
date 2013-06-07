@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Admin::CategoriesController do
   before(:each) { @category = FactoryGirl.create(:category)
-  @admin = FactoryGirl.create(:admin)
-  sign_in :admin, @admin
+    @admin = FactoryGirl.create(:admin)
+    sign_in :admin, @admin
   }
 
   describe 'GET #edit' do
@@ -44,7 +44,7 @@ describe Admin::CategoriesController do
 
     it 'sets the correct flash notice' do
       send_request
-      expect(flash[:notice]).to eql('Category was successfully created.') 
+      expect(flash[:notice]).to eql('Category was successfully created.')
     end
   end
 
@@ -54,7 +54,7 @@ describe Admin::CategoriesController do
 
     context 'HTTP PATCH method' do
       it 'updates the @category' do
-        patch :update, id: @category, category: { name: 'changed' } 
+        patch :update, id: @category, category: { name: 'changed' }
         Category.find(@category).name.should eql('changed')
       end
 
@@ -75,14 +75,13 @@ describe Admin::CategoriesController do
 
       it 'sets the correct flash notice' do
         send_patch_request
-        expect(flash[:notice]).to eql('Category was successfully updated.') 
+        expect(flash[:notice]).to eql('Category was successfully updated.')
       end
     end
 
-
     context 'HTTP PUT method' do
       it 'updates the @category' do
-        put :update, id: @category, category: { name: 'changed' } 
+        put :update, id: @category, category: { name: 'changed' }
         Category.find(@category).name.should eql('changed')
       end
 
@@ -103,7 +102,7 @@ describe Admin::CategoriesController do
 
       it 'sets the correct flash notice' do
         send_put_request
-        expect(flash[:notice]).to eql('Category was successfully updated.') 
+        expect(flash[:notice]).to eql('Category was successfully updated.')
       end
     end
   end
@@ -132,7 +131,7 @@ describe Admin::CategoriesController do
 
     it 'sets the correct flash notice' do
       send_request
-      expect(flash[:notice]).to eql('Category was successfully destroyed.') 
+      expect(flash[:notice]).to eql('Category was successfully destroyed.')
     end
   end
 end

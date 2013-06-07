@@ -16,16 +16,16 @@ def run_worker(queue, count = 1)
     Process.detach(pid)
   }
 end
- 
+
 namespace :resque do
   task :setup => :environment
- 
+
   desc "Restart running workers"
   task :restart_workers => :environment do
     Rake::Task['resque:stop_workers'].invoke
     Rake::Task['resque:start_workers'].invoke
   end
-  
+
   desc "Quit running workers"
   task :stop_workers => :environment do
     pids = Array.new
@@ -40,7 +40,7 @@ namespace :resque do
       system(syscmd)
     end
   end
-  
+
   desc "Start workers"
   task :start_workers => :environment do
     run_worker("*", 1)

@@ -9,7 +9,7 @@ describe User do
   it { should validate_presence_of(:address) }
   it { should validate_presence_of(:street_number) }
   it { should validate_presence_of(:postal_code) }
-  it { should validate_presence_of(:country) } 
+  it { should validate_presence_of(:country) }
   it { should validate_presence_of(:password) }
 
   it { should validate_uniqueness_of(:email) }
@@ -21,7 +21,7 @@ describe User do
         user = FactoryGirl.create(:user)
         user.hard_reset_balance(20)
         User.find(user).balance.should eql(20.to_d)
-      end 
+      end
 
       context 'when no amount supplied' do
         it 'resets balance to 0' do
@@ -33,13 +33,12 @@ describe User do
     end
   end
 
-
   describe '#update_user_balance_by' do
     context 'given positive amount' do
       it 'increases balance by given amount' do
         user = FactoryGirl.create(:user, balance: 20)
         user.update_user_balance_by(10)
-        User.find(user).balance.should eql(30.to_d) 
+        User.find(user).balance.should eql(30.to_d)
       end
     end
 
@@ -67,7 +66,6 @@ describe User do
       end
     end
   end
-
 
   describe '#not_sold_item_count' do
     it 'returns correct count' do
@@ -100,7 +98,6 @@ describe User do
       User.find(user).closed_item_count.should eql(1)
     end
   end
-
 
   describe '#not_closed_item_count' do
     it 'returns correct count' do

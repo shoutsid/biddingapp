@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     update_amount = balance.to_f + amount.to_f
     update(balance: update_amount)
   end
-  
+
   def has_enough_balance_to_bid?(amount)
     balance.to_f >= amount.to_f
   end
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   def closed_item_count
     items.where(closed: true).count
   end
-  
+
   def not_closed_item_count
     items.where(closed: false).count
   end

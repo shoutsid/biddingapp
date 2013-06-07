@@ -17,7 +17,6 @@ class Ability
     cannot :create, Bid, item: { user_id: user.id }
     ## Can't delete or update someone elses Bid
     can :modify, Bid, user_id: user.id
-    
   end
 end
 
@@ -25,6 +24,6 @@ class AdminAbility
   include CanCan::Ability
 
   def intialize(admin)
-    can :manage, :all 
+    can :manage, :all
   end
 end

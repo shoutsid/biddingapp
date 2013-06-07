@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_category  
+  before_action :set_category
   before_action :set_user
   before_action :authenticate_user!, except: [:index, :show]
 
-  load_and_authorize_resource 
+  load_and_authorize_resource
 
   def index
     redirect_to category_url(@category)
@@ -47,7 +47,7 @@ class ItemsController < ApplicationController
   end
 
   private
-  def set_user 
+  def set_user
     @user = current_user
   end
 

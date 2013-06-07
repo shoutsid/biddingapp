@@ -19,8 +19,8 @@ class Item < ActiveRecord::Base
     end
   end
 
-  def highest_bid 
-    bids.max 
+  def highest_bid
+    bids.max
   end
 
   def second_highest_bid
@@ -29,18 +29,18 @@ class Item < ActiveRecord::Base
   end
 
   def highest_bid_amount
-    highest_bid == nil ? 0 : highest_bid.amount 
+    highest_bid == nil ? 0 : highest_bid.amount
   end
 
   def min_bid_amount
-    highest_bid == nil ? starting_price + 1 : highest_bid.amount + 1 
+    highest_bid == nil ? starting_price + 1 : highest_bid.amount + 1
   end
 
   def increase_time_left
     update(closing_time: closing_time + 10.seconds)
   end
 
-  def check_time_left 
+  def check_time_left
     Time.diff(Time.now, closing_time)
   end
 
@@ -60,17 +60,17 @@ class Item < ActiveRecord::Base
       ItemMailer.item_sold_bidder(self, highest_bid).deliver
 
     elsif expired? == true && accept_highest_bid? == false
-      update(closed: true, sold: false)          
+      update(closed: true, sold: false)
       highest_bid.user.update_user_balance_by(highest_bid.amount) if highest_bid
       ItemMailer.item_not_sold_owner(self).deliver
     end
   end
 
-  private 
+  private
   def bg_worker_complete_auction
     Resque.enqueue(CompleteAuction, id)
   end
-   
+
   def not_closed
     update(closed: false)
   end
