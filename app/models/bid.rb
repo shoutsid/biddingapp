@@ -38,7 +38,7 @@ class Bid < ActiveRecord::Base
   end
 
   def push_to_redis
-    bid = self.to_json(include: [:user, item: { include: [:category] }])
+    bid = self.to_json(include: [:user, item: { include: [:category], methods: [:time_left] }])
     $redis.publish('updates.new_bid', bid)
   end
 end

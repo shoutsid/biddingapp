@@ -26,7 +26,7 @@ class EventsController < ApplicationController
    begin
      Item.uncached do
        loop do
-         @items = Item.where(closed: false).to_a
+         @items = Item.includes(:category).where(closed: false).to_a
          @items.each do |item|
            sse.write({ id: "#{item.id}", time: item.time_left,
                      category: item.category.url

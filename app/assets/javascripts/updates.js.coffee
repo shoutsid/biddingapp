@@ -41,6 +41,9 @@ $ ->
         )
         recent_activity_DOM.attr( 'placeholder', placeholder_string)
 
+    update_timer: (time_left) ->
+
+
   event_source_updates = new EventSource('/events/updates')
   recent_activity_DOM = $('#recent_activity')
   current_user_DOM = $('#user_id')
@@ -65,8 +68,10 @@ $ ->
     category = item.category.url
     current_bid_user = bid.user.username
     current_bid_user_id = bid.user.id
+    time_left = item.time_left
     placeholder_string = 'Bid: ' + bid.amount + ', by ' + bid.user.username + ', on ' + bid.item.name
 
+    # update top bids with this bid
     new_top_bid = current_bid_user + ' bidded ' + highest_bid + ', just now. <hr/>'
     $('#topbids').prepend(new_top_bid)
 
@@ -74,6 +79,10 @@ $ ->
     current_bid_DOM = $('#current_bid_amount_' + item_id)
     current_bid_user_DOM = $('#current_bid_user_' + item_id)
     starting_price_DOM = parseFloat($('#starting_price').html())
+    time_left_DOM = $('#time_left_' + item_id)
+
+    timer.stop_timer(item_id)
+    timer.start_timer(time_left_DOM, time_left, item_id)
 
     action.update_bid_user(current_bid_user_DOM, current_bid_user)
     action.disable_form(current_user_DOM, current_bid_user_id, input_bid_DOM)

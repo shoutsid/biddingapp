@@ -1,13 +1,14 @@
-timer =
-  start_timer: (time_left_DOM, time) ->
+window.timer =
+  start_timer: (time_left_DOM, time, item) ->
     seconds_left = String(time).substr((time.length - 2), 2)
     minutes_left = String(time).substr((time.length - 5), 2)
     hours_left = String(time).substr((time.length - 8), 2)
+    countdown = 'countdown_' + item
 
-    countdown = setInterval (->
+    window[countdown] = setInterval (->
       timeleft = hours_left + ':' + minutes_left + ':' + seconds_left
-      if hours_left <= 0 && minutes_left <= 0 && seconds_left <= 0
-        clearInterval(countdown)
+      if hours_left <= '00' && minutes_left <= '00' && seconds_left <= 0
+        timer.stop_timer
       if minutes_left <= 0 && seconds_left <= 0
         hours_left = hours_left - 1
       if seconds_left <= 0
@@ -17,8 +18,9 @@ timer =
       time_left_DOM.append(String(time).substr(0, (time.length - 8)) + timeleft)
       seconds_left = seconds_left - 1
     ), 1000
-  stop_timer: ->
-    clearInterval(countdown)
+  stop_timer: (item) ->
+    countdown = 'countdown_' + item
+    clearInterval(window[countdown])
 
 expired =
   disable: (time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM, time) ->
@@ -50,7 +52,7 @@ $ ->
     item_DOM = $('#item' + item)
 
     if time == '00:00:00'
-      timer.stop_timer
+      timer.stop_timer(item)
       expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM)
 
-    timer.start_timer(time_left_DOM, time)
+    timer.start_timer(time_left_DOM, time, item)
