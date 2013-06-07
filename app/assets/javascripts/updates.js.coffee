@@ -1,6 +1,21 @@
 $ ->
   event_source_updates = new EventSource('/events/updates')
   url = window.location.href
+
+  recent_activity_DOM = $('#recent_activity')
+  current_user_DOM = $('#user_id')
+  balance_DOM = $('#user_balance')
+  balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
+  item_bid_DOM = $('#item_bid')
+
+  # On form submittion, check if user has enough balance 
+  $('[id^=new_bid_]').each (index) ->
+    form = this
+    $(form).submit ->
+      if parseFloat($('#input_bid_amount', form).val()) > parseFloat(balance_placeholder_DOM)
+        balance_DOM.animate( { backgroundColor: '#CC3333' } )
+        $('#unable_to_bid').modal('show')
+
   event_source_updates.addEventListener ('updates.new_bid'), (event) ->
 
     bid = $.parseJSON(event.data)
@@ -12,11 +27,6 @@ $ ->
     current_bid_user = bid.user.username
     current_bid_user_id = bid.user.id
     placeholder_string = 'Bid: ' + bid.amount + ', by ' + bid.user.username + ', on ' + bid.item.name
-    recent_activity_DOM = $('#recent_activity')
-    current_user_DOM = $('#user_id')
-    balance_DOM = $('#user_balance')
-    balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
-    item_bid_DOM = $('#item_bid')
 
     all =
       bid_actions: (current_user_DOM, balance_DOM, balance_placeholder_DOM, item_bid_DOM,input_bid_DOM, current_bid_DOM, current_bid_user_DOM, time_DOM, starting_price_DOM) ->
@@ -42,14 +52,6 @@ $ ->
           input_bid_DOM.attr( 'placeholder', (parseFloat(highest_bid) + 1))
           input_bid_DOM.attr( 'min', (parseFloat(highest_bid) + 1))
           input_bid_DOM.val(parseFloat(highest_bid) + 1)
-
-    # On form submittion, check if user has enough balance 
-    $('[id^=new_bid_]').each (index) ->
-      form = this
-      $(form).submit ->
-        if $('#input_bid_amount', form).val() > parseFloat(balance_placeholder_DOM)
-          balance_DOM.animate( { backgroundColor: '#CC3333' } )
-          $('#unable_to_bid').modal('show')
 
     new_top_bid = current_bid_user + ' bidded ' + highest_bid + ', just now. <hr/>'
     $('#topbids').prepend(new_top_bid)
