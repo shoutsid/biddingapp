@@ -44,37 +44,13 @@ $ ->
     item = $.parseJSON(event.data).id
     time = $.parseJSON(event.data).time
 
-    if url.search(category) > 0 && url.search('items/' + item) < 0
-      time_left_DOM = $('#time_left_' + item)
-      item_sold_DOM = $('#item_sold_' + item)
-      item_bid_DOM = $('#item_bid_' + item)
-      item_DOM = $('#item' + item)
+    time_left_DOM = $('#time_left_' + item)
+    item_sold_DOM = $('#item_sold_' + item)
+    item_bid_DOM = $('#item_bid_' + item)
+    item_DOM = $('#item' + item)
 
-      if time == '00:00:00'
-        timer.stop_timer
-        expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM)
+    if time == '00:00:00'
+      timer.stop_timer
+      expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM)
 
-      timer.start_timer(time_left_DOM, time)
-
-    else if url.search('items/' + item) > 0
-      time_left_DOM = $('#time')
-      item_sold_DOM = $('#item_sold')
-      item_bid_DOM = $('#item_bid')
-      item_DOM = $('#item')
-
-      if time == '00:00:00'
-        timer.stop_timer
-        expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM, time)
-
-      timer.start_timer(time_left_DOM, time)
-    else
-      time_left_DOM = $('#time_left_' + item)
-      item_sold_DOM = $('#item_sold_' + item)
-      item_bid_DOM = $('#item_bid_' + item)
-      item_DOM = $('#item' + item)
-
-      if time == '00:00:00'
-        timer.stop_timer
-        expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM)
-
-      timer.start_timer(time_left_DOM, time)
+    timer.start_timer(time_left_DOM, time)

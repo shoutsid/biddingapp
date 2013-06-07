@@ -2,8 +2,8 @@
   <div class="row-fluid">
     <div class="span9 well well-small" style="border: 1px solid;">
       <div class="span2 text-center">
-        <span id="starting_price" style="display: none;"><%= @item.starting_price %></span>
-        <div id="user_stats"
+        <span id="starting_price_<%= @item.id %>" style="display: none;"><%= @item.starting_price %></span>
+        <div id="user_stats_<%= @item.id %>"
           data-title="<%= @item.user.username.titleize %>'s Stats"
           data-content="Items Posted: <%= @item.user.item_count %><br/>
           Sold: <%= @item.user.sold_item_count %><br/>
@@ -15,12 +15,13 @@
             <%= image_tag(@item.image.largethumbnail, class: 'thumbnail', style: 'margin-bottom: 10px;') if @item.image? %>
           <% end %>
         </div>
-        Current Bid: <span id="current_bid_amount" style="font-size: 130%"><%= @item.highest_bid.amount if @item.highest_bid %></span><br/>
-        <span id="current_bid_user" style="font-size: 130%;">bid by: <%= @item.highest_bid.user.username if @item.highest_bid %></span><br/>
+        Current Bid: <span id="current_bid_amount_<%= @item.id %>" style="font-size: 130%"><%= @item.highest_bid.amount if @item.highest_bid %></span><br/>
+        <span id="current_bid_user_<%= @item.id %>" style="font-size: 130%;">bid by: <%= @item.highest_bid.user.username if @item.highest_bid %></span><br/>
 
-        <div id="time" style="margin: 10px; font-size: 150%;"></div>
+        <div id="time_left_<%= @item.id %>" style="margin: 10px; font-size: 150%;"></div>
+
         <% if user_signed_in? %>
-          <div id="item_bid">
+          <div id="item_bid_<%= @item.id %>">
             <%= render '/bids/form' %>
           </div>
         <% else %>

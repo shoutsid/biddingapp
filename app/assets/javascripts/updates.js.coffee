@@ -57,37 +57,23 @@ $ ->
     $('#topbids').prepend(new_top_bid)
     new_top_bid = ''
    
-    if url.search(category) > 0 && url.search('items/' + item) < 0
-      input_bid_DOM = $('#item_bid_' + item_id + ' #input_bid_amount')
-      current_bid_DOM = $('#current_bid_amount_' + item_id)
-      current_bid_user_DOM = $('#current_bid_user_' + item_id)
-      starting_price_DOM = parseFloat($('#starting_price').html())
+    input_bid_DOM = $('#item_bid_' + item_id + ' #input_bid_amount')
+    current_bid_DOM = $('#current_bid_amount_' + item_id)
+    current_bid_user_DOM = $('#current_bid_user_' + item_id)
+    starting_price_DOM = parseFloat($('#starting_price').html())
 
-      all.bid_actions(current_user_DOM, balance_DOM, balance_placeholder_DOM, item_bid_DOM,
-        input_bid_DOM, current_bid_DOM, current_bid_user_DOM, starting_price_DOM)
-
-    if url.search('items/' + item_id) > 0
-      input_bid_DOM = $('#input_bid_amount')
-      current_bid_DOM = $('#current_bid_amount')
-      current_bid_user_DOM = $('#current_bid_user')
-      starting_price_DOM = parseFloat($('#starting_price').html())
-
-      all.bid_actions(current_user_DOM, balance_DOM, balance_placeholder_DOM, item_bid_DOM,
-        input_bid_DOM, current_bid_DOM, current_bid_user_DOM, starting_price_DOM)
+    all.bid_actions(current_user_DOM, balance_DOM, balance_placeholder_DOM, item_bid_DOM, input_bid_DOM, current_bid_DOM, current_bid_user_DOM, starting_price_DOM)
 
     if recent_activity_DOM.attr('placeholder') != placeholder_string
       recent_activity_DOM.effect( "explode", { times: 1 }, "slow", ->
-      setTimeout (->
-        recent_activity_DOM.removeAttr("style").hide().fadeIn()
+        setTimeout (->
+          recent_activity_DOM.removeAttr("style").hide().fadeIn()
         ), 500
       )
       recent_activity_DOM.attr( 'placeholder', placeholder_string)
 
 
   event_source_updates.addEventListener ('updates.balance'), (event) ->
-    current_user_DOM = $('#user_id')
-    balance_DOM = $('#user_balance')
-    balance_placeholder_DOM = balance_DOM.attr( 'placeholder' )
     user = $.parseJSON(event.data)
     user_id = user.id
     balance = user.balance
