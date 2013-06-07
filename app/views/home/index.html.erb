@@ -9,7 +9,7 @@
         <div class="row-fluid">
           <p><h4 class="muted"><%= link_to category.name, category_path(category) %></h4></p>
           <div class="span12 well well-small text-center" style="border: 1px solid;">
-            <% category.items.where(closed: false).limit(4).each do |item| %>
+            <% category.items.each do |item| %>
               <div class="span3">
                 <div class="container-fluid">
                   <div class="row-fluid">

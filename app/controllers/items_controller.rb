@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update, :destroy]
   before_action :set_category
   before_action :set_user
   before_action :authenticate_user!, except: [:index, :show]
@@ -11,8 +11,9 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.includes(:user, :category, bids: [ :user ]).find(params[:id])
     @bid = Bid.new
-    @bids = Bid.where(item_id: @item).order(created_at: :desc).limit(6)
+    @bids = @item.bids.order(created_at: :desc).limit(6)
   end
 
   def new
