@@ -2,6 +2,7 @@
   <div class="row-fluid">
     <div class="span9 well well-small" style="border: 1px solid;">
       <div class="span2 text-center">
+        <span id="current_bid_user_id_<%= @item.id %>" style="display: none"><%= @item.highest_bid.user.id %></span>
         <span id="starting_price_<%= @item.id %>" style="display: none;"><%= @item.starting_price %></span>
         <div id="user_stats_<%= @item.id %>"
           data-title="<%= @item.user.username.titleize %>'s Stats"
