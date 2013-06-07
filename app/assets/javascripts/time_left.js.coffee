@@ -55,4 +55,5 @@ $ ->
       timer.stop_timer(item)
       expired.disable(time_left_DOM, item_sold_DOM, item_bid_DOM, item_DOM)
 
+    timer.stop_timer(item)
     timer.start_timer(time_left_DOM, time, item)
