@@ -23,19 +23,17 @@ class EventsController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
     sse = SSE::Client.new(response.stream)
 
-   begin
-     Item.uncached do
-       loop do
-         @items = Item.includes(:category).where(closed: false).to_a
-         @items.each do |item|
-           sse.write({ id: "#{item.id}", time: item.time_left,
-                     category: item.category.url
-           }, event: "time_left")
-         end
-         sleep 60
-       end
-     end
-   end
+    begin
+      loop do
+        Item.uncached do
+          @items = Item.includes(:category).where(closed: false).to_a
+          @items.each do |item|
+            sse.write({ id: "#{item.id}", time: item.time_left, category: item.category.url }, event: "time_left")
+          end
+        end
+        sleep 60
+      end
+    end
 
   rescue IOError
     logger.info "Stream closed"
