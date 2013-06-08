@@ -16,6 +16,7 @@ class EventsController < ApplicationController
   rescue IOError
     logger.info "Stream closed"
   ensure
+    redis.quit
     sse.close
   end
 
