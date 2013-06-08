@@ -24,7 +24,6 @@ class EventsController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
     sse = SSE::Client.new(response.stream)
 
-    begin
       loop do
         Item.uncached do
           @items = Item.includes(:category).where(closed: false).to_a
@@ -34,7 +33,6 @@ class EventsController < ApplicationController
         end
         sleep 60
       end
-    end
 
   rescue IOError
     logger.info "Stream closed"

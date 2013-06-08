@@ -7,8 +7,6 @@ window.timer =
 
     window[countdown] = setInterval (->
       timeleft = hours_left + ':' + minutes_left + ':' + seconds_left
-      if hours_left <= '00' && minutes_left <= '00' && seconds_left <= 0
-        timer.stop_timer(item)
       if minutes_left <= 0 && seconds_left <= 0
         hours_left = hours_left - 1
       if seconds_left <= 0
