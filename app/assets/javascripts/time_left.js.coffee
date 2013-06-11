@@ -7,9 +7,11 @@ window.timer =
 
     window[countdown] = setInterval (->
       timeleft = hours_left + ':' + minutes_left + ':' + seconds_left
-      if minutes_left <= 0 && seconds_left <= 0
+      if hours_left <= '00' || 0 && minutes_left <= '00' || 0 && seconds_left <= '00' || 0
+        timer.stop_timer(item)
+      if minutes_left <= '00' || 0 && seconds_left <= '00' || 0
         hours_left = hours_left - 1
-      if seconds_left <= 0
+      if seconds_left <= '00' || 0
         minutes_left = minutes_left - 1
         seconds_left = 60
       time_left_DOM.empty()
