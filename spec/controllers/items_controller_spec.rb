@@ -4,7 +4,7 @@ describe ItemsController do
 
   context 'User signed in' do
     before(:each) {
-      @item = FactoryGirl.create(:item)
+      @item = FactoryBot.create(:item)
       @user = @item.user
       sign_in @user
     }
@@ -196,7 +196,7 @@ describe ItemsController do
 
   context 'Without user signed in' do
     before(:each) {
-      @item = FactoryGirl.create(:item)
+      @item = FactoryBot.create(:item)
     }
 
     describe 'GET #index' do
