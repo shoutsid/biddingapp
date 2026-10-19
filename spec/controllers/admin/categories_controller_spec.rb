@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Admin::CategoriesController do
-  before(:each) { @category = FactoryGirl.create(:category)
-    @admin = FactoryGirl.create(:admin)
+  before(:each) { @category = FactoryBot.create(:category)
+    @admin = FactoryBot.create(:admin)
     sign_in :admin, @admin
   }
 
