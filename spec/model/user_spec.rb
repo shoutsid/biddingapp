@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe User do
+  subject { FactoryGirl.build(:user) }
   it { should have_many(:bids) }
   it { should have_many(:items) }
 
@@ -12,7 +13,7 @@ describe User do
   it { should validate_presence_of(:country) }
   it { should validate_presence_of(:password) }
 
-  it { should validate_uniqueness_of(:email) }
+  it { should validate_uniqueness_of(:email).case_insensitive }
   it { should validate_uniqueness_of(:username) }
 
   describe '#hard_update_balance' do
