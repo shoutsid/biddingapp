@@ -1,5 +1,5 @@
-class Bid < ActiveRecord::Base
-  belongs_to :user
+class Bid < ApplicationRecord
+  belongs_to :user, optional: true
   belongs_to :item, counter_cache: true
   validates_presence_of :item, :amount
   validates_numericality_of :amount, on: :create,
