@@ -18,30 +18,30 @@ class ItemsControllerTest < ActionController::TestCase
 
   test "should create item" do
     assert_difference('Item.count') do
-      post :create, item: {  }
+      post :create, params: { item: {  } }
     end
 
     assert_redirected_to item_path(assigns(:item))
   end
 
   test "should show item" do
-    get :show, id: @item
+    get :show, params: { id: @item }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @item
+    get :edit, params: { id: @item }
     assert_response :success
   end
 
   test "should update item" do
-    patch :update, id: @item, item: {  }
+    patch :update, params: { id: @item, item: {  } }
     assert_redirected_to item_path(assigns(:item))
   end
 
   test "should destroy item" do
     assert_difference('Item.count', -1) do
-      delete :destroy, id: @item
+      delete :destroy, params: { id: @item }
     end
 
     assert_redirected_to items_path
