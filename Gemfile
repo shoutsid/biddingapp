@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '6.1.0'
+gem 'rails', '7.0.0'
 gem "pg", "~> 1.5.0"
 
 gem "json", "~> 1.8"
@@ -43,7 +43,7 @@ end
 group :test do
   gem "rspec-rails", "~> 3.5.0"
   gem 'ruby-prof'
-  gem "shoulda-matchers", "~> 2.7"
+  gem "shoulda-matchers", "~> 4.1"
   gem "database_cleaner", "~> 1.0"
   gem "rails-controller-testing", "~> 1.0.5"
 end
