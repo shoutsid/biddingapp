@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.0'
+gem 'rails', '5.1.0'
 gem "pg", "~> 0.18"
 
 gem "json", "~> 1.8"
@@ -8,7 +8,7 @@ gem "sass-rails", "= 5.0.7"
 gem 'uglifier', '>= 1.3.0'
 gem "coffee-rails", "~> 4.2.2"
 gem "jquery-rails", "~> 4.6.1"
-gem 'jbuilder', '~> 1.0.1'
+gem "jbuilder", "~> 2.6.4"
 
 gem 'bb-ruby'
 gem "simple_form", "~> 3.1"

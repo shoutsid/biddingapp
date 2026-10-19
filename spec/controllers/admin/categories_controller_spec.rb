@@ -7,7 +7,7 @@ describe Admin::CategoriesController do
   }
 
   describe 'GET #edit' do
-    let(:send_request) { get :edit, id: @category }
+    let(:send_request) { get :edit, params: { id: @category } }
 
     it 'responds succesfull'do
       send_request
@@ -21,10 +21,10 @@ describe Admin::CategoriesController do
   end
 
   describe 'POST #create' do
-    let(:send_request) { post :create, category: { name: 'foobar' } }
+    let(:send_request) { post :create, params: { category: { name: 'foobar' } } }
 
     it 'creates a new record' do
-      lambda { post :create, category: { name: 'Techbology' } }.should change(Category, :count).by(1)
+      lambda { post :create, params: { category: { name: 'Techbology' } } }.should change(Category, :count).by(1)
     end
 
     it 'responds as redirect' do
@@ -49,13 +49,13 @@ describe Admin::CategoriesController do
   end
 
   describe 'PATCH/PUT #update' do
-    let(:send_patch_request) { patch :update, id: @category, category: { name: 'Technology' } }
-    let(:send_put_request) { put :update, id: @category, category: { name: 'Technology' } }
+    let(:send_patch_request) { patch :update, params: { id: @category, category: { name: 'Technology' } } }
+    let(:send_put_request) { put :update, params: { id: @category, category: { name: 'Technology' } } }
 
     context 'HTTP PATCH method' do
       it 'updates the @category' do
-        patch :update, id: @category, category: { name: 'changed' }
-        Category.find(@category).name.should eql('changed')
+        patch :update, params: { id: @category, category: { name: 'changed' } }
+        Category.find(@category.id).name.should eql('changed')
       end
 
       it 'responds as redirect' do
@@ -81,8 +81,8 @@ describe Admin::CategoriesController do
 
     context 'HTTP PUT method' do
       it 'updates the @category' do
-        put :update, id: @category, category: { name: 'changed' }
-        Category.find(@category).name.should eql('changed')
+        put :update, params: { id: @category, category: { name: 'changed' } }
+        Category.find(@category.id).name.should eql('changed')
       end
 
       it 'responds as redirect' do
@@ -108,10 +108,10 @@ describe Admin::CategoriesController do
   end
 
   describe 'DELETE #destroy' do
-    let(:send_request) { delete :destroy, id: @category }
+    let(:send_request) { delete :destroy, params: { id: @category } }
 
     it 'should delete the record' do
-      lambda{ delete :destroy, id: @category }.should change(Category, :count).by(-1)
+      lambda{ delete :destroy, params: { id: @category } }.should change(Category, :count).by(-1)
     end
 
     it 'respond as redirect' do

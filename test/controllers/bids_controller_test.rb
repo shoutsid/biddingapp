@@ -18,30 +18,30 @@ class BidsControllerTest < ActionController::TestCase
 
   test "should create bid" do
     assert_difference('Bid.count') do
-      post :create, bid: {  }
+      post :create, params: { bid: {  } }
     end
 
     assert_redirected_to bid_path(assigns(:bid))
   end
 
   test "should show bid" do
-    get :show, id: @bid
+    get :show, params: { id: @bid }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @bid
+    get :edit, params: { id: @bid }
     assert_response :success
   end
 
   test "should update bid" do
-    patch :update, id: @bid, bid: {  }
+    patch :update, params: { id: @bid, bid: {  } }
     assert_redirected_to bid_path(assigns(:bid))
   end
 
   test "should destroy bid" do
     assert_difference('Bid.count', -1) do
-      delete :destroy, id: @bid
+      delete :destroy, params: { id: @bid }
     end
 
     assert_redirected_to bids_path

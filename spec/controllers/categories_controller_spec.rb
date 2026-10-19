@@ -4,7 +4,7 @@ describe CategoriesController do
   before(:each) { @category = FactoryGirl.create(:category) }
 
   describe 'GET #show' do
-    let(:send_request) { get :show, id: @category }
+    let(:send_request) { get :show, params: { id: @category } }
 
     it 'responds succesfull'do
       send_request
