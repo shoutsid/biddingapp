@@ -1,7 +1,7 @@
 require 'time_diff'
 class Item < ApplicationRecord
   belongs_to :category, optional: true
-  belongs_to :user
+  belongs_to :user, required: true
   has_many :bids, dependent: :destroy
 
   validates_presence_of :name, :description, :starting_price, :closing_time, :min_accept_bid, :user

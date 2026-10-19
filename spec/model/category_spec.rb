@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Category do
+  subject { FactoryGirl.build(:category) }
   it { should have_many(:items) }
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
