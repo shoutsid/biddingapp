@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0'
+gem 'rails', '4.2.0'
 gem 'pg'
 
 gem 'json', '~> 1.7.7'
@@ -17,7 +17,7 @@ gem 'puma'
 gem 'figaro'
 gem 'resque', :require=> 'resque/server'
 gem "cancancan", "~> 1.9"
-gem "devise", "~> 3.0.0"
+gem "devise", "~> 3.2"
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem "stringex", "~> 2.0"
 gem 'time_diff'
@@ -52,3 +52,4 @@ gem 'rvm-capistrano', require: false
 gem "loofah", "~> 2.0.3"
 gem "execjs", "~> 2.8.0"
 gem "mimemagic", "= 0.3.9"
+gem "responders", "~> 2.0"
