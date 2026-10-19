@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  subject { FactoryGirl.build(:user) }
+  subject { FactoryBot.build(:user) }
   it { should have_many(:bids) }
   it { should have_many(:items) }
 
@@ -19,14 +19,14 @@ describe User do
   describe '#hard_update_balance' do
     context 'when given amount to reset balance too' do
       it 'resets balance to amount supplied' do
-        user = FactoryGirl.create(:user)
+        user = FactoryBot.create(:user)
         user.hard_reset_balance(20)
         User.find(user.id).balance.should eql(20.to_d)
       end
 
       context 'when no amount supplied' do
         it 'resets balance to 0' do
-          user = FactoryGirl.create(:user, balance: 20)
+          user = FactoryBot.create(:user, balance: 20)
           user.hard_reset_balance
           User.find(user.id).balance.should eql(0.to_d)
         end
@@ -37,7 +37,7 @@ describe User do
   describe '#update_user_balance_by' do
     context 'given positive amount' do
       it 'increases balance by given amount' do
-        user = FactoryGirl.create(:user, balance: 20)
+        user = FactoryBot.create(:user, balance: 20)
         user.update_user_balance_by(10)
         User.find(user.id).balance.should eql(30.to_d)
       end
@@ -45,7 +45,7 @@ describe User do
 
     context 'given negitive amount' do
       it 'decreases balance by given amount' do
-        user = FactoryGirl.create(:user, balance: 20)
+        user = FactoryBot.create(:user, balance: 20)
         user.update_user_balance_by(-10)
         User.find(user.id).balance.should eql(10.to_d)
       end
@@ -55,14 +55,14 @@ describe User do
   describe '#has_enough_balance_to_bid?' do
     context 'user has enough balance' do
       it 'returns true' do
-        user = FactoryGirl.create(:user, balance: 9000)
+        user = FactoryBot.create(:user, balance: 9000)
         user.has_enough_balance_to_bid?(200).should eql(true)
       end
     end
 
     context 'user doesnt have enough balance' do
       it 'returns false' do
-        user = FactoryGirl.create(:user, balance: 20)
+        user = FactoryBot.create(:user, balance: 20)
         user.has_enough_balance_to_bid?(200).should eql(false)
       end
     end
@@ -70,8 +70,8 @@ describe User do
 
   describe '#not_sold_item_count' do
     it 'returns correct count' do
-      user = FactoryGirl.create(:user)
-      item = FactoryGirl.create(:item, user: user)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item, user: user)
       item.closed = true
       item.sold = false
       item.save
@@ -81,8 +81,8 @@ describe User do
 
   describe '#sold_item_count' do
     it 'returns correct count' do
-      user = FactoryGirl.create(:user)
-      item = FactoryGirl.create(:item, user: user)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item, user: user)
       item.sold = true
       item.closed = true
       item.save
@@ -92,8 +92,8 @@ describe User do
 
   describe '#closed_item_count' do
     it 'returns correct count' do
-      user = FactoryGirl.create(:user)
-      item = FactoryGirl.create(:item, user: user)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item, user: user)
       item.closed = true
       item.save
       User.find(user.id).closed_item_count.should eql(1)
@@ -102,8 +102,8 @@ describe User do
 
   describe '#not_closed_item_count' do
     it 'returns correct count' do
-      user = FactoryGirl.create(:user)
-      item = FactoryGirl.create(:item, user: user)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item, user: user)
       User.find(user.id).not_closed_item_count.should eql(1)
     end
   end
