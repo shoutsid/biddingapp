@@ -266,7 +266,7 @@ describe ItemsController do
       it 'does not create a record' do
         @category = @item.category
         lambda{ post :create, item: { name: 'foo', description: 'bar', category_id: @category, starting_price: 500, closing_time: Time.now + 1.day, min_accept_bid: 600 }, category_id: @category
-        }.should_not change(Item, :count).by(1)
+        }.should_not change(Item, :count)
       end
 
       it 'responds as a redirect' do
@@ -366,7 +366,7 @@ describe ItemsController do
 
       it 'does not delete the record' do
         @category = @item.category
-        lambda{ delete :destroy, id: @item, category_id: @category }.should_not change(Item, :count).by(-1)
+        lambda{ delete :destroy, id: @item, category_id: @category }.should_not change(Item, :count)
       end
 
       it 'responds as redirect' do
