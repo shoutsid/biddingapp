@@ -8,7 +8,7 @@ describe CategoriesController do
 
     it 'responds succesfull'do
       send_request
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'responds with 200 status' do
