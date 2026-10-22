@@ -1,4 +1,4 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_bid_path(@bid) %> |
-<%= link_to 'Back', bids_path %>
+<%= link_to 'Edit', edit_category_item_bid_path(@bid.item.category, @bid.item, @bid) %> |
+<%= link_to 'Back', category_item_bids_path(@bid.item.category, @bid.item) %>
