@@ -7,24 +7,22 @@ gem 'json', '~> 1.7.7'
 gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'jbuilder', '~> 1.0.1'
-gem 'turbo-sprockets-rails3', group: :assets
 
 gem 'bb-ruby'
-gem 'simple_form', github: 'plataformatec/simple_form'
+gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'foreman'
 gem 'puma'
 gem 'figaro'
 gem 'resque', :require=> 'resque/server'
-gem 'cancan', github: 'moriz/cancan'
-gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
+gem "cancancan", "~> 1.9"
+gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'bootstrap-sass', '~> 2.3.1.0'
-gem 'stringex', github: 'rsl/stringex'
+gem "stringex", "~> 2.0"
 gem 'time_diff'
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-gem 'rmagick', github: 'rmagick/rmagick'
+gem "carrierwave", "~> 0.9.0"
+gem "rmagick", "~> 2.13"
 
 group :test, :development do
   gem 'guard'
@@ -46,8 +44,11 @@ group :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'ruby-prof'
   gem 'shoulda-matchers'
-  gem 'database_cleaner', github: 'bmabey/database_cleaner'
+  gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 end
 
-gem 'capistrano'
-gem 'rvm-capistrano'
+gem 'capistrano', require: false
+gem 'rvm-capistrano', require: false
+gem "loofah", "~> 2.0.3"
+gem "execjs", "~> 2.8.0"
+gem "mimemagic", "= 0.3.9"
