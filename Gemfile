@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.1.0'
 gem 'pg'
 
 gem 'json', '~> 1.7.7'
@@ -11,13 +11,13 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.0.1'
 
 gem 'bb-ruby'
-gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
+gem "simple_form", "~> 3.1"
 gem 'foreman'
 gem 'puma'
 gem 'figaro'
 gem 'resque', :require=> 'resque/server'
 gem "cancancan", "~> 1.9"
-gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'rails4'
+gem "devise", "~> 3.0.0"
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem "stringex", "~> 2.0"
 gem 'time_diff'
@@ -41,10 +41,10 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 2.0'
+  gem "rspec-rails", "~> 2.14.0"
   gem 'ruby-prof'
   gem 'shoulda-matchers'
-  gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
+  gem "database_cleaner", "~> 1.0"
 end
 
 gem 'capistrano', require: false
