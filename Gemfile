@@ -44,7 +44,7 @@ group :test do
   gem "rspec-rails", "~> 3.5.0"
   gem "rails-controller-testing", "~> 1.0"
   gem 'ruby-prof'
-  gem "shoulda-matchers", "~> 2.7"
+  gem "shoulda-matchers", "~> 4.1"
   gem "database_cleaner", "~> 1.0"
 end
 
