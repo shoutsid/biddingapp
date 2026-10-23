@@ -3,7 +3,12 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  ActiveRecord::Migration.check_all_pending!
+  begin
+    ActiveRecord::Migration.check_all_pending!
+  rescue ActiveRecord::NoDatabaseError, PG::Error
+    ActiveRecord::Tasks::DatabaseTasks.prepare_all
+    ActiveRecord::Migration.check_all_pending!
+  end
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   #

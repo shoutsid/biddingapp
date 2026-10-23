@@ -17,7 +17,14 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.check_all_pending! if defined?(ActiveRecord::Migration)
+if defined?(ActiveRecord::Migration)
+  begin
+    ActiveRecord::Migration.check_all_pending!
+  rescue ActiveRecord::NoDatabaseError, PG::Error
+    ActiveRecord::Tasks::DatabaseTasks.prepare_all
+    ActiveRecord::Migration.check_all_pending!
+  end
+end
 
 RSpec.configure do |config|
   config.define_derived_metadata(file_path: %r{/spec/model/}) { |metadata| metadata[:type] = :model }
