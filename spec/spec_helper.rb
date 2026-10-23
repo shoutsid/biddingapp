@@ -9,7 +9,7 @@ Shoulda::Matchers.configure do |config|
   end
 end
 #require 'rspec/autorun'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -30,7 +30,7 @@ RSpec.configure do |config|
   config.define_derived_metadata(file_path: %r{/spec/model/}) { |metadata| metadata[:type] = :model }
   config.infer_spec_type_from_file_location!
   # ## Factory Girl
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # ## Mock Framework
   #

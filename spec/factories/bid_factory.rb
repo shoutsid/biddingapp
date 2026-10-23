@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :bid do
-    amount 1000
+    amount { 1000 }
     item
     user
   end
