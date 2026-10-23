@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :admin do
     email { generate(:email) }
-    password 'password'
+    password { 'password' }
   end
 end
