@@ -301,8 +301,8 @@ GEM
       sprockets-rails
       tilt
     shellany (0.0.1)
-    shoulda-matchers (2.8.0)
-      activesupport (>= 3.0.0)
+    shoulda-matchers (4.5.1)
+      activesupport (>= 4.2.0)
     simple_form (4.1.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -389,7 +389,7 @@ DEPENDENCIES
   ruby-prof
   rvm-capistrano
   sass-rails (~> 6.0)
-  shoulda-matchers (~> 2.7)
+  shoulda-matchers (~> 4.1)
   simple_form (~> 4.0)
   sprockets (~> 3.7)
   sprockets-rails (~> 3.4.0)
@@ -401,4 +401,4 @@ DEPENDENCIES
   zeus-parallel_tests
 
 BUNDLED WITH
-   1.17.3
+   2.4.22
