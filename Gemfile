@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.1.6'
+gem 'rails', '7.2.4'
 gem "pg", "~> 1.5.0"
 
 gem "json", "~> 2.6"
@@ -27,7 +27,7 @@ gem "rmagick", "~> 4.2"
 group :test, :development do
   gem 'guard'
   gem 'rb-inotify', '~> 0.9'
-  gem 'factory_girl_rails', '~> 4.0'
+  gem "factory_bot_rails", "~> 4.9"
 end
 
 group :development do
@@ -41,7 +41,7 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails", "~> 3.5.0"
+  gem "rspec-rails", "~> 6.1"
   gem 'ruby-prof'
   gem "shoulda-matchers", "~> 4.1"
   gem "database_cleaner", "~> 2.1"
