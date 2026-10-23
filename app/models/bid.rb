@@ -1,9 +1,9 @@
 class Bid < ApplicationRecord
   belongs_to :user, optional: true
-  belongs_to :item, counter_cache: true
+  belongs_to :item, counter_cache: true, required: true
   validates_presence_of :item, :amount
   validates_numericality_of :amount, on: :create,
-                                    greater_than_or_equal_to: Proc.new { |bid| bid.item.min_bid_amount.to_f }
+                                    greater_than_or_equal_to: Proc.new { |bid| bid.item ? bid.item.min_bid_amount.to_f : 0 }
   after_create :bump_item_time_left
   after_create :deduct_from_balance
   after_create :reimberse_previous_bidder
