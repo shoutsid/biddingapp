@@ -15,6 +15,21 @@ require 'factory_girl_rails'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+# Creates the test database and loads its schema when they are missing,
+# so the suite can bootstrap itself without out-of-band provisioning.
+if defined?(ActiveRecord::Migration)
+  db_config = ActiveRecord::Base.configurations.configs_for(env_name: Rails.env).first
+  begin
+    ActiveRecord::Base.establish_connection(db_config)
+    ActiveRecord::Base.connection
+  rescue
+    ActiveRecord::Tasks::DatabaseTasks.create(db_config)
+    ActiveRecord::Base.establish_connection(db_config)
+    ActiveRecord::Base.connection
+    load File.join(Rails.root, "db/schema.rb")
+  end
+end
+
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_all_pending! if defined?(ActiveRecord::Migration)
