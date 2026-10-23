@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '8.0.5.1'
+gem 'rails', '8.1.4'
 gem "pg", "~> 1.5.0"
 
 gem "json", "~> 2.0"
