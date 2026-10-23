@@ -26,7 +26,7 @@ describe Item do
     context 'after create' do
       it 'sets closed to false' do
         item = FactoryGirl.create(:item)
-        Item.find(item).closed.should eql(false)
+        Item.find(item.id).closed.should eql(false)
       end
     end
   end
@@ -35,7 +35,7 @@ describe Item do
     it 'returns highest bid' do
       item = FactoryGirl.create(:item)
       bid = FactoryGirl.create(:bid, item: item)
-      Item.find(item).highest_bid.should eql(bid)
+      Item.find(item.id).highest_bid.should eql(bid)
     end
   end
 
@@ -80,7 +80,7 @@ describe Item do
     it 'increased time left by 10 seconds' do
       item = FactoryGirl.create(:item, closing_time: Time.now + 1.hour)
       item.increase_time_left
-      Item.find(item).time_left.should eql('01:00:10')
+      Item.find(item.id).time_left.should eql('01:00:10')
     end
   end
 
@@ -101,7 +101,7 @@ describe Item do
       it 'should return true' do
         item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
         bid = FactoryGirl.create(:bid, item: item, amount: 1000)
-        Item.find(item).accept_highest_bid?.should eql(true)
+        Item.find(item.id).accept_highest_bid?.should eql(true)
       end
     end
 
@@ -109,7 +109,7 @@ describe Item do
       it 'should return false' do
         item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
         bid = FactoryGirl.create(:bid, item: item, amount: 20)
-        Item.find(item).accept_highest_bid?.should eql(false)
+        Item.find(item.id).accept_highest_bid?.should eql(false)
       end
     end
   end
@@ -118,12 +118,12 @@ describe Item do
     context 'no current bid' do
       it 'returns as big decimal' do
         item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
-        Item.find(item).min_bid_amount.should be_kind_of(BigDecimal)
+        Item.find(item.id).min_bid_amount.should be_kind_of(BigDecimal)
       end
 
       it 'returns item starting price + 1' do
         item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
-        Item.find(item).min_bid_amount.should eql(11.to_d)
+        Item.find(item.id).min_bid_amount.should eql(11.to_d)
       end
     end
 
@@ -131,13 +131,13 @@ describe Item do
       it ' returns as a big decimal' do
         item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
         bid = FactoryGirl.create(:bid, item: item)
-        Item.find(item).min_bid_amount.should be_kind_of(BigDecimal)
+        Item.find(item.id).min_bid_amount.should be_kind_of(BigDecimal)
       end
 
       it 'returns highest bid + 1' do
         item = FactoryGirl.create(:item, starting_price: 10, min_accept_bid: 200)
         bid = FactoryGirl.create(:bid, item: item, amount: 200)
-        Item.find(item).min_bid_amount.should eql(201.to_d)
+        Item.find(item.id).min_bid_amount.should eql(201.to_d)
       end
     end
   end
@@ -150,8 +150,8 @@ describe Item do
           bid = FactoryGirl.create(:bid, item: item)
           item.update(closing_time: Time.now - 10.minutes)
 
-          Item.find(item).close_auction
-          Item.find(item).closed.should eql(true)
+          Item.find(item.id).close_auction
+          Item.find(item.id).closed.should eql(true)
         end
 
         it 'updates users balance with winning bid amount' do
@@ -161,8 +161,8 @@ describe Item do
           bid = FactoryGirl.create(:bid, item: item, amount: 200, user: bid_user)
           item.update(closing_time: Time.now - 10.minutes)
 
-          Item.find(item).close_auction
-          User.find(item_user).balance.should eql(300.to_d)
+          Item.find(item.id).close_auction
+          User.find(item_user.id).balance.should eql(300.to_d)
         end
       end
 
@@ -173,8 +173,8 @@ describe Item do
             item = FactoryGirl.create(:item, min_accept_bid: 100000, closing_time: Time.now + 2.minutes, user: item_user)
             item.update(closing_time: Time.now - 10.minutes)
 
-            Item.find(item).close_auction
-            Item.find(item).closed.should eql(true)
+            Item.find(item.id).close_auction
+            Item.find(item.id).closed.should eql(true)
           end
         end
 
@@ -186,8 +186,8 @@ describe Item do
             bid = FactoryGirl.create(:bid, item: item, amount: 200, user: bid_user)
             item.update(closing_time: Time.now - 10.minutes)
 
-            Item.find(item).close_auction
-            Item.find(item).closed.should eql(true)
+            Item.find(item.id).close_auction
+            Item.find(item.id).closed.should eql(true)
           end
 
           it 'reimberses highest bidder with bid amount' do
@@ -197,8 +197,8 @@ describe Item do
             bid = FactoryGirl.create(:bid, item: item, amount: 200, user: bid_user)
             item.update(closing_time: Time.now - 10.minutes)
 
-            Item.find(item).close_auction
-            User.find(bid_user).balance.should eql(1000.to_d)
+            Item.find(item.id).close_auction
+            User.find(bid_user.id).balance.should eql(1000.to_d)
           end
         end
       end
@@ -209,7 +209,7 @@ describe Item do
     context 'no highest bid' do
       it 'should return 0' do
         item = FactoryGirl.create(:item, closing_time: Time.now - 2.minutes)
-        Item.find(item).highest_bid_amount.should eql(0)
+        Item.find(item.id).highest_bid_amount.should eql(0)
       end
     end
 
@@ -217,7 +217,7 @@ describe Item do
       it 'returns highest bid amount' do
         item = FactoryGirl.create(:item, closing_time: Time.now + 2.minutes)
         bid = FactoryGirl.create(:bid, item: item, amount: 500)
-        Item.find(item).highest_bid_amount.should eql(500.to_d)
+        Item.find(item.id).highest_bid_amount.should eql(500.to_d)
       end
     end
   end
