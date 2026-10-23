@@ -22,7 +22,7 @@ gem 'bootstrap-sass', '~> 2.3.1.0'
 gem "stringex", "~> 2.0"
 gem 'time_diff'
 gem "carrierwave", "~> 0.9.0"
-gem "rmagick", "~> 2.13"
+gem "rmagick", "~> 4.2"
 
 group :test, :development do
   gem 'guard'
@@ -55,7 +55,7 @@ gem "execjs", "~> 2.8.0"
 gem "mimemagic", "= 0.3.9"
 gem "jquery-ui-rails", "~> 6.0"
 gem "responders", "~> 3.1"
-gem 'bootsnap', "= 1.4.5"
+gem "bootsnap", "~> 1.26"
 
 gem "thor", "~> 1.2.0"
 gem "ffi", "~> 1.16.0"
@@ -68,3 +68,4 @@ gem "rake", ">= 12.2"
 gem "logger", "~> 1.4"
 gem "minitest", "~> 5.25.0"
 gem "connection_pool", "~> 2.5"
+gem "sass", "~> 3.7"
