@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.0.10'
+gem 'rails', '7.1.6'
 gem "pg", "~> 1.5.0"
 
 gem "json", "~> 1.8"
@@ -45,7 +45,7 @@ group :test do
   gem "rails-controller-testing", "~> 1.0"
   gem 'ruby-prof'
   gem "shoulda-matchers", "~> 4.1"
-  gem "database_cleaner", "~> 1.0"
+  gem "database_cleaner", "~> 2.1"
 end
 
 gem 'capistrano', require: false
@@ -63,6 +63,8 @@ gem "sprockets-rails", "~> 3.4.0"
 gem "globalid", "~> 1.1.0"
 gem "sprockets", "~> 3.7"
 gem "zeitwerk", "~> 2.6.0"
-gem "nokogiri", "~> 1.12.0"
+gem "nokogiri", "~> 1.15.7"
 gem "rake", ">= 12.2"
 gem "logger", "~> 1.4"
+gem "minitest", "~> 5.25.0"
+gem "connection_pool", "~> 2.5"
