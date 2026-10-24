@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.1.6'
+gem 'rails', '7.2.4'
 gem "pg", "~> 1.5.0"
 
-gem "json", "~> 1.8"
+gem "json", "~> 2.6.0"
 gem "sass-rails", "~> 6.0"
 gem 'uglifier', '>= 1.3.0'
 gem "coffee-rails", "~> 4.2.2"
@@ -22,12 +22,12 @@ gem 'bootstrap-sass', '~> 2.3.1.0'
 gem "stringex", "~> 2.0"
 gem 'time_diff'
 gem "carrierwave", "~> 0.9.0"
-gem "rmagick", "~> 2.13"
+gem "rmagick", "~> 4.2"
 
 group :test, :development do
   gem 'guard'
   gem 'rb-inotify', '~> 0.9'
-  gem 'factory_girl_rails', '~> 4.0'
+  gem "factory_bot_rails", "~> 4.9"
 end
 
 group :development do
@@ -41,7 +41,7 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails", "~> 3.5.0"
+  gem "rspec-rails", "~> 6.1"
   gem 'ruby-prof'
   gem "shoulda-matchers", "~> 4.1"
   gem "database_cleaner", "~> 2.1"
@@ -55,7 +55,7 @@ gem "execjs", "~> 2.8.0"
 gem "mimemagic", "= 0.3.9"
 gem "jquery-ui-rails", "~> 6.0"
 gem "responders", "~> 3.1"
-gem 'bootsnap', "= 1.4.5"
+gem "bootsnap", "~> 1.26"
 
 gem "thor", "~> 1.2.0"
 gem "ffi", "~> 1.16.0"
@@ -68,3 +68,4 @@ gem "rake", ">= 12.2"
 gem "logger", "~> 1.4"
 gem "minitest", "~> 5.25.0"
 gem "connection_pool", "~> 2.5"
+gem "sass", "~> 3.7"
