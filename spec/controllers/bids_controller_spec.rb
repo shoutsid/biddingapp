@@ -109,7 +109,7 @@ describe BidsController do
         post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
         lambda {
           post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item }
-        }.should_not change(Bid, :count).by(1)
+        }.should_not change(Bid, :count)
       end
 
       it 'does not redirect to successful url' do
