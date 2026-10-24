@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe HomeController do
   before(:each) {
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     sign_in :user, @user
   }
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CategoriesController do
-  before(:each) { @category = FactoryGirl.create(:category) }
+  before(:each) { @category = FactoryBot.create(:category) }
 
   describe 'GET #show' do
     let(:send_request) { get :show, params: { id: @category } }
