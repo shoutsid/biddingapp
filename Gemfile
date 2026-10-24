@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.7'
+gem 'rails', '5.2.8.1'
 gem "pg", "~> 0.18"
 
 gem "json", "~> 1.8"
@@ -11,7 +11,7 @@ gem "jquery-rails", "~> 4.6.1"
 gem "jbuilder", "~> 2.6.4"
 
 gem 'bb-ruby'
-gem "simple_form", "~> 3.1"
+gem "simple_form", "~> 4.0"
 gem 'foreman'
 gem 'puma'
 gem 'figaro'
@@ -55,3 +55,6 @@ gem "execjs", "~> 2.8.0"
 gem "mimemagic", "= 0.3.9"
 gem "jquery-ui-rails", "~> 6.0"
 gem "responders", "~> 2.0"
+gem 'bootsnap', "= 1.4.5"
+
+gem "thor", "~> 1.2.0"
