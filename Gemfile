@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.8.1'
+gem 'rails', '6.0.6.1'
 gem "pg", "~> 0.18"
 
 gem "json", "~> 1.8"
-gem "sass-rails", "= 5.0.7"
+gem "sass-rails", "~> 6.0"
 gem 'uglifier', '>= 1.3.0'
 gem "coffee-rails", "~> 4.2.2"
 gem "jquery-rails", "~> 4.6.1"
@@ -50,11 +50,17 @@ end
 
 gem 'capistrano', require: false
 gem 'rvm-capistrano', require: false
-gem "loofah", "~> 2.0.3"
+gem "loofah", "~> 2.22"
 gem "execjs", "~> 2.8.0"
 gem "mimemagic", "= 0.3.9"
 gem "jquery-ui-rails", "~> 6.0"
-gem "responders", "~> 2.0"
+gem "responders", "~> 3.1"
 gem 'bootsnap', "= 1.4.5"
 
 gem "thor", "~> 1.2.0"
+gem "ffi", "~> 1.16.0"
+gem "sprockets-rails", "~> 3.4.0"
+gem "globalid", "~> 1.1.0"
+gem "sprockets", "~> 3.7"
+gem "zeitwerk", "~> 2.6.0"
+gem "nokogiri", "~> 1.12.0"
