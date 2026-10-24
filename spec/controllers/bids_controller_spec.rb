@@ -9,7 +9,7 @@ describe BidsController do
     let(:send_request) do
       @item = @bid.item
       @category = @item.category
-      get :index, item_id: @item, category_id: @category
+      get :index, params: { item_id: @item, category_id: @category }
     end
 
     it 'should be successfull' do
@@ -27,7 +27,7 @@ describe BidsController do
     let(:send_request) do
       @item = @bid.item
       @category = @item.category
-      get :show, id: @bid, item_id: @item, category_id: @category
+      get :show, params: { id: @bid, item_id: @item, category_id: @category }
     end
 
     it 'responds successfull' do
@@ -44,7 +44,7 @@ describe BidsController do
     let(:send_request) do
       @item = @bid.item
       @category = @item.category
-      get :edit, id: @bid, item_id: @item, category_id: @category
+      get :edit, params: { id: @bid, item_id: @item, category_id: @category }
     end
 
     it 'responds successfull' do
@@ -62,15 +62,15 @@ describe BidsController do
       let(:send_request) {
         @item = @bid.item
         @category = @item.category
-        post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item }
-        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
+        post :create, params: { item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } }
+        post :create, params: { item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } }
       }
 
       it 'should create a new record' do
         @item = @bid.item
         @category = @item.category
         lambda {
-          post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
+          post :create, params: { item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } }
         }.should change(Bid, :count).by(1)
       end
 
@@ -99,16 +99,16 @@ describe BidsController do
       let(:send_request) {
         @item = @bid.item
         @category = @item.category
-        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
-        post :create, item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item }
+        post :create, params: { item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } }
+        post :create, params: { item_id: @item, category_id: @category, bid: { amount: 200, item_id: @item } }
       }
 
       it 'should not create a new record' do
         @item = @bid.item
         @category = @item.category
-        post :create, item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item }
+        post :create, params: { item_id: @item, category_id: @category, bid: { amount: 5000, item_id: @item } }
         lambda {
-          post :create, item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item }
+          post :create, params: { item_id: @item, category_id: @category, bid: { amount: 10, item_id: @item } }
         }.should_not change(Bid, :count)
       end
 
@@ -132,13 +132,13 @@ describe BidsController do
     let(:send_put_request) do
       @item = @bid.item
       @category = @item.category
-      put :update, id: @bid, item_id: @item, category_id: @category, bid: { amount: 5000 }
+      put :update, params: { id: @bid, item_id: @item, category_id: @category, bid: { amount: 5000 } }
     end
 
     let(:send_patch_request) do
       @item = @bid.item
       @category = @item.category
-      patch :update, id: @bid, item_id: @item, category_id: @category, bid: { amount: 5000 }
+      patch :update, params: { id: @bid, item_id: @item, category_id: @category, bid: { amount: 5000 } }
     end
 
     context 'Using the PATCH HTTP Method' do
@@ -147,8 +147,8 @@ describe BidsController do
         it 'should update the record' do
           @item = @bid.item
           @category = @item.category
-          patch :update, id: @bid, item_id: @item, category_id: @category, bid: { amount: 5000 }
-          Bid.find(@bid).amount.should eql(5000.to_d)
+          patch :update, params: { id: @bid, item_id: @item, category_id: @category, bid: { amount: 5000 } }
+          Bid.find(@bid.id).amount.should eql(5000.to_d)
         end
 
         it 'responds as redirect' do
@@ -179,8 +179,8 @@ describe BidsController do
         it 'should update the record' do
           @item = @bid.item
           @category = @item.category
-          put :update, id: @bid, item_id: @item, category_id: @category, bid: { amount: 5000 }
-          Bid.find(@bid).amount.should eql(5000.to_d)
+          put :update, params: { id: @bid, item_id: @item, category_id: @category, bid: { amount: 5000 } }
+          Bid.find(@bid.id).amount.should eql(5000.to_d)
         end
 
         it 'responds as redirect' do
@@ -210,13 +210,13 @@ describe BidsController do
     let(:send_request) do
       @item = @bid.item
       @category = @item.category
-      delete :destroy, item_id: @item, id: @bid, category_id: @category
+      delete :destroy, params: { item_id: @item, id: @bid, category_id: @category }
     end
 
     it 'should create a delete record' do
       @item = @bid.item
       @category = @item.category
-      lambda { delete :destroy, item_id: @item, id: @bid, category_id: @category }.should change(Bid, :count).by(-1)
+      lambda { delete :destroy, params: { item_id: @item, id: @bid, category_id: @category } }.should change(Bid, :count).by(-1)
     end
 
     it 'responds as redirect' do
