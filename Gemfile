@@ -22,7 +22,7 @@ gem 'bootstrap-sass', '~> 2.3.1.0'
 gem "stringex", "~> 2.0"
 gem 'time_diff'
 gem "carrierwave", "~> 0.9.0"
-gem 'rmagick', git: 'https://github.com/rmagick/rmagick.git', ref: '962d56cba3a132d590be1dd062f2a3a2efa48545'
+gem "rmagick", "~> 2.13"
 
 group :test, :development do
   gem 'guard'
@@ -49,3 +49,6 @@ end
 
 gem 'capistrano', require: false
 gem 'rvm-capistrano', require: false
+gem "loofah", "~> 2.0.3"
+gem "execjs", "~> 2.8.0"
+gem "mimemagic", "= 0.3.9"
