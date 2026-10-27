@@ -45,6 +45,7 @@ group :test do
   gem 'ruby-prof'
   gem "shoulda-matchers", "~> 2.7"
   gem "database_cleaner", "~> 1.0"
+  gem 'rails-controller-testing'
 end
 
 gem 'capistrano', require: false
