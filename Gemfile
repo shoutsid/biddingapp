@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '6.0.6.1'
-gem "pg", "~> 0.18"
+gem 'rails', '6.1.7.10'
+gem "pg", "~> 1.5.0"
 
 gem "json", "~> 1.8"
 gem "sass-rails", "~> 6.0"
@@ -64,3 +64,4 @@ gem "globalid", "~> 1.1.0"
 gem "sprockets", "~> 3.7"
 gem "zeitwerk", "~> 2.6.0"
 gem "nokogiri", "~> 1.12.0"
+gem "rake", ">= 12.2"
