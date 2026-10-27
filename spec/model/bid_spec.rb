@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe Bid do
+  subject { FactoryGirl.build(:bid) }
   it { should belong_to(:user) }
-  it { should belong_to(:item) }
+  it { should belong_to(:item).required(true) }
   it { should validate_presence_of(:amount) }
   it { should validate_numericality_of(:amount) }
 
