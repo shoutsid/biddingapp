@@ -7,13 +7,6 @@ GIT
       actionpack (>= 4.0.0.rc1, < 4.1)
       activemodel (>= 4.0.0.rc1, < 4.1)
 
-GIT
-  remote: https://github.com/rmagick/rmagick.git
-  revision: 962d56cba3a132d590be1dd062f2a3a2efa48545
-  ref: 962d56cba3a132d590be1dd062f2a3a2efa48545
-  specs:
-    rmagick (2.13.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -87,8 +80,7 @@ GEM
       http_parser.rb (~> 0.5.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
+    execjs (2.8.1)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.9.0)
@@ -131,12 +123,18 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
+    loofah (2.0.3)
+      nokogiri (>= 1.5.9)
     lumberjack (1.0.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.25.1)
+    mimemagic (0.3.9)
+      nokogiri (~> 1)
+      rake
+    mini_portile2 (2.4.0)
     minitest (4.7.4)
     mono_logger (1.1.0)
     multi_json (1.7.3)
@@ -147,6 +145,8 @@ GEM
     net-ssh (2.6.7)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    nokogiri (1.9.1)
+      mini_portile2 (~> 2.4.0)
     orm_adapter (0.4.0)
     parallel (0.6.5)
     parallel_tests (0.13.2)
@@ -192,6 +192,7 @@ GEM
       redis-namespace (~> 1.2)
       sinatra (>= 0.9.2)
       vegas (~> 0.1.2)
+    rmagick (2.16.0)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -272,6 +273,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner (~> 1.0)
   devise (~> 3.0.0)
+  execjs (~> 2.8.0)
   factory_girl_rails (~> 4.0)
   figaro
   foreman
@@ -282,13 +284,15 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   json (~> 1.7.7)
+  loofah (~> 2.0.3)
+  mimemagic (= 0.3.9)
   parallel_tests
   pg
   puma
   rails (= 4.0.13)
   rb-inotify (~> 0.9)
   resque
-  rmagick!
+  rmagick (~> 2.13)
   rspec-rails (~> 2.14.0)
   ruby-prof
   rvm-capistrano
