@@ -20,14 +20,14 @@ describe User do
       it 'resets balance to amount supplied' do
         user = FactoryGirl.create(:user)
         user.hard_reset_balance(20)
-        User.find(user).balance.should eql(20.to_d)
+        User.find(user.id).balance.should eql(20.to_d)
       end
 
       context 'when no amount supplied' do
         it 'resets balance to 0' do
           user = FactoryGirl.create(:user, balance: 20)
           user.hard_reset_balance
-          User.find(user).balance.should eql(0.to_d)
+          User.find(user.id).balance.should eql(0.to_d)
         end
       end
     end
@@ -38,7 +38,7 @@ describe User do
       it 'increases balance by given amount' do
         user = FactoryGirl.create(:user, balance: 20)
         user.update_user_balance_by(10)
-        User.find(user).balance.should eql(30.to_d)
+        User.find(user.id).balance.should eql(30.to_d)
       end
     end
 
@@ -46,7 +46,7 @@ describe User do
       it 'decreases balance by given amount' do
         user = FactoryGirl.create(:user, balance: 20)
         user.update_user_balance_by(-10)
-        User.find(user).balance.should eql(10.to_d)
+        User.find(user.id).balance.should eql(10.to_d)
       end
     end
   end
@@ -74,7 +74,7 @@ describe User do
       item.closed = true
       item.sold = false
       item.save
-      User.find(user).not_sold_item_count.should eql(1)
+      User.find(user.id).not_sold_item_count.should eql(1)
     end
   end
 
@@ -85,7 +85,7 @@ describe User do
       item.sold = true
       item.closed = true
       item.save
-      User.find(user).sold_item_count.should eql(1)
+      User.find(user.id).sold_item_count.should eql(1)
     end
   end
 
@@ -95,7 +95,7 @@ describe User do
       item = FactoryGirl.create(:item, user: user)
       item.closed = true
       item.save
-      User.find(user).closed_item_count.should eql(1)
+      User.find(user.id).closed_item_count.should eql(1)
     end
   end
 
@@ -103,7 +103,7 @@ describe User do
     it 'returns correct count' do
       user = FactoryGirl.create(:user)
       item = FactoryGirl.create(:item, user: user)
-      User.find(user).not_closed_item_count.should eql(1)
+      User.find(user.id).not_closed_item_count.should eql(1)
     end
   end
 end
