@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.13'
+gem 'rails', '4.1.16'
 gem 'pg'
 
 gem 'json', '~> 1.7.7'
@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.0.1'
 
 gem 'bb-ruby'
-gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git', ref: 'd75963307f3a9aa7884cff8d5ad228f65e94d343'
+gem "simple_form", "~> 3.1"
 gem 'foreman'
 gem 'puma'
 gem 'figaro'
@@ -52,3 +52,4 @@ gem 'rvm-capistrano', require: false
 gem "loofah", "~> 2.0.3"
 gem "execjs", "~> 2.8.0"
 gem "mimemagic", "= 0.3.9"
+gem "jquery-ui-rails", "~> 6.0"
