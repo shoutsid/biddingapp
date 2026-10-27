@@ -1,11 +1,11 @@
 GIT
-  remote: git://github.com/bmabey/database_cleaner.git
+  remote: https://github.com/bmabey/database_cleaner.git
   revision: a44abba53dcadfc018d6a27bbc51fab2ab111e49
   specs:
     database_cleaner (1.0.1)
 
 GIT
-  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  remote: https://github.com/carrierwaveuploader/carrierwave.git
   revision: 1e87bb54d545dafe0d26644d4c3c558938cc593a
   specs:
     carrierwave (0.8.0)
@@ -14,13 +14,13 @@ GIT
       json (>= 1.7)
 
 GIT
-  remote: git://github.com/moriz/cancan.git
+  remote: https://github.com/moriz/cancan.git
   revision: c1e86b9404be768a99f16128e68d944a5d365ce8
   specs:
     cancan (1.6.9)
 
 GIT
-  remote: git://github.com/plataformatec/devise.git
+  remote: https://github.com/plataformatec/devise.git
   revision: 6b5988d756d780903bf8c9ccb3e2b3b724ccebe8
   branch: rails4
   specs:
@@ -31,7 +31,7 @@ GIT
       warden (~> 1.2.1)
 
 GIT
-  remote: git://github.com/plataformatec/simple_form.git
+  remote: https://github.com/plataformatec/simple_form.git
   revision: d75963307f3a9aa7884cff8d5ad228f65e94d343
   specs:
     simple_form (3.0.0.rc)
@@ -39,13 +39,13 @@ GIT
       activemodel (>= 4.0.0.rc1, < 4.1)
 
 GIT
-  remote: git://github.com/rmagick/rmagick.git
+  remote: https://github.com/rmagick/rmagick.git
   revision: 962d56cba3a132d590be1dd062f2a3a2efa48545
   specs:
     rmagick (2.13.2)
 
 GIT
-  remote: git://github.com/rsl/stringex.git
+  remote: https://github.com/rsl/stringex.git
   revision: 26883df41d1f44470fc9dd7461b353e9964c7900
   specs:
     stringex (1.5.1)
