@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe BidsController do
-  before(:each) { @bid = FactoryGirl.create(:bid)
+  before(:each) { @bid = FactoryBot.create(:bid)
     sign_in @bid.user
   }
 
