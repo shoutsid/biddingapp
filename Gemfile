@@ -55,3 +55,5 @@ gem "execjs", "~> 2.8.0"
 gem "mimemagic", "= 0.3.9"
 gem "jquery-ui-rails", "~> 6.0"
 gem "responders", "~> 2.0"
+gem 'bootsnap', "= 1.4.5"
+
